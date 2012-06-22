@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="horizontal" android:gravity="center"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content">
+    <Button android:text="@string/updateAccount" android:id="@+id/btUpdate" android:layout_width="110dip" android:layout_height="wrap_content"></Button>
+    <Button android:text="@string/createAccount" android:id="@+id/btCreate" android:layout_width="100dip" android:layout_height="wrap_content"></Button>    
+    <Button android:text="@string/btnCancelCap" android:id="@+id/btCancel" android:layout_width="wrap_content" android:layout_height="fill_parent" android:singleLine="true"></Button>
+</LinearLayout>

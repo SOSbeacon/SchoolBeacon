@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<integer-array name="recordTimeValues">
+		<item>1</item>
+		<item>2</item>
+		<item>3</item>
+		<item>4</item>
+		<item>5</item>
+		<item>6</item>
+	</integer-array>
+
+	<string-array name="recordTimes">
+		<item>1 session</item>
+		<item>2 sessions</item>
+		<item>3 sessions</item>
+		<item>4 sessions</item>
+		<item>5 sessions</item>
+		<item>6 sessions</item>
+	</string-array>
+
+	<string-array name="distance">
+		<item>0 KM</item>
+		<item>1 KM</item>
+		<item>3 KM</item>
+		<item>5 KM</item>
+		<item>10 KM</item>
+		<item>20 KM</item>
+	</string-array>
+
+	<integer-array name="distanceValues">
+		<item>0</item>
+		<item>1</item>
+		<item>3</item>
+		<item>5</item>
+		<item>10</item>
+		<item>20</item>
+	</integer-array>
+
+	<string-array name="checkInNormal">
+		<item> I will call later</item>
+		<item>Please call me asap</item>
+		<item> I will be late</item>
+		<item>Problems Resolved</item>
+	</string-array>
+
+	<string-array name="checkInAlert">
+	    <item>Medical Alert</item>
+	    <item>Fire Alert</item>
+	    <item>Family Emergency</item>
+	    <item>Weather Alert</item>
+		<item>Security Problem</item>
+	</string-array>
+
+	<string-array name="broadCast">
+	    <item>Send Group Check-in</item>
+	    <item>Send Group Emergency Alert</item>
+	</string-array>
+	
+		<string-array name="selectGroup">
+	    <item>Family</item>
+	    <item>Friends</item>
+	    <item>Family &amp; Friends</item>
+	    <item>Neighborhood watch</item>
+	    <item>All Groups</item>
+	</string-array>
+</resources>

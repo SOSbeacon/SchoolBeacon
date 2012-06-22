@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView 
+	xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+	<LinearLayout
+	  android:layout_width="fill_parent"
+	  android:layout_height="fill_parent"
+	  android:orientation="vertical"
+	  android:background="#fff"
+	  >
+		  <LinearLayout
+		  	android:layout_width="fill_parent"
+		  	android:layout_height="wrap_content"
+		  	android:padding="10dip"
+		  	android:minHeight="300dip"
+		  	android:layout_gravity="center">
+		    <WebView  
+			    android:id="@+id/webview_term"
+			    android:layout_width="fill_parent"
+			    android:layout_height="fill_parent"
+			/>
+		  </LinearLayout>
+		   <LinearLayout
+		  		android:layout_width="fill_parent"
+		  		android:layout_height="wrap_content"
+		  	
+		  		android:gravity="center">
+			  	<Button
+			  		android:id="@+id/btn_acept"
+			  		android:layout_width="120dip"
+		  			android:layout_height="wrap_content"
+		  			android:layout_gravity="center"
+		  			android:text="@string/btnAccept"
+		  			/>
+			  	<Button
+			  		android:id="@+id/btn_cancel"
+			  		android:layout_width="120dip"
+		  			android:layout_height="wrap_content"
+		  			android:layout_gravity="center"
+		  			android:text="@string/btnCancel"/>
+		    </LinearLayout>
+	  
+	</LinearLayout>
+</ScrollView>	

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android" android:summary="@string/title_copyright" android:title="@string/app_name">
+    <PreferenceCategory android:key="appUrls" android:title="App URL">
+        
+        <EditTextPreference android:key="apiUrl" android:defaultValue="http://sosbeacon.org" title="App API Url"></EditTextPreference>
+        <EditTextPreference android:key="phoneUrl" android:defaultValue="/phones/"></EditTextPreference>
+        <EditTextPreference android:key="phoneGetUrl" android:defaultValue="/phones/%s?format=json&amp;token=%s&amp;number=%s&amp;password=%s&amp;phoneInfo=%s"></EditTextPreference>
+        <EditTextPreference android:key="mailAccountUrl" android:defaultValue="/mail?format=json"></EditTextPreference>
+        <EditTextPreference android:key="settingUrl" android:defaultValue="/setting/"></EditTextPreference>
+        <EditTextPreference android:key="locationUrl" android:defaultValue="/location/"></EditTextPreference>
+        <EditTextPreference android:key="uploadUrl" android:defaultValue="/data/"></EditTextPreference>
+        <EditTextPreference android:key="alertUrl" android:defaultValue="/alert/"></EditTextPreference>
+        <EditTextPreference android:key="reviewUrl" android:defaultValue="/web/alert/latest?token=%s"></EditTextPreference>
+        <EditTextPreference android:key="groupUrl" android:defaultValue="/groups/"></EditTextPreference>
+        <EditTextPreference android:key="groupGetUrl" android:defaultValue="/groups/?format=json&amp;phoneId=%s&amp;token=%s"></EditTextPreference>
+        <EditTextPreference android:key="contactUrl" android:defaultValue="/contacts/"></EditTextPreference>
+        <EditTextPreference android:key="contactGetUrl" android:defaultValue="/contacts?format=json&amp;groupId=%s&amp;token=%s"></EditTextPreference>
+        <EditTextPreference android:key="demoUrl" android:defaultValue="/web/about/take-the-tour"></EditTextPreference>
+        <EditTextPreference android:key="emergencyListUrl" android:defaultValue="file:///android_asset/SOSb-v4-911-other-countries.html"></EditTextPreference>
+        
+    </PreferenceCategory>
+    
+     <PreferenceCategory android:key="google" android:defaultValue="Google" android:title="Google">
+	    <EditTextPreference android:key="oauth_google_consumerKey" android:defaultValue="sosbeacon.org"></EditTextPreference>
+	    <EditTextPreference android:key="oauth_google_consumerSecret" android:defaultValue="8SLDym8v5FxtqLyFb1KKn2go"></EditTextPreference>
+	    <EditTextPreference android:key="oauth_google_requestTokenUrl" android:defaultValue="https://www.google.com/accounts/OAuthGetRequestToken"></EditTextPreference>
+	    <EditTextPreference android:key="oauth_google_authorizationUrl" android:defaultValue="https://www.google.com/accounts/OAuthAuthorizeToken?hd=default"></EditTextPreference>
+	    <EditTextPreference android:key="oauth_google_accessTokenUrl" android:defaultValue="https://www.google.com/accounts/OAuthGetAccessToken"></EditTextPreference>
+	    <EditTextPreference android:key="oauth_google_requestContactUrl" android:defaultValue="https://www.google.com/m8/feeds"></EditTextPreference>
+	    <EditTextPreference android:key="oauth_google_requestContactParams" android:defaultValue="/contacts/default/full?max-results=200"></EditTextPreference>
+	</PreferenceCategory>
+	
+	<PreferenceCategory android:key="yahoo" android:defaultValue="Yahoo" android:title="Yahoo">
+	    <EditTextPreference android:key="oauth_yahoo_consumerKey" android:defaultValue="dj0yJmk9WWs1Y05hbVlDT3hNJmQ9WVdrOVpVSnZUVTR3TkRJbWNHbzlNVEUwTmpNMU5ERTJNZy0tJnM9Y29uc3VtZXJzZWNyZXQmeD01Yg--"></EditTextPreference>
+	    <EditTextPreference android:key="oauth_yahoo_consumerSecret" android:defaultValue="f07151ee4e9fd53f7f7d1756beb51ca8e32b0790"></EditTextPreference>
+	    <EditTextPreference android:key="oauth_yahoo_requestTokenUrl" android:defaultValue="https://api.login.yahoo.com/oauth/v2/get_request_token"></EditTextPreference>
+	    <EditTextPreference android:key="oauth_yahoo_authorizationUrl" android:defaultValue="https://api.login.yahoo.com/oauth/v2/request_auth"></EditTextPreference>
+	    <EditTextPreference android:key="oauth_yahoo_accessTokenUrl" android:defaultValue="https://api.login.yahoo.com/oauth/v2/get_token"></EditTextPreference>
+	    <EditTextPreference android:key="oauth_yahoo_requestContactUrl" android:defaultValue="http://query.yahooapis.com/v1/yql?format=json&amp;q="></EditTextPreference>
+	    <EditTextPreference android:key="oauth_yahoo_requestContactParams" android:defaultValue='SELECT * FROM social.contacts(200) WHERE ((guid=me)  AND ((fields.type="email") OR (fields.type="phone"))) limit 200'></EditTextPreference>
+	    <ListPreference></ListPreference>
+	</PreferenceCategory>
+        
+    <PreferenceCategory android:key="flurryApi" android:title="Flurry Api">
+       <EditTextPreference android:key="flurryApiKey" android:defaultValue="7EL6AKAU8746M1ZKT7LX"></EditTextPreference>
+    </PreferenceCategory>
+    
+    <PreferenceCategory android:key="logToFile" android:title="Log to file">
+       <CheckBoxPreference android:title="Enable" android:key="logToFileEnable"  android:defaultValue="true"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>
+
+

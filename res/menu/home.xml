@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:icon="@drawable/alert"
+        android:id="@+id/menu_item_home"
+        android:title="@string/menu_item_home"
+        />
+   <item
+        android:icon="@drawable/ic_review"
+        android:id="@+id/menu_item_review"
+        android:title="@string/menu_item_review"
+         />          
+    <!--
+        <item
+        android:icon="@drawable/ic_contact"
+        android:id="@+id/menu_item_groups"
+        android:title="@string/menu_item_groups" />
+    -->
+
+   
+   <item
+        android:icon="@android:drawable/ic_menu_more"
+        android:id="@+id/menu_item_more"
+        android:title="@string/menu_item_more" >
+        <!-- menu>
+            <item
+               android:id="@+id/menu_item_account"
+               android:title="@string/menu_item_account" />
+            <item
+               android:id="@+id/menu_item_alert_settings"
+               android:title="@string/menu_item_alert_settings" />
+            <item
+               android:id="@+id/menu_item_good_samaritan_settings"
+               android:title="@string/menu_item_good_samaritan_settings" />
+            <item
+               android:id="@+id/menu_item_storage_settings"
+               android:title="@string/menu_item_storage_settings" />      
+            <item
+			   android:id="@+id/menu_item_contact"
+			   android:title="@string/menu_item_contact" /> 
+			<item
+               android:id="@+id/menu_item_send_friend"
+               android:title="@string/menu_item_send_friend" />
+            <item
+               android:id="@+id/menu_item_send_about"
+               android:title="@string/menu_item_about" />      
+        </menu -->
+   </item>
+</menu>

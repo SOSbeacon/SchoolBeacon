@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView  
+  xmlns:android="http://schemas.android.com/apk/res/android" 
+  android:id="@+id/wrapscroll"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:background="@drawable/settings">
+<RelativeLayout  
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent" 
+  android:gravity="top"
+  android:paddingLeft="20dip"
+ >
+  
+  <LinearLayout  
+   android:id ="@+id/infor"
+   android:layout_width="fill_parent"
+   android:layout_height="fill_parent"
+   android:orientation="vertical"   
+   android:layout_alignParentTop="true"
+   android:layout_alignParentLeft="true"
+   >
+   	<TextView
+   	 android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_marginTop="15dip"
+   	 android:text="@string/lblInformation"
+   	 android:textStyle="bold"
+   	 android:textSize="14dip">
+   	</TextView>
+    <TableLayout
+    android:layout_height="fill_parent" 
+    android:layout_width="fill_parent"
+   >
+    	 <TableRow> 
+         <TextView 
+            android:text="@string/lblUserName"
+            android:width ="80dip"
+            />
+         <EditText 
+            android:id="@+id/txtUserName" 
+            android:layout_width="200dip"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+             />
+         </TableRow> 
+         
+         <TableRow>
+          <TextView 
+            android:text="@string/lblEmail"
+            />
+          <EditText 
+            android:id="@+id/txtEmail"            
+            android:layout_width="200dip"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:enabled="false"
+            android:singleLine="true"
+            />
+          </TableRow>
+          
+          <TableRow>
+          <TextView 
+            android:text="@string/lblPhonenumber"
+            />
+          <EditText 
+             android:id="@+id/txtPhonenumber" 
+             android:layout_width="200dip"
+             android:layout_height="wrap_content" 
+             android:enabled="false"
+             android:inputType="numberDecimal"
+             android:singleLine="true"
+             />
+          </TableRow>
+        <TableRow>
+          <TextView 
+            android:text="@string/lblPassword"
+            />
+          <EditText 
+            android:id="@+id/txtPassword" 
+            android:layout_width="200dip"
+            android:layout_height="wrap_content"
+            android:password="true" 
+            android:singleLine="true"
+            />
+          </TableRow>
+    	
+    
+    </TableLayout>
+   
+   </LinearLayout>
+   
+   <LinearLayout  
+   android:id ="@+id/recordsetting"
+   android:layout_width="fill_parent"
+   android:layout_height="wrap_content"
+   android:orientation="vertical" 
+   android:layout_marginTop="10dip"   
+   android:layout_below="@+id/infor"
+   >
+   	<TextView
+   	 android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_marginTop="15dip"
+   	 android:text="@string/lblRecordSetting"
+   	 android:textStyle="bold"
+   	 android:textSize="14dip">
+   	</TextView>
+   
+  	 
+  	 <TableLayout
+    android:layout_height="fill_parent" 
+    android:layout_width="fill_parent"
+   >
+    	 
+         
+         <TableRow> 
+           <TextView 
+            android:text="@string/lblCapture"
+            android:width ="150dip"
+            />
+	        <Spinner 
+	        android:id="@+id/spinner_voice"
+	        android:layout_width="140dip"
+	        android:layout_height="wrap_content"
+	        android:drawSelectorOnTop="true"
+	        android:prompt="@string/image_record_prompt"
+	        />
+         </TableRow> 
+         
+        
+	
+	</TableLayout>
+   
+   </LinearLayout>
+   <LinearLayout  
+   android:id ="@+id/alertsetting"
+   android:layout_width="fill_parent"
+   android:layout_height="wrap_content"
+   android:orientation="vertical" 
+   android:layout_marginTop="10dip"   
+   android:layout_below="@+id/recordsetting"
+   >
+	   	<TextView
+	   	 android:layout_width="wrap_content"
+	     android:layout_height="wrap_content"
+	     android:layout_marginTop="15dip"
+	   	 android:text="@string/lblAlertSetting"
+	   	 android:textStyle="bold"
+	   	 android:textSize="14dip">
+	   	</TextView>
+	   	<LinearLayout
+	   	 android:layout_width="fill_parent"
+	     android:layout_height="fill_parent"
+	     android:layout_marginLeft="10dip"
+	     android:orientation="vertical"> 
+	     	<TextView
+		   	 android:layout_width="wrap_content"
+		     android:layout_height="wrap_content"
+		     android:layout_marginTop="15dip"
+		   	 android:text="@string/lblAlertincase"/>
+		 </LinearLayout>  	 
+		  <LinearLayout
+         android:layout_width="fill_parent"
+         android:layout_height="fill_parent"
+         android:layout_marginLeft="10dip"
+         android:gravity="center"
+         android:orientation="vertical"> 	
+	     	 <Spinner 
+		        android:id="@+id/spinner_incase"
+		        android:layout_width="200dip"
+		        android:layout_height="wrap_content"
+		        android:drawSelectorOnTop="true"
+		        android:prompt="@string/sendto_prompt"/>	
+		  </LinearLayout>          	
+	   	
+   	</LinearLayout>
+   	
+   	<LinearLayout  
+	   android:id ="@+id/panicsetting"
+	   android:layout_width="fill_parent"
+	   android:layout_height="wrap_content"
+	   android:orientation="vertical" 
+	   android:layout_marginTop="10dip"   
+	   android:layout_below="@+id/alertsetting"
+	   >
+	   	<TextView
+	   	 android:layout_width="wrap_content"
+	     android:layout_height="wrap_content"
+	     android:layout_marginTop="15dip"
+	   	 android:text="@string/lblPanicSetting"
+	   	 android:textStyle="bold"
+	   	 android:textSize="14dip">
+	   	</TextView>
+	   	
+	   	<LinearLayout
+	   	 android:layout_width="fill_parent"
+	     android:layout_height="fill_parent"
+	     android:layout_marginLeft="10dip"
+	     android:orientation="vertical">
+	         
+	         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="@string/lblPanicTelPhonenumber"
+             android:id="@+id/linkPanicTelPhonenumber"
+             android:selectAllOnFocus="true"
+             android:textColor="@color/telPhonenumberLinkColor"
+             android:layout_marginTop="5dip"
+             android:layout_marginBottom="5dip"
+             />
+		     <TextView
+		   	 android:layout_width="wrap_content"
+		     android:layout_height="wrap_content"
+		     android:text="@string/lblPanicPhonenumber"
+		     />
+		      <LinearLayout
+	   		 android:layout_width="fill_parent"
+	    	 android:layout_height="fill_parent"
+	    	 android:gravity="center">
+			     <EditText
+			      android:id="@+id/txtpanicphone"
+			      android:layout_width="200dip"
+			      android:layout_height="wrap_content"
+			      android:phoneNumber="true"
+			      android:gravity="center"
+			      />
+		      </LinearLayout>
+		     <TextView
+		   	 android:layout_width="wrap_content"
+		     android:layout_height="wrap_content"
+		     android:text="@string/lblPanicNear"/>
+		     <LinearLayout
+	   		 android:layout_width="fill_parent"
+	    	 android:layout_height="fill_parent"
+	    	 android:gravity="center">
+			     <ToggleButton
+			      android:id="@+id/btntogg_near"
+			      android:layout_width="wrap_content"
+	   			  android:layout_height="wrap_content" 
+	   			  android:gravity="center">
+			     </ToggleButton>
+		     </LinearLayout>
+		     <TextView
+		   	 android:layout_width="wrap_content"
+		     android:layout_height="wrap_content"
+		     android:text="@string/lblPanicMaximum"/>
+		      <LinearLayout
+	   		 	android:layout_width="fill_parent"
+	    	 	android:layout_height="fill_parent"
+	    	 	android:gravity="center">
+			    <Spinner 
+		        android:id="@+id/spinner_panic_maximum"
+		        android:layout_width="200dip"
+		        android:layout_height="wrap_content"
+		        android:drawSelectorOnTop="true"
+		        android:prompt="@string/panic_distance_prompt"/>	
+		      </LinearLayout>
+		     
+	     </LinearLayout>
+	</LinearLayout>
+	
+	<LinearLayout  
+	   android:id ="@+id/samaritantsetting"
+	   android:layout_width="fill_parent"
+	   android:layout_height="wrap_content"
+	   android:orientation="vertical" 
+	   android:layout_marginTop="10dip"   
+	   android:layout_below="@+id/panicsetting"
+	   >
+	   	<TextView
+	   	 android:layout_width="wrap_content"
+	     android:layout_height="wrap_content"
+	     android:layout_marginTop="15dip"
+	   	 android:text="@string/lblSamaritanSetting"
+	   	 android:textStyle="bold"
+	   	 android:textSize="14dip">
+	   	</TextView>
+	   	
+	   	<LinearLayout
+	   	 android:layout_width="fill_parent"
+	     android:layout_height="fill_parent"
+	     android:layout_marginLeft="10dip"
+	     android:orientation="vertical">
+	     	 <TextView
+		   	 android:layout_width="wrap_content"
+		     android:layout_height="wrap_content"
+		     android:text="@string/lblSamaritanReceive"/>
+	     	<LinearLayout
+	   		 android:layout_width="fill_parent"
+	    	 android:layout_height="fill_parent"
+	    	 android:gravity="center">
+			     <ToggleButton
+			      android:id="@+id/btntogg_receive"
+			      android:layout_width="wrap_content"
+	   			  android:layout_height="wrap_content" 
+	   			  android:gravity="center">
+			     </ToggleButton>
+		     </LinearLayout>
+		     <TextView
+		   	 android:layout_width="wrap_content"
+		     android:layout_height="wrap_content"
+		     android:text="@string/lblSamaritanMaximum"/>
+		      <LinearLayout
+	   		 	android:layout_width="fill_parent"
+	    	 	android:layout_height="fill_parent"
+	    	 	android:gravity="center">
+			    <Spinner 
+		        android:id="@+id/spinner_samaritant_maximum"
+		        android:layout_width="200dip"
+		        android:layout_height="wrap_content"
+		        android:drawSelectorOnTop="true"
+		        android:prompt="@string/samari_distance_prompt"/>
+		        </LinearLayout>
+		      <TextView
+		   	 android:layout_width="wrap_content"
+		     android:layout_height="wrap_content"
+		     android:text="@string/lblSamaritanIncoming"/>
+		     <LinearLayout
+	   		 android:layout_width="fill_parent"
+	    	 android:layout_height="fill_parent"
+	    	 android:gravity="center">
+			     <ToggleButton
+			      android:id="@+id/btntogg_incom"
+			      android:layout_width="wrap_content"
+	   			  android:layout_height="wrap_content" 
+	   			  android:gravity="center">
+			     </ToggleButton>
+		     </LinearLayout>
+		</LinearLayout>
+	</LinearLayout>
+	
+	<LinearLayout  
+	   android:id ="@+id/memorysetting"
+	   android:layout_width="fill_parent"
+	   android:layout_height="wrap_content"
+	   android:orientation="vertical" 
+	   android:layout_marginTop="10dip"   
+	   android:layout_below="@+id/samaritantsetting"
+	   >
+	   	<TextView
+	   	 android:layout_width="wrap_content"
+	     android:layout_height="wrap_content"
+	     android:layout_marginTop="15dip"
+	   	 android:text="@string/lblMemorySetting"
+	   	 android:textStyle="bold"
+	   	 android:textSize="14dip">
+	   	</TextView>
+	   	 <TextView
+		   	 android:layout_width="wrap_content"
+		     android:layout_height="wrap_content"
+		     android:layout_marginLeft="10dip"
+		     android:text="@string/lblMemoryLocation"/>
+	   	
+	   	<LinearLayout
+	   	 android:layout_width="fill_parent"
+	     android:layout_height="fill_parent"
+	     android:layout_marginTop="5dip"
+	     android:layout_marginLeft="10dip"
+	     android:gravity="center"
+	     android:orientation="vertical">
+	     
+	     <Button 
+		        android:layout_width="200dip"
+		        android:layout_height="wrap_content"
+		        android:drawSelectorOnTop="true"
+		        android:text="@string/lblMyDocument"/>
+		  <Button 
+		  		android:id="@+id/btn_clear"
+		        android:layout_width="200dip"
+		        android:layout_height="wrap_content"
+		        android:text="@string/lblMemoryClear"/>
+				  
+		   <Button 
+		   		android:id="@+id/btn_reset"
+		        android:layout_width="200dip"
+		        android:layout_height="wrap_content"
+		        android:text="@string/lblMemoryReset"/>
+		  
+	     </LinearLayout>
+	  </LinearLayout>   
+</RelativeLayout>
+
+</ScrollView>

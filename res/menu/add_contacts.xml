@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_enter_contact" android:title="@string/menu_enter_contact"></item>
+    <item android:id="@+id/menu_import_google_contact" android:title="@string/menu_import_google_contacts"></item>
+    <item android:id="@+id/menu_import_yahoo_contact" android:title="@string/menu_import_yahoo_contacts"></item>
+</menu>

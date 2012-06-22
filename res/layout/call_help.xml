@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:panel="http://schemas.android.com/apk/res/cnc.sosbeacon"
+    android:layout_width="fill_parent" android:layout_height="fill_parent">		
+    <LinearLayout
+	  android:layout_width="fill_parent"
+	  android:layout_height="fill_parent"
+	  android:layout_gravity="left"	
+	  android:gravity="right" 
+	  android:orientation="vertical"
+	  android:background="@drawable/main"
+	>
+		<TextView
+		  android:layout_width="190dip"
+		  android:layout_height="50dip"
+		  android:layout_marginTop="80dip"
+		  android:layout_marginRight="10dip"		 
+		  android:gravity="right" 
+		  android:textSize="12dip"
+		  android:text="@string/title_copyright">
+		</TextView>
+	</LinearLayout>
+    
+    <LinearLayout
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      android:paddingLeft="20dip"
+      android:paddingRight="20dip"
+      android:layout_gravity="center"
+      android:gravity="center"  
+      android:orientation="vertical"
+    >
+        <Button 
+        	android:text="@string/title_call_original" 
+        	android:id="@+id/btCallOriginal"
+        	style="@style/btRed" 
+        	android:layout_marginTop="120dip" 
+        	android:layout_marginBottom="20dip">
+       	</Button>
+	    <Button 
+	    	android:text="@string/title_need_help_easy" 
+	    	android:id="@+id/btHelpEasy" 
+	    	style="@style/btYellow" 
+	    	android:layout_marginBottom="20dip"></Button>
+	    <Button 
+	    	android:text="@string/btnCancel" 
+	    	android:id="@+id/btCancel" 
+	    	style="@style/btBlack"></Button>
+	    
+	</LinearLayout>
+</FrameLayout>

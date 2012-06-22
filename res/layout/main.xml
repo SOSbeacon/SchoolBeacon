@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:panel="http://schemas.android.com/apk/res/cnc.sosbeacon"
+    android:layout_width="fill_parent" android:layout_height="fill_parent">		
+    <LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_gravity="left"	
+		android:gravity="right" 
+		android:orientation="vertical"
+		android:background="@drawable/main"
+	>
+		<TextView
+			android:layout_width="190dip"
+			android:layout_height="50dip"
+			android:layout_marginTop="80dip"
+			android:layout_marginRight="10dip"		 
+			android:gravity="right" 
+			android:textSize="12dip"
+			android:text="@string/title_copyright">
+		</TextView>
+	</LinearLayout>
+    
+    <LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:gravity="center"  
+		android:layout_gravity="center"
+		android:orientation="vertical"
+		android:paddingLeft="15dip"
+		android:paddingRight="15dip"
+    >
+        <Button 
+            android:id="@+id/btOk" android:background="@drawable/bt_broadcast"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="130dip" android:layout_marginBottom="30dip"></Button>
+        <Button
+            android:layout_width="wrap_content" android:layout_height="wrap_content" 
+            android:id="@+id/btHelp" android:background="@drawable/bt_emergency"></Button>
+            
+        <!--  Button 
+        	android:text="@string/title_im_ok" android:id="@+id/btOk" style="@style/btImOk"
+        	android:layout_marginTop="140dip" android:layout_marginBottom="30dip"></Button>
+	    <Button 
+	    	android:text="@string/title_need_help" android:id="@+id/btHelp"
+	    	style="@style/btHelp"></Button -->
+	    
+	</LinearLayout>
+</FrameLayout>

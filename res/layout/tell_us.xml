@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:panel="http://schemas.android.com/apk/res/cnc.sosbeacon"
+	android:background="@drawable/settings" 
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	>
+	<LinearLayout android:orientation="vertical"
+	android:paddingTop="15dip"
+    android:paddingLeft="10dip" android:paddingRight="10dip"
+    android:layout_width="wrap_content" android:layout_height="wrap_content"
+	>
+	
+	<LinearLayout android:layout_width="fill_parent"
+        android:layout_height="wrap_content" android:orientation="horizontal"
+        android:paddingBottom="5dip"
+        android:gravity="center_vertical"
+        >
+        <TextView android:text="@string/title_to"
+            android:layout_height="wrap_content" android:textSize="18dip"
+            android:layout_width="50dip" />
+        <TextView 
+            android:id="@+id/tvSendTo"
+            android:layout_height="wrap_content"
+            android:textStyle="bold" 
+            android:textSize="18dip"
+            android:layout_width="wrap_content"
+            android:visibility="gone" 
+            />    
+        <EditText android:id="@+id/send_to" 
+            android:layout_height="wrap_content"
+            android:singleLine="true"           
+            android:layout_width="250dip"
+            />
+    </LinearLayout>
+    <LinearLayout android:layout_width="fill_parent"
+        android:layout_height="wrap_content" android:orientation="horizontal"
+        android:paddingBottom="5dip"
+        >
+        <TextView android:text="@string/title_cc"
+            android:layout_height="wrap_content" android:textSize="18dip"
+            android:layout_width="120dip" />
+        <EditText android:id="@+id/send_cc" 
+            android:layout_height="wrap_content"
+            android:singleLine="true"           
+            android:layout_width="180dip"
+            />
+    </LinearLayout>
+	<LinearLayout android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:orientation="horizontal"
+		android:paddingBottom="5dip"
+		>
+		<TextView android:text="@string/tellus_subject_label"
+			android:layout_height="wrap_content" android:textSize="18dip"
+			android:layout_width="80dip" />
+		<EditText android:id="@+id/subject" 
+		    android:layout_height="wrap_content"
+			android:singleLine="true"			
+			android:layout_width="220dip"
+			/>
+	</LinearLayout>
+
+    <LinearLayout android:layout_width="fill_parent"
+        android:layout_height="wrap_content" android:orientation="horizontal"
+        android:paddingBottom="5dip"
+        android:gravity="center_vertical"
+        >
+        <TextView android:text="@string/tellus_message_label"
+            android:layout_height="fill_parent" android:textSize="18dip"
+             android:layout_width="80dip" />
+    </LinearLayout>
+    
+	<LinearLayout android:layout_width="fill_parent"
+	     android:paddingBottom="5dip"
+		android:layout_height="wrap_content" android:orientation="horizontal">
+		<EditText android:id="@+id/message" android:lines="5" 
+		android:layout_height="wrap_content" 
+            android:layout_width="fill_parent"
+            android:gravity="top" android:maxLength="95"
+		/>
+	</LinearLayout>
+
+	</LinearLayout>
+</ScrollView>
