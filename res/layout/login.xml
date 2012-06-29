@@ -37,31 +37,21 @@
             android:gravity="center"
             android:orientation="vertical" >
 
-            <!--
-            RadioGroup 
-				android:layout_width="fill_parent" android:layout_height="wrap_content" 
-				android:orientation="horizontal" android:gravity="center"
-	            android:layout_marginTop="10dip"
-	            android:layout_marginBottom="5dip"
-            >
-                <RadioButton android:text="@string/login" android:id="@+id/rbLogin" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="22dip" android:textStyle="bold" android:layout_marginRight="10dip"></RadioButton>
-                <RadioButton android:text="@string/register" android:id="@+id/rbRegister" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="22dip" android:textStyle="bold"></RadioButton>
-			</RadioGroup
-            -->
-
             <EditText
-                android:id="@+id/etNumber"
+                android:id="@+id/edtEmail"
                 android:layout_width="fill_parent"
                 android:layout_height="60dip"
                 android:hint="@string/email"
-                android:inputType="phone"
+                android:inputType="textEmailAddress"
                 android:singleLine="true" />
-            <!--
-                  EditText android:id="@+id/etPassword" android:hint="@string/enterPassword"
-				android:layout_width="fill_parent" android:singleLine="true"
-				android:layout_height="60dip" android:password="true"
-				android:layout_marginTop="1dip"/
-            -->
+
+            <EditText
+                android:id="@+id/edtPassword"
+                android:layout_width="fill_parent"
+                android:layout_height="60dip"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:singleLine="true" />
 
             <RelativeLayout
                 android:layout_width="fill_parent"

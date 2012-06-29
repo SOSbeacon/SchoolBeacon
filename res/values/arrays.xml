@@ -11,12 +11,12 @@
 	</integer-array>
 
 	<string-array name="recordTimes">
-		<item>1 session</item>
-		<item>2 sessions</item>
-		<item>3 sessions</item>
-		<item>4 sessions</item>
-		<item>5 sessions</item>
-		<item>6 sessions</item>
+		<item>30 seconds</item>
+		<item>60 seconds</item>
+		<item>1 minute</item>
+		<item>1.5 minutes</item>
+		<item>2 minutes</item>
+		<item>3 minutes</item>
 	</string-array>
 
 	<string-array name="distance">

@@ -40,29 +40,43 @@ import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import cnc.sosbeacon.R;
+import cnc.schoolbeacon.R;
 
 import com.facebook.android.Facebook.DialogListener;
 
 public class FbDialog extends Dialog {
 
     static final int FB_BLUE = 0xFF6D84B4;
-    static final float[] DIMENSIONS_DIFF_LANDSCAPE = {20, 60};
-    static final float[] DIMENSIONS_DIFF_PORTRAIT = {40, 60};
-    static final FrameLayout.LayoutParams FILL =
-        new FrameLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
-                         ViewGroup.LayoutParams.FILL_PARENT);
+
+    static final float[] DIMENSIONS_DIFF_LANDSCAPE = {
+            20, 60
+    };
+
+    static final float[] DIMENSIONS_DIFF_PORTRAIT = {
+            40, 60
+    };
+
+    static final FrameLayout.LayoutParams FILL = new FrameLayout.LayoutParams(
+            ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT);
+
     static final int MARGIN = 4;
+
     static final int PADDING = 2;
+
     static final String DISPLAY_STRING = "touch";
+
     static final String FB_ICON = "icon.png";
 
     private String mUrl;
+
     private DialogListener mListener;
+
     private ProgressDialog mSpinner;
+
     private WebView mWebView;
+
     private LinearLayout mContent;
+
     private TextView mTitle;
 
     public FbDialog(Context context, String url, DialogListener listener) {
@@ -83,22 +97,18 @@ public class FbDialog extends Dialog {
         setUpTitle();
         setUpWebView();
         Display display = getWindow().getWindowManager().getDefaultDisplay();
-        final float scale =
-            getContext().getResources().getDisplayMetrics().density;
-        int orientation =
-            getContext().getResources().getConfiguration().orientation;
-        float[] dimensions =
-            (orientation == Configuration.ORIENTATION_LANDSCAPE)
-                    ? DIMENSIONS_DIFF_LANDSCAPE : DIMENSIONS_DIFF_PORTRAIT;
-        addContentView(mContent, new LinearLayout.LayoutParams(
-                display.getWidth() - ((int) (dimensions[0] * scale + 0.5f)),
-                display.getHeight() - ((int) (dimensions[1] * scale + 0.5f))));
+        final float scale = getContext().getResources().getDisplayMetrics().density;
+        int orientation = getContext().getResources().getConfiguration().orientation;
+        float[] dimensions = (orientation == Configuration.ORIENTATION_LANDSCAPE) ? DIMENSIONS_DIFF_LANDSCAPE
+                : DIMENSIONS_DIFF_PORTRAIT;
+        addContentView(mContent, new LinearLayout.LayoutParams(display.getWidth()
+                - ((int) (dimensions[0] * scale + 0.5f)), display.getHeight()
+                - ((int) (dimensions[1] * scale + 0.5f))));
     }
 
     private void setUpTitle() {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        Drawable icon = getContext().getResources().getDrawable(
-                R.drawable.facebook_icon);
+        Drawable icon = getContext().getResources().getDrawable(R.drawable.facebook_icon);
         mTitle = new TextView(getContext());
         mTitle.setText("Facebook");
         mTitle.setTextColor(Color.WHITE);
@@ -106,8 +116,7 @@ public class FbDialog extends Dialog {
         mTitle.setBackgroundColor(FB_BLUE);
         mTitle.setPadding(MARGIN + PADDING, MARGIN, MARGIN, MARGIN);
         mTitle.setCompoundDrawablePadding(MARGIN + PADDING);
-        mTitle.setCompoundDrawablesWithIntrinsicBounds(
-                icon, null, null, null);
+        mTitle.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
         mContent.addView(mTitle);
     }
 
@@ -125,21 +134,21 @@ public class FbDialog extends Dialog {
     }
 
     private class FbWebViewClient extends WebViewClient {
-    	public void onReceivedSslError(WebView view, SslErrorHandler handler,
-                SslError error) {
+        public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
             handler.proceed();
         }
-    	
-		@Override
-		public void onReceivedHttpAuthRequest(WebView view,
-				HttpAuthHandler handler, String host, String realm) {
-			super.onReceivedHttpAuthRequest(view, handler, host, realm);
-		}
-    	@Override
-    	public void onLoadResource(WebView view, String url) {
-    		super.onLoadResource(view, url);
-    	}
-    	
+
+        @Override
+        public void onReceivedHttpAuthRequest(WebView view, HttpAuthHandler handler, String host,
+                String realm) {
+            super.onReceivedHttpAuthRequest(view, handler, host, realm);
+        }
+
+        @Override
+        public void onLoadResource(WebView view, String url) {
+            super.onLoadResource(view, url);
+        }
+
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             Log.d("Facebook-WebView", "Redirect URL: " + url);
@@ -153,8 +162,8 @@ public class FbDialog extends Dialog {
 
                 if (error == null) {
                     mListener.onComplete(values);
-                } else if (error.equals("access_denied") ||
-                           error.equals("OAuthAccessDeniedException")) {
+                } else if (error.equals("access_denied")
+                        || error.equals("OAuthAccessDeniedException")) {
                     mListener.onCancel();
                 } else {
                     mListener.onFacebookError(new FacebookError(error));
@@ -170,17 +179,15 @@ public class FbDialog extends Dialog {
                 return false;
             }
             // launch non-dialog URLs in a full browser
-            getContext().startActivity(
-                    new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+            getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
             return true;
         }
 
         @Override
-        public void onReceivedError(WebView view, int errorCode,
-                String description, String failingUrl) {
+        public void onReceivedError(WebView view, int errorCode, String description,
+                String failingUrl) {
             super.onReceivedError(view, errorCode, description, failingUrl);
-            mListener.onError(
-                    new DialogError(description, errorCode, failingUrl));
+            mListener.onError(new DialogError(description, errorCode, failingUrl));
             FbDialog.this.dismiss();
         }
 
@@ -200,6 +207,6 @@ public class FbDialog extends Dialog {
             }
             mSpinner.dismiss();
         }
-        
+
     }
 }

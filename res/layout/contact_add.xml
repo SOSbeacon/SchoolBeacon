@@ -1,82 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-	xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:padding="10dip"
-  android:layout_height="wrap_content"
-  android:orientation="vertical"
-  >
-  <TableLayout
-    android:layout_width="fill_parent"
-    android:padding="10dip"
-    android:background="@drawable/background_list_round" android:layout_height="wrap_content">
-    	 <TableRow> 
-         <TextView 
-            android:text="@string/lblUserName"
-            android:width ="80dip"
-           
-            />
-         <EditText 
-            android:id="@+id/txtUserName" 
-            android:width="200dip" 
-            android:maxWidth="200dip"
-             android:inputType="textPersonName"/>
-         </TableRow> 
-         
-         <TableRow>
-          <TextView 
-            android:text="@string/lblEmail"
-            />
-          <EditText 
-            android:id="@+id/txtEmail"            
-            android:inputType="textEmailAddress"
-          
-            />
-          </TableRow>
-          
-          <TableRow>
-          <TextView 
-            android:text="@string/lblVoicePhone"
-           
-            />
-          <EditText 
-             android:id="@+id/txtVoicePhone" 
-             android:phoneNumber="true"
-             android:inputType="phone"
-            />
-          </TableRow>
-        <TableRow>
-          <TextView 
-            android:text="@string/lblTextPhone"
-            />
-          <EditText 
-            android:id="@+id/txtTextPhone" 
-            android:phoneNumber="true"
-            android:inputType="phone"
-            />
-          </TableRow>
-    </TableLayout>
+    android:layout_height="fill_parent" >
+
     <LinearLayout
-        android:layout_height="wrap_content"
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
-        android:layout_marginTop="20dip"
-        android:gravity="bottom"
-         android:orientation="vertical"
-    >
-    <Button 
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dip" >
+
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_list_round"
+            android:padding="10dip" >
+
+            <TableRow>
+
+                <TextView
+                    android:text="@string/lblUserName"
+                    android:width="80dip" />
+
+                <EditText
+                    android:id="@+id/txtUserName"
+                    android:inputType="textPersonName"
+                    android:maxWidth="200dip"
+                    android:width="200dip" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView android:text="@string/lblEmail" />
+
+                <EditText
+                    android:id="@+id/txtEmail"
+                    android:inputType="textEmailAddress" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView android:text="@string/lblVoicePhone" />
+
+                <EditText
+                    android:id="@+id/txtVoicePhone"
+                    android:inputType="phone"
+                    android:phoneNumber="true" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView android:text="@string/lblTextPhone" />
+
+                <EditText
+                    android:id="@+id/txtTextPhone"
+                    android:inputType="phone"
+                    android:phoneNumber="true" />
+            </TableRow>
+        </TableLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:gravity="bottom"
+            android:orientation="vertical" >
+
+            <Button
                 android:id="@+id/btn_add_exist_contacts"
                 android:layout_width="fill_parent"
                 android:layout_height="50dip"
                 android:text="@string/contact_add_from_contact"
-                android:textSize="20dip"                
-                />
-    <TextView android:id="@+id/tvNotice" android:visibility="gone" android:text="@string/contact_not_allow_change" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center_horizontal" />            
-    </LinearLayout>
-    <!-- 
+                android:textSize="20dip" />
+
+            <TextView
+                android:id="@+id/tvNotice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/contact_not_allow_change"
+                android:visibility="gone" />
+        </LinearLayout>
+        <!--
     <LinearLayout
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
@@ -98,6 +103,7 @@
                 android:textSize="20dip"                
                 />
     </LinearLayout>  
-    -->          
-</LinearLayout>
+        -->
+    </LinearLayout>
+
 </ScrollView>
