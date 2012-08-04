@@ -31,6 +31,8 @@ public class HttpUploadFile implements Runnable, Constants {
 
     private String userId;
 
+    private String schoolId;
+
     private String token;
 
     private String alertid;
@@ -47,7 +49,7 @@ public class HttpUploadFile implements Runnable, Constants {
 
     public HttpUploadFile(String uploadUrl, Handler mHandler, List<String> lstFileImages,
             List<String> lstFileAudio, String alertid, String alertLogType, String userId,
-            String token) {
+            String schoolId, String token) {
         super();
         this.mHandler = mHandler;
         this.pFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + pFile;
@@ -56,6 +58,7 @@ public class HttpUploadFile implements Runnable, Constants {
         this.alertid = alertid;
         this.alertLogType = alertLogType;
         this.userId = userId;
+        this.schoolId = schoolId;
         this.token = token;
         this.uploadUrl = uploadUrl;
     }
@@ -104,6 +107,7 @@ public class HttpUploadFile implements Runnable, Constants {
                             mHandler.sendMessage(msg);
                         }
                         postData.put(USERID, userId);
+                        postData.put(SCHOOLID, schoolId);
                         postData.put(TOKEN, token);
                         if (!alertLogType.equalsIgnoreCase("")) {
                             postData.put(ALERT_LOG_TYPE, alertLogType);

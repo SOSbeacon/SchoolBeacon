@@ -404,8 +404,8 @@ public class SosBeaconActivity extends GeneralActivity implements OnClickListene
             parameter = parameter + "&toGroupIds[]=" + groupIds.get(i).toString();
         }
 
-        return getApiUrl(ALERT_URL) + "?_method=get&format=json&userId=" + mUserId + "&token="
-                + mToken + parameter;
+        return getApiUrl(ALERT_URL) + "?_method=get&format=json&userId=" + mUserId + "&schoolId="
+                + mSchoolId + "&token=" + mToken + parameter;
     }
 
     private void performSendBroadcast() {
@@ -437,6 +437,7 @@ public class SosBeaconActivity extends GeneralActivity implements OnClickListene
         nameValuePairs.add(new BasicNameValuePair("format", "json"));
         nameValuePairs.add(new BasicNameValuePair("userId", mUserId));
         nameValuePairs.add(new BasicNameValuePair("token", mToken));
+        nameValuePairs.add(new BasicNameValuePair(SCHOOLID, mSchoolId));
         nameValuePairs.add(new BasicNameValuePair("type", broadcastTypeId + 1 + ""));
         nameValuePairs.add(new BasicNameValuePair("shortMessage", shortMessage));
         nameValuePairs.add(new BasicNameValuePair("longMessage", longMessage));

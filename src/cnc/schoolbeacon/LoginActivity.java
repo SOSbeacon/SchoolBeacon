@@ -30,8 +30,6 @@ public class LoginActivity extends GeneralActivity {
 
     private ProgressDialog mProgressDialog;
 
-    private Handler mHandler;
-
     private String requestType;
 
     private Integer waitingCount = 0;
@@ -102,11 +100,17 @@ public class LoginActivity extends GeneralActivity {
     private void processLogin() {
         mProgressDialog.hide();
         if (mSuccess.equals(TRUE)) { // OK
+            mRequestChooseSchool = false;
             SosBeaconActivity.show(LoginActivity.this, true);
             Toast.makeText(LoginActivity.this, mMessage, Toast.LENGTH_LONG).show();
             finish();
         }
         if (mSuccess.equals(FALSE)) {
+            if (mRequestChooseSchool) {
+                showSelectSchoolDialog(mSchools);
+                return;
+            }
+
             Toast.makeText(LoginActivity.this, mMessage, Toast.LENGTH_LONG).show();
             loginForm.setVisibility(View.VISIBLE);
         }

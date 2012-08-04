@@ -192,8 +192,6 @@ public class AlertSettingActivity extends SettingActivity {
             mRecordDuration = String.valueOf(recordTimeArray[spinVoice.getSelectedItemPosition()]);
             mAlertSendToGroup = category.get(spinIncase.getSelectedItemPosition()).getId();
 
-            /*mEmergencyNumber = txtPanicPhone.getText().toString();
-            mIncomingGovernmentAlert = btnToggIncoming.isChecked() ? "1" : "0";*/
             saveSettingsConfirm(mHandler, finishActivity, false, confirm);
 
         } else {

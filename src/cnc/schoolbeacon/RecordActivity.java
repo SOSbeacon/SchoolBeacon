@@ -651,7 +651,7 @@ public class RecordActivity extends GeneralActivity implements SurfaceHolder.Cal
         try {
             UploadDialog uploadDialog = new UploadDialog(RecordActivity.this,
                     getApiUrl(UPLOAD_URL), callBackHandler, lstFileImage, lstFileVoice,
-                    broadcastType, type, mUserId, getToken());
+                    broadcastType, type, mUserId, mSchoolId, getToken());
 
             uploadDialog.setCancelable(false);
             try {

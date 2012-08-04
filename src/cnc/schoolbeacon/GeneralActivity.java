@@ -28,6 +28,7 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -48,10 +49,16 @@ import android.os.Looper;
 import android.os.Message;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Spinner;
+import cnc.schoolbeacon.adapter.SchoolsAdapter;
 import cnc.schoolbeacon.constants.Constants;
 import cnc.schoolbeacon.http.HttpRequest;
 import cnc.schoolbeacon.http.HttpSolution;
 import cnc.schoolbeacon.model.Group;
+import cnc.schoolbeacon.model.School;
 import cnc.schoolbeacon.provider.SosBeaconCheckinMessageProvider;
 import cnc.schoolbeacon.util.ContactInfo;
 import cnc.schoolbeacon.util.GroupInfo;
@@ -63,6 +70,8 @@ import com.google.code.microlog4android.LoggerFactory;
 import com.google.code.microlog4android.config.PropertyConfigurator;
 
 public class GeneralActivity extends Activity implements Constants {
+
+    protected static final int LOGIN_TASK = 1;
 
     protected Preferences preferences;
 
@@ -87,6 +96,8 @@ public class GeneralActivity extends Activity implements Constants {
     protected String mEmail = "";
 
     protected String mDefaultGroupId = "";
+
+    protected String mSchoolId = "";
 
     protected String mRecordDuration = "";
 
@@ -114,6 +125,8 @@ public class GeneralActivity extends Activity implements Constants {
 
     protected String mMessage = "";
 
+    protected boolean mRequestChooseSchool = false;
+
     private static boolean isStartTimer = false;
 
     protected JSONObject settingJson;
@@ -131,6 +144,10 @@ public class GeneralActivity extends Activity implements Constants {
     protected AlertDialog.Builder mAlertDialog;
 
     protected ArrayList<Group> groups = new ArrayList<Group>();
+
+    protected ArrayList<School> mSchools = new ArrayList<School>();
+
+    protected Handler mHandler;
 
     protected String[] mBroadcastTypes = new String[] {
             "School Notice", "Emergency Alert"
@@ -174,6 +191,7 @@ public class GeneralActivity extends Activity implements Constants {
 
     private void getSavedInfor() {
         mPhoneId = getPrefs(ID);
+        mSchoolId = getPrefs(SCHOOLID);
         mSettingId = getPrefs(SETTING_ID);
         mPhoneNumber = getPrefs(PHONE_NUMBER);
         mUserName = getPrefs(NAME);
@@ -198,11 +216,12 @@ public class GeneralActivity extends Activity implements Constants {
 
     protected void savePhoneInfor() {
         preferences.edit().putString(ID, mPhoneId).putString(SETTING_ID, mSettingId)
-                .putString(USERID, mUserId).putString(PHONE_NUMBER, mPhoneNumber)
-                .putString(DEFAULTGROUPID, mDefaultGroupId).putString(NAME, mUserName)
-                .putString(PASSWORD, mPassword).putString(EMAIL, mEmail).putString(TOKEN, mToken)
-                .putString(PHONE_STATUS, mPhoneStatus).putString(REGISTER_TYPE, mRegisterType)
-                .putInt(COUNT_CONTACT, mCountContact).putString(RECORD_DURATION, mRecordDuration)
+                .putString(SCHOOLID, mSchoolId).putString(USERID, mUserId)
+                .putString(PHONE_NUMBER, mPhoneNumber).putString(DEFAULTGROUPID, mDefaultGroupId)
+                .putString(NAME, mUserName).putString(PASSWORD, mPassword).putString(EMAIL, mEmail)
+                .putString(TOKEN, mToken).putString(PHONE_STATUS, mPhoneStatus)
+                .putString(REGISTER_TYPE, mRegisterType).putInt(COUNT_CONTACT, mCountContact)
+                .putString(RECORD_DURATION, mRecordDuration)
                 .putString(ALERT_SEND_TO_GROUP, mAlertSendToGroup)
                 .putString(EMERGENCY_NUMBER, mEmergencyNumber)
                 .putString(PANIC_STATUS, mPanicStatus).putString(PANIC_RANGE, mPanicRange)
@@ -214,10 +233,11 @@ public class GeneralActivity extends Activity implements Constants {
     protected void initPhoneData(JSONObject json) {
         try {
             JSONObject jUser = json.getJSONObject(USER);
-            mPhoneId = jUser.has(ID) ? jUser.getString(ID) : mPhoneId;
+//            mPhoneId = jUser.has(ID) ? jUser.getString(ID) : mPhoneId;
+            mSchoolId = jUser.has(SCHOOLID) ? jUser.getString(SCHOOLID) : mSchoolId;
             mSettingId = jUser.has(SETTING_ID) ? jUser.getString(SETTING_ID) : mSettingId;
             mPhoneNumber = jUser.has(PHONE_NUMBER) ? jUser.getString(PHONE_NUMBER) : mPhoneNumber;
-            mUserId = jUser.has(USERID) ? jUser.getString(USERID) : mUserId;
+            mUserId = jUser.has(ID) ? jUser.getString(ID) : mUserId;
             mUserName = jUser.has(NAME) ? jUser.getString(NAME) : mUserName;
             mPassword = jUser.has(PASSWORD) ? jUser.getString(PASSWORD) : mPassword;
             mEmail = jUser.has(EMAIL) ? jUser.getString(EMAIL) : mEmail;
@@ -258,6 +278,24 @@ public class GeneralActivity extends Activity implements Constants {
         }
     }
 
+    protected ArrayList<School> getSchools(JSONObject json) {
+        ArrayList<School> schools = new ArrayList<School>();
+        try {
+            JSONArray schoolArray = json.getJSONArray("selectSchool");
+            for (int i = 0; i < schoolArray.length(); i++) {
+                mRequestChooseSchool = true;
+                JSONObject school = schoolArray.getJSONObject(i);
+                String id = school.getString("id");
+                String name = school.getString("name");
+
+                schools.add(new School(id, name));
+            }
+        } catch (JSONException e) {
+            Log.e("Get Schools", "Parse Json Error: " + e.getMessage());
+        }
+        return schools;
+    }
+
     protected String getDeviceInfor() {
         String phoneInfo = "";
         TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -283,7 +321,7 @@ public class GeneralActivity extends Activity implements Constants {
         String phoneInfo = getDeviceInfor();
         HttpClient client = new DefaultHttpClient();
         String getUrl = String.format(getApiUrl(PHONE_GET_URL), mImei, mToken, mEmail, mPassword,
-                URLEncoder.encode(phoneInfo));
+                mSchoolId, URLEncoder.encode(phoneInfo));
         HttpGet httpGet = new HttpGet(getUrl);
         HttpResponse response;
         logger.log(Level.INFO, "request login: " + getUrl);
@@ -298,6 +336,10 @@ public class GeneralActivity extends Activity implements Constants {
             if (mSuccess.equals(TRUE)) {
                 initPhoneData(responseJson);
                 savePhoneInfor();
+            } else {
+                if (responseJson.has("selectSchool")) {
+                    mSchools = getSchools(responseJson);
+                }
             }
             logger.log(Level.INFO, "- server response: " + responseJson);
         } catch (Exception e) {
@@ -357,7 +399,7 @@ public class GeneralActivity extends Activity implements Constants {
             JSONException {
         ArrayList<GroupInfo> category = new ArrayList<GroupInfo>();
         HttpClient client = new DefaultHttpClient();
-        String getURL = String.format(getApiUrl(GROUP_GET_URL), mUserId, mToken);
+        String getURL = String.format(getApiUrl(GROUP_GET_URL), mUserId, mSchoolId, mToken);
         HttpGet httpGet = new HttpGet(getURL);
         HttpParams httpParams = new BasicHttpParams();
         httpParams.setParameter(FORMAT, JSON);
@@ -431,7 +473,7 @@ public class GeneralActivity extends Activity implements Constants {
                                     String component = i.getComponent().toShortString();
                                     String cls[] = component.split("/");
                                     if (cls[1].contains("SplashScreenActivity")) {
-                                        checkConnect.stop();
+                                        //                                        checkConnect.stop();
                                         checkConnect.interrupt();
                                         sendEmptyMessageDelayed(2, 10000);
                                     }
@@ -626,6 +668,7 @@ public class GeneralActivity extends Activity implements Constants {
                     httpObject.put(FORMAT, JSON);
                     httpObject.put(TOKEN, getToken());
                     httpObject.put(USERID, mUserId);
+                    httpObject.put(SCHOOLID, mSchoolId);
                     httpObject.put(LATITUDE, getLatitude());
                     httpObject.put(LONGITUDE, getLongtitude());
                     httpObject.put(TYPE, broadcastType);
@@ -739,6 +782,14 @@ public class GeneralActivity extends Activity implements Constants {
         this.mPhoneId = phoneId;
     }
 
+    protected String getSchoolId() {
+        return mSchoolId;
+    }
+
+    protected void setSchoolId(String schoolId) {
+        this.mSchoolId = schoolId;
+    }
+
     protected String getToken() {
         return mToken;
     }
@@ -758,7 +809,7 @@ public class GeneralActivity extends Activity implements Constants {
     public void requestGetAllGroup() {
         groups.clear();
         HttpClient client = new DefaultHttpClient();
-        String getUrl = String.format(getApiUrl(GROUP_GET_URL), mUserId, mToken);
+        String getUrl = String.format(getApiUrl(GROUP_GET_URL), mUserId, mSchoolId, mToken);
         HttpGet httpGet = new HttpGet(getUrl);
         HttpResponse response;
         logger.log(Level.INFO, "get groups" + getUrl);
@@ -786,5 +837,55 @@ public class GeneralActivity extends Activity implements Constants {
             mSuccess = "";
             logger.log(Level.ERROR, e.getMessage());
         }
+    }
+
+    public void showSelectSchoolDialog(ArrayList<School> schools) {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.select_school_dialog);
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        dialog.getWindow().setAttributes(lp);
+
+        View btnOk = dialog.findViewById(R.id.btnOk);
+        View btnCancel = dialog.findViewById(R.id.btnCancel);
+
+        final Spinner spSelectSchool = (Spinner) dialog.findViewById(R.id.spSelectSchools);
+        SchoolsAdapter adapter = new SchoolsAdapter(schools, this);
+        spSelectSchool.setAdapter(adapter);
+
+        btnOk.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                mProgressDialog.setMessage(getString(R.string.loadingLogin));
+                mProgressDialog.setCancelable(false);
+                mProgressDialog.show();
+
+                School school = (School) spSelectSchool.getSelectedItem();
+                mSchoolId = school.id;
+                new Thread(new Runnable() {
+                    public void run() {
+                        requestPhoneData();
+                        mHandler.sendEmptyMessage(0);
+                    }
+                }).start();
+
+                dialog.dismiss();
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 }

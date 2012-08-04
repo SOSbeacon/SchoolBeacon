@@ -5,7 +5,7 @@
         
         <EditTextPreference android:key="apiUrl" android:defaultValue="http://sosbeacon.org/school" title="App API Url"></EditTextPreference>
         <EditTextPreference android:key="phoneUrl" android:defaultValue="/phones/"></EditTextPreference>
-        <EditTextPreference android:key="phoneGetUrl" android:defaultValue="/users?format=json&amp;imei=%s&amp;token=%s&amp;email=%s&amp;password=%s&amp;phoneInfo=%s"></EditTextPreference>
+        <EditTextPreference android:key="phoneGetUrl" android:defaultValue="/users?format=json&amp;imei=%s&amp;token=%s&amp;email=%s&amp;password=%s&amp;phoneType=2&amp;schoolId=%s&amp;phoneInfo=%s"></EditTextPreference>
         <EditTextPreference android:key="mailAccountUrl" android:defaultValue="/mail?format=json"></EditTextPreference>
         <EditTextPreference android:key="settingUrl" android:defaultValue="/setting/"></EditTextPreference>
         <EditTextPreference android:key="updateAccount" android:defaultValue="/users"></EditTextPreference>
@@ -14,7 +14,7 @@
         <EditTextPreference android:key="alertUrl" android:defaultValue="/alert/"></EditTextPreference>
         <EditTextPreference android:key="reviewUrl" android:defaultValue="/web/alert/latest?token=%s"></EditTextPreference>
         <EditTextPreference android:key="groupUrl" android:defaultValue="/groups/"></EditTextPreference>
-        <EditTextPreference android:key="groupGetUrl" android:defaultValue="/groups/?format=json&amp;userId=%s&amp;token=%s"></EditTextPreference>
+        <EditTextPreference android:key="groupGetUrl" android:defaultValue="/groups/?format=json&amp;userId=%s&amp;schoolId=%s&amp;token=%s"></EditTextPreference>
         <EditTextPreference android:key="contactUrl" android:defaultValue="/contacts/"></EditTextPreference>
         <EditTextPreference android:key="contactGetUrl" android:defaultValue="/contacts?format=json&amp;groupId=%s&amp;token=%s"></EditTextPreference>
         <EditTextPreference android:key="demoUrl" android:defaultValue="/web/about/take-the-tour"></EditTextPreference>

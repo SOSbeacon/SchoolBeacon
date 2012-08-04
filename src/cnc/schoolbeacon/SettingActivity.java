@@ -130,6 +130,7 @@ public class SettingActivity extends GeneralActivity {
             httpObject.put(METHOD, "PUT");
             httpObject.put(FORMAT, "json");
             httpObject.put(USERID, mUserId);
+            httpObject.put(SCHOOLID, mSchoolId);
             httpObject.put(TOKEN, mToken);
 
             httpObject.put(RECORD_DURATION, mRecordDuration);

@@ -51,8 +51,10 @@ public class UploadDialog extends Dialog implements Constants {
     private String alertId;
 
     private String phoneId;
-    
+
     private String userId;
+
+    private String schoolId;
 
     private String token;
 
@@ -71,13 +73,14 @@ public class UploadDialog extends Dialog implements Constants {
     // alertLogType = check in: 2, alert: 0, call: 1
     public UploadDialog(Context context, String uploadUrl, Handler callBackHandler,
             List<String> lstFileImage, List<String> lstFileVoice, String alertId, String type,
-            String userId, String token) {
+            String userId, String schoolId, String token) {
         super(context);
         this.context = context;
         this.lstFileImage = lstFileImage;
         this.lstFileVoice = lstFileVoice;
         this.alertId = alertId;
         this.userId = userId;
+        this.schoolId = schoolId;
         this.token = token;
         this.type = type;
         this.callBackHandler = callBackHandler;
@@ -231,7 +234,7 @@ public class UploadDialog extends Dialog implements Constants {
 
         // alertLogType = check in: 2, alert: 0, call: 1
         Thread workthreadImage = new Thread(new HttpUploadFile(uploadUrl, uHandler, lstFileImage,
-                lstFileVoice, alertId, type, userId, token));
+                lstFileVoice, alertId, type, userId, schoolId, token));
         workthreadImage.start();
 
         //reset list	 

@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import cnc.schoolbeacon.R;
 
-import com.coremedia.iso.gui.Main;
 import com.flurry.android.FlurryAgent;
 
 public class AboutActivity extends GeneralActivity {

@@ -308,4 +308,6 @@ public interface Constants {
 
     public static final String UPDATE_ACCOUNT = "updateAccount";
 
+    public static final String SCHOOLID = "schoolId";
+
 }

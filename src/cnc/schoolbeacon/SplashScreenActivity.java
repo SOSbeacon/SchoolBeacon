@@ -61,6 +61,11 @@ public class SplashScreenActivity extends GeneralActivity {
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
             if (mSuccess.equals(FALSE)) { // Login fail
+                if (mRequestChooseSchool) {
+                    showSelectSchoolDialog(mSchools);
+                    return;
+                }
+
                 finish();
                 LoginActivity.show(SplashScreenActivity.this);
                 //Toast.makeText(SplashScreenActivity.this, mMessage, Toast.LENGTH_LONG).show();

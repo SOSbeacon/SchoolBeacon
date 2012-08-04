@@ -2,8 +2,8 @@
 <resources>
 
     <string name="app_name">SBeacon</string>
-    <string name="title_copyright">Copyright @2012 SchoolBeacon Inc version 1.00</string>
-    <string name="app_version">1.28</string>
+    <string name="title_copyright">Copyright @2012 SOSbeacon Inc. v2.29s</string>
+    <string name="app_version">2.29</string>
     <string name="btnRecord">Record</string>
     <string name="btnDone">Done</string>
     <string name="btnStop">Stop</string>
@@ -228,7 +228,7 @@
     <string name="select_broadcast_group">Select Broadcast Group</string>
     <string name="short_text_message">Short text message</string>
     <string name="long_email_message">Long email message</string>
-    <string name="preview_broadcast">Preview Broadcast</string>
+    <string name="preview_broadcast">Broadcast List</string>
     <string name="send_broadcast">Send Broadcast</string>
     <string name="cancel">Cancel</string>
     <string name="reset">Reset</string>
@@ -236,5 +236,7 @@
     <string name="groups">Groups:</string>
     <string name="settings">Settings</string>
     <string name="remain_characters">(remain %s characters)</string>
+    <string name="select_school">Select a school to login</string>
+    <string name="ok">OK</string>
 
 </resources>
