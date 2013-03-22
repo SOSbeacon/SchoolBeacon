@@ -290,6 +290,7 @@ public class SosBeaconActivity extends GeneralActivity implements OnClickListene
 
     private void bindGroups() {
         groups.add(0, new Group("allgroups", "All Group", ""));
+        Log.w(TAG, "groups.size():"+groups.size());
         ListGroupsAdapter adapter = new ListGroupsAdapter(this, groups);
         spBroadcastGroup.setAdapter(adapter);
         makeDefaultGroup();
@@ -381,7 +382,7 @@ public class SosBeaconActivity extends GeneralActivity implements OnClickListene
     }
 
     public String getAllBroadcastListUrl() {
-
+    	Log.w(TAG, "get all");
         Group group = (Group) spBroadcastGroup.getSelectedItem();
 
         ArrayList<String> groupIds = new ArrayList<String>();

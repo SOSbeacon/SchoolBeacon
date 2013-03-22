@@ -70,6 +70,8 @@ import com.google.code.microlog4android.LoggerFactory;
 import com.google.code.microlog4android.config.PropertyConfigurator;
 
 public class GeneralActivity extends Activity implements Constants {
+	
+	private final String TAG="GeneralActivity";
 
     protected static final int LOGIN_TASK = 1;
 
@@ -98,7 +100,7 @@ public class GeneralActivity extends Activity implements Constants {
     protected String mDefaultGroupId = "";
 
     protected String mSchoolId = "";
-
+//
     protected String mRecordDuration = "";
 
     protected String mAlertSendToGroup = "";
@@ -190,6 +192,7 @@ public class GeneralActivity extends Activity implements Constants {
     }
 
     private void getSavedInfor() {
+    	Log.w(TAG, "getSavedInfor");
         mPhoneId = getPrefs(ID);
         mSchoolId = getPrefs(SCHOOLID);
         mSettingId = getPrefs(SETTING_ID);
@@ -215,6 +218,7 @@ public class GeneralActivity extends Activity implements Constants {
     }
 
     protected void savePhoneInfor() {
+    	Log.w(TAG, "savePhoneInfor");
         preferences.edit().putString(ID, mPhoneId).putString(SETTING_ID, mSettingId)
                 .putString(SCHOOLID, mSchoolId).putString(USERID, mUserId)
                 .putString(PHONE_NUMBER, mPhoneNumber).putString(DEFAULTGROUPID, mDefaultGroupId)
@@ -234,7 +238,10 @@ public class GeneralActivity extends Activity implements Constants {
         try {
             JSONObject jUser = json.getJSONObject(USER);
 //            mPhoneId = jUser.has(ID) ? jUser.getString(ID) : mPhoneId;
-            mSchoolId = jUser.has(SCHOOLID) ? jUser.getString(SCHOOLID) : mSchoolId;
+            JSONObject jSchool = json.getJSONObject("school");
+            Log.w(TAG, "initPhoneData: "+jSchool.getString("id"));
+            mSchoolId = jSchool.has("id") ? jSchool.getString("id") : mSchoolId;
+            
             mSettingId = jUser.has(SETTING_ID) ? jUser.getString(SETTING_ID) : mSettingId;
             mPhoneNumber = jUser.has(PHONE_NUMBER) ? jUser.getString(PHONE_NUMBER) : mPhoneNumber;
             mUserId = jUser.has(ID) ? jUser.getString(ID) : mUserId;
@@ -318,10 +325,12 @@ public class GeneralActivity extends Activity implements Constants {
      * Get phone information by IMEI
      */
     protected void requestPhoneData() {
+    	Log.w(TAG, "requestPhoneData");
         String phoneInfo = getDeviceInfor();
         HttpClient client = new DefaultHttpClient();
         String getUrl = String.format(getApiUrl(PHONE_GET_URL), mImei, mToken, mEmail, mPassword,
                 mSchoolId, URLEncoder.encode(phoneInfo));
+        Log.w(TAG, "requestPhoneData: "+getUrl);
         HttpGet httpGet = new HttpGet(getUrl);
         HttpResponse response;
         logger.log(Level.INFO, "request login: " + getUrl);
@@ -397,6 +406,7 @@ public class GeneralActivity extends Activity implements Constants {
 
     protected ArrayList<GroupInfo> getContactGroups() throws ClientProtocolException, IOException,
             JSONException {
+    	Log.w(TAG, "getContactGroups");
         ArrayList<GroupInfo> category = new ArrayList<GroupInfo>();
         HttpClient client = new DefaultHttpClient();
         String getURL = String.format(getApiUrl(GROUP_GET_URL), mUserId, mSchoolId, mToken);
@@ -659,6 +669,7 @@ public class GeneralActivity extends Activity implements Constants {
                 Message msg = new Message();
                 logger.log(Level.INFO, "start sending check-in message");
                 try {
+                	Log.w(TAG, "sendCheckIn");
                     Looper.prepare();
                     getLocation();
                     HttpClient client = new DefaultHttpClient();
@@ -809,7 +820,9 @@ public class GeneralActivity extends Activity implements Constants {
     public void requestGetAllGroup() {
         groups.clear();
         HttpClient client = new DefaultHttpClient();
+        Log.w(TAG	, "mSchoolId: "+mSchoolId);
         String getUrl = String.format(getApiUrl(GROUP_GET_URL), mUserId, mSchoolId, mToken);
+        Log.w("asdsd", "getUrl: "+getUrl);
         HttpGet httpGet = new HttpGet(getUrl);
         HttpResponse response;
         logger.log(Level.INFO, "get groups" + getUrl);
@@ -819,9 +832,11 @@ public class GeneralActivity extends Activity implements Constants {
             Log.e("get groups response", responseContent);
             JSONObject responseJson = new JSONObject(responseContent);
             responseJson = responseJson.getJSONObject(RESPONSE);
+            Log.w("aaa", ""+responseJson.toString());
             mSuccess = responseJson.getString(SUCCESS);
             if (mSuccess.equals(TRUE)) {
                 JSONArray jArray = responseJson.getJSONArray("groups");
+                
                 for (int i = 0; i < jArray.length(); i++) {
                     JSONObject jGroup = jArray.getJSONObject(i);
                     String id = jGroup.getString("id");

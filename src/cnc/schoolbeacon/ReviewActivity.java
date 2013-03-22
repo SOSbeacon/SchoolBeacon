@@ -4,14 +4,18 @@ package cnc.schoolbeacon;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.webkit.WebSettings.PluginState;
 import android.widget.Button;
 import android.widget.TextView;
 import cnc.schoolbeacon.R;
@@ -35,7 +39,36 @@ public class ReviewActivity extends GeneralActivity {
         title.setText(APP_DIR);
         leftBtn.setVisibility(View.INVISIBLE);
         rightBtn.setVisibility(View.INVISIBLE);
+
         webView = (WebView) findViewById(R.id.webview);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setPluginsEnabled(true);
+        webView.getSettings().setPluginState(PluginState.ON);
+        webView.getSettings().setAllowFileAccess(true);
+        webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        webView.setWebChromeClient(new WebChromeClient());
+
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                if (mProgressDialog.isShowing()) {
+                    mProgressDialog.dismiss();
+                }
+            }
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                if (url.endsWith(".ogg")) {
+                    Uri tempPath = Uri.parse(url);
+                    MediaPlayer player = MediaPlayer.create(ReviewActivity.this, tempPath);
+                    player.start();
+                    return true;
+                } else {
+                    return super.shouldOverrideUrlLoading(view, url);
+                }
+            }
+        });
+        /*webView = (WebView) findViewById(R.id.webview);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setPluginsEnabled(true);
         webView.setWebViewClient(new WebViewClient() {
@@ -45,7 +78,7 @@ public class ReviewActivity extends GeneralActivity {
                     mProgressDialog.dismiss();
                 }
             }
-        });
+        });*/
         webView.loadUrl(String.format(getApiUrl(REVIEW_URL), getToken()));
         mProgressDialog = ProgressDialog.show(ReviewActivity.this, "", getString(R.string.loading));
         mProgressDialog.setCancelable(true);
