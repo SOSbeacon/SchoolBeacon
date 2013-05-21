@@ -29,6 +29,7 @@
     <string name="btnSubmit">Submit</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
+    <string name="agree">Agree</string>
     <string name="enterGroupName">Enter group name</string>
     <string name="groupNameInvalid">Please enter group name</string>
     <string name="menu_item_home">Home</string>
@@ -220,6 +221,7 @@
     <string name="offline_sms_error_no_service">sms transmission failed, no text service available, try again later</string>
     <string name="offline_sms_error_unknown">sms transmission failed, reasons unknown, try again later</string>
     <string name="offline_sms_char_remain">(there are %s characters remaining)</string>
+    <string name="offline_sms_confirm">You need to send a SMS to School Beacon phone number. Choose Agree to continue</string>
     <string name="alert_setting_sound">Enable shutter sound</string>
     <string name="offline_return_main_screen">Returning to main screen...</string>
     <string name="email">email</string>

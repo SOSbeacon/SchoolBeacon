@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -33,7 +34,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import cnc.schoolbeacon.R;
 
 public class OffLineModeActivity extends Activity {
     String latitude = "n/a";
@@ -154,33 +154,7 @@ public class OffLineModeActivity extends Activity {
         btnSend.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                // {Prefix}|{PhoneId}|{Alert Type}|{Group}|{Latitude}|{Longitude}|{Mess}
-                int broadcast = 2;
-                if (spBroadcastType.getSelectedItemId() == 1) {
-                    broadcast = 0;
-                }
-
-                int group = 0;
-                if (spnBroadcastGroup.getSelectedItemId() == 2) {
-                    group = 3;
-                } else if (spnBroadcastGroup.getSelectedItemId() == 3) {
-                    group = 2;
-                } else {
-                    group = (int) spnBroadcastGroup.getSelectedItemId();
-                }
-                String mess = "OF|";
-                //mess += preferences.getString("id", "")+"|";
-                mess += mImei + "|";
-                mess += broadcast + "|";
-                mess += group + "|";
-                mess += latitude + "|";
-                mess += longitude + "|";
-                mess += etMessage.getText().toString() + "|";
-                //tel : +14156898484;
-                //etMessage.setText(mess);
-                type = 0;
-                //test tel : 0974072386
-                new AutoSendSMS("+14156898484", mess).execute();
+            	confirmSendSms();
             }
         });
 
@@ -220,6 +194,48 @@ public class OffLineModeActivity extends Activity {
         });
     }
 
+    /**
+     * Confirm send SMS
+     */
+    private void confirmSendSms() {
+    	// {Prefix}|{PhoneId}|{Alert Type}|{Group}|{Latitude}|{Longitude}|{Mess}
+    	AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+    	dialog.setMessage(getString(R.string.offline_sms_confirm));
+    	dialog.setNegativeButton(R.string.cancel, null);
+    	dialog.setNeutralButton(R.string.agree, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+				int broadcast = 2;
+		        if (spBroadcastType.getSelectedItemId() == 1) {
+		            broadcast = 0;
+		        }
+
+		        int group = 0;
+		        if (spnBroadcastGroup.getSelectedItemId() == 2) {
+		            group = 3;
+		        } else if (spnBroadcastGroup.getSelectedItemId() == 3) {
+		            group = 2;
+		        } else {
+		            group = (int) spnBroadcastGroup.getSelectedItemId();
+		        }
+		        String mess = "OF|";
+		        //mess += preferences.getString("id", "")+"|";
+		        mess += mImei + "|";
+		        mess += broadcast + "|";
+		        mess += group + "|";
+		        mess += latitude + "|";
+		        mess += longitude + "|";
+		        mess += etMessage.getText().toString() + "|";
+		        //tel : +14156898484;
+		        //etMessage.setText(mess);
+		        type = 0;
+		        //test tel : 0974072386
+		        new AutoSendSMS("+14156898484", mess).execute();
+			}
+		});
+    	dialog.show();
+    }
+    
     /* Class My Location Listener */
 
     public class MyLocationListener implements LocationListener {
