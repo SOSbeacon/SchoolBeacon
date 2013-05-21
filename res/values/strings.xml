@@ -2,8 +2,8 @@
 <resources>
 
     <string name="app_name">SBeacon</string>
-    <string name="title_copyright">Copyright @2012 SOSbeacon Inc. v2.29s</string>
-    <string name="app_version">2.29</string>
+    <string name="title_copyright">Copyright @2012 SOSbeacon Inc. v2.30s</string>
+    <string name="app_version">2.30</string>
     <string name="btnRecord">Record</string>
     <string name="btnDone">Done</string>
     <string name="btnStop">Stop</string>
