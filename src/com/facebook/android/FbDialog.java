@@ -40,7 +40,7 @@ import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import cnc.schoolbeacon.R;
+import cncsoft.schoolbeacon.R;
 
 import com.facebook.android.Facebook.DialogListener;
 

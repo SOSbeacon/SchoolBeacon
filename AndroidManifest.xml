@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cnc.schoolbeacon"
-    android:versionCode="3"
+    package="cncsoft.schoolbeacon"
+    android:versionCode="1"
     android:versionName="@string/app_version" >
 
     <application
-        android:debuggable="true"
         android:icon="@drawable/schoolbeacon_logo"
         android:label="@string/app_name" >
 
@@ -34,7 +33,7 @@
 
         <provider
             android:name=".provider.SosBeaconCheckinMessageProvider"
-            android:authorities="cnc.schoolbeacon.provider" />
+            android:authorities="cncsoft.schoolbeacon.provider" />
 
         <activity
             android:name=".LoginActivity"

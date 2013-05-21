@@ -20,7 +20,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
-import cnc.schoolbeacon.constant.Values;
+import cncsoft.schoolbeacon.constant.Values;
 
 import android.Manifest;
 import android.app.Activity;
