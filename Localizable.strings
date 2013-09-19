@@ -1,0 +1,54 @@
+/* 
+   Localizable.strings
+   SOSBEACON
+
+   Created by bon on 9/6/11.
+   Copyright 2011 __MyCompanyName__. All rights reserved.
+ */
+//NSLocalizedString(@"MessageBeenSent",@"")
+//"Message" = "Message";
+"Cannotgetdata" = "Cannot get data from server. Please check your Internet connection.";
+"TextActive" = "Did you receive a text message to activate?";
+"VerifyPhone" = "Please verify your mobile phone number";
+"Video" = "Do you want to see the short SOSbeacon video tutorial?";
+"EmegencyNotSet" = "Emergency phone number not yet set for your location.";
+"Establish" = "Do you want to establish a login and password for security?";
+"doYouWantAddcontact" = "Do you want to add contacts to your groups?";
+"checkinWithOutMessage" = "Cannot Check-in without a message";
+"messageLimit" = "Message length exceeds SMS limit.";
+"chekin_success" = "Check-in sent successfully";
+"SetEmergency"="Emergency Phone number not yet set for your location. Do you want to set it now?";
+"SendAlertSuccess" = "Alert has been sent successfully";
+"EnterGroupName" = "Please enter group name";
+"ConFimDeleteGroup"="Are you sure you want to delete this group ?";
+"DeleteDefaulGroup"="Cannot delete default group";
+"EnterNameAndPhone"="Please enter Name and TextPhone or Name and Email";
+"EmailNotValid"="Email address is not valid.";
+"TextPhoneNotValid" = "Text phone number is not valid.";
+"VoicePhoneNotValid" = "Voice phone number is not valid.";
+"SelectContact" = "Please select contacts to import";
+"ConfimChange" = "Contact was changed, Do you want to save contacts ?";
+"PassShort" = "Password can not be shorter than 6 characters";
+"SaveChange" = "Do you want to save your changes?";
+"ResetAllToDefault" = "Are you sure you want to reset this application and lose your existing settings?";
+"EnterSubjectMessage" = "Please enter your subject and message.";
+"MessageBeenSent" = "Your message has been sent.";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
