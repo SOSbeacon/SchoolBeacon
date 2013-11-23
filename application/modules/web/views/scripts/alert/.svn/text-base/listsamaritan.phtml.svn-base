@@ -1,0 +1,90 @@
+<script type="text/javascript"
+    src="http://maps.google.com/maps/api/js?sensor=false">
+</script>
+
+<script type="text/javascript" src="/scripts/lightbox.js"></script>
+<link rel="stylesheet" href="/styles/lightbox.css" type="text/css" media="screen" />
+
+<?php if (stristr($_SERVER['HTTP_USER_AGENT'], 'iphone') || stristr($_SERVER['HTTP_USER_AGENT'], 'android')){ ?>
+<style type="text/css">
+.alert-list .alert .main-audio .play {
+background:none repeat scroll 0 0 transparent;
+border:1px solid;
+float:left;
+height:80px;
+overflow:visible;
+vertical-align:inherit;
+width:100%;
+}
+.alert-list .alert .main-audio .play div {
+	top:60px;
+	bottom:5px;
+	display:block;
+	float:none;
+	margin-bottom:0;
+	margin-left:0;
+	margin-right:0;
+	position:relative;
+}
+</style>
+<?php }?>
+
+
+<script type="text/javascript">
+function initialize(la,lo) {
+      var latlng  = new google.maps.LatLng(la, lo);
+      var myOptions = {
+      zoom: 12,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+        
+    var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+    var marker = new google.maps.Marker({
+        position: latlng,
+        title:"My location",
+		icon: 'http://google-maps-icons.googlecode.com/files/factory.png'  
+    }); 
+    // To add the marker to the map, call setMap();
+    marker.setMap(map); 
+
+<?php
+foreach($this->phones  as $key => $row) {
+	if($row['phoneId'] != $this->phoneId) {
+?>	
+	var marker<?php echo $key?> = new google.maps.Marker({  
+	position: new google.maps.LatLng(<?php echo $row['latitude']?>, <?php echo $row['longtitude']?>),  
+	map: map,  
+	title: '<?php echo $row['number']?>', 
+	});
+	marker<?php echo $key?>.setMap(map);  
+   
+<?php }} ?>
+    
+}
+
+$(document).ready(function(){
+    var la = $("#map_canvas").attr("la");
+    var lo = $("#map_canvas").attr("lo");
+	//initialize(21.040994081750677,105.78739643096924);
+    initialize(la, lo);
+});
+
+
+</script>
+
+<div class="alert-list">
+<h1> Location </h1>
+
+	<div class="location">
+	    <h1>Location</h1>
+	    <div class="map">
+	             <div>
+	                <div class="map_canvas" id="map_canvas" 
+						la="21.0157" 
+						lo="105.805"></div>
+	            </div>
+		</div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<script type="text/javascript">
+    function submitForm() {
+        $('#contactGroupsForm').submit();
+    }
+</script>
+
+<div class="phone-list">
+    <?php echo $this->messages ?>
+    <form id="contactGroupsForm" method="get" action="">
+        <h1>Contact groups</h1>
+        <br />
+        <div class="contact-groups">
+            <table class="tblList" style="width: 500px">
+                <thead>
+                    <tr>
+                        <th>Group name</th>
+                        <th>Number of contacts</th>
+                        <th>Manage contacts</th>
+                    </tr>
+                </thead>
+
+            <?php foreach ($this->groups as $group) : ?>
+                <tr>
+                    <td><?php echo $group['name'] ?></td>
+                    <td><?php echo $group['number'] ?></td>
+                    <td><a href="/web/contacts/list/phoneId/<?php echo $this->phoneId ?>/groupId/<?php echo $group['id'] ?>" class="browse">&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
+                </tr>
+            <?php endforeach; ?>
+            </table>
+        </div>
+    </form>
+</div>

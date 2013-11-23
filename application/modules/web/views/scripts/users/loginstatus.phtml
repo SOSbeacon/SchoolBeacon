@@ -1,0 +1,21 @@
+<?php if (!Sos_Service_Functions::isMobileAccess()) : ?>
+<div class="account">
+    Welcome
+    <?php if ($this->auth->getId()) : ?>
+        <strong>
+            <?php if ($this->auth->getName()) { echo htmlspecialchars($this->auth->getName()); } ?>  
+            <?php if ($this->auth->getNumber()) { echo htmlspecialchars($this->auth->getNumber()); } ?>
+        </strong> ! | 
+        <a href="/webapp">WebAPP</a>
+        <!-- a href="/web/phone/list/">Account</a> |
+        <a href="/web/groups">Manage Groups</a> |
+        <a href="/web/phone/smslog/">Sms Log</a> |
+        <a href="/web/phone/settings/">Settings</a --> |
+        <a href="/web/users/logout">Logout</a>
+    <?php else : ?>
+        <strong>Guest</strong>! | 
+        <a href="/webapp">WebAPP</a> |
+        <a href="/web/users/login">Login</a> or <a href="/web/users/register">Register</a>
+    <?php endif; ?>
+</div>
+<?php endif; ?>

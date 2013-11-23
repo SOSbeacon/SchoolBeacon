@@ -1,0 +1,17 @@
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#btCheckInOk').click(function() {
+            if(confirm('Are you sure you want to send check-in message "I\'m OK"?')) {
+                setLoading();
+                return true;
+            }
+            return false;
+        });
+    });
+</script>
+
+<div class="message"><?php echo $this->message ?></div>
+<form method="post" action="" class="center">
+    <input type="submit" id="btCheckInOk" name="btCheckInOk" value="Check-in I'm OK" class="action bt-green" />
+    <input type="submit" id="btCheckInGroup" name="btCheckInGroup" value="Check-in Group Message" class="action bt-orange" />
+</form>

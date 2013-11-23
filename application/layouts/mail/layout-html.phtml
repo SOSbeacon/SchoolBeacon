@@ -1,0 +1,16 @@
+<html>
+<body>
+
+<?php echo $this->layout()->content ?>
+<?php
+if (isset($this->layout()->mailkey))
+{
+	?>
+<br></br>
+<a
+	href="<?php echo $this->layout()->rooturl ?>/mail/unsubscribe?uid=<?php echo $this->layout()->mailkey;?>">click
+here to stop receiving email</a>
+	<?php }?>
+
+</body>
+</html>

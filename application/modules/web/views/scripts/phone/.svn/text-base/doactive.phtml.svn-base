@@ -1,0 +1,9 @@
+<div class="phone-active">
+<div class="div1-1">
+	<div class="do-active">
+		<?php if(isset($this->message)) :?>
+			<?php echo $this->message ?>
+		<?php endif; ?>
+	</div>
+</div>
+</div>

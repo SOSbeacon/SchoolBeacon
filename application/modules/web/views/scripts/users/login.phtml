@@ -1,0 +1,66 @@
+<div class="login-home">
+        <script type="text/javascript">
+        $().ready(function() {
+
+	        // validate signup form on keyup and submit
+	        $("#frmLogin").validate({
+                    rules: {
+                        cpassword: {
+                          equalTo: "#password"
+                        }
+                    },
+                    messages: {
+                        cpassword: {
+                            equalTo: "Please enter the same password as above"
+                        }
+                    }
+			});
+
+			//Set blank when load form
+			$('#user').val('');
+			$('#password').val('');
+        });
+        </script>
+        <?php $form = $this->form; ?>
+
+        <div class="login-panel">
+		<?php if($this->msg) : ?>
+			<h2 style="font-size: 16px; margin-left: 12px; margin-bottom: 10px; color: #1959AC">
+			<?php echo $this->msg ?></h2>
+		<?php endif; ?>
+         
+        <form action="/web/users/login" method="POST" name="frmLogin" id="frmLogin">
+                <div class="login-title">&nbsp;</div>
+                <div class="select-phone"><?php echo $this->selectPhone ?></div>
+                <div class="div1">
+                        <div class="left">Phone number</div>
+                        <div class="right">
+                        <?php echo $this->formText("user", $form->getElement("user")->getValue(), array("class" => "txt", "minlength" => "6")) ?>
+                        </div>
+                </div>
+                <div class="div1">
+                        <div class="left">Password</div>
+                        <div class="right">
+                        <?php   echo $this->formPassword("password", $form->getElement("password")->getValue(), array("class" => "txt", "minlength" => "6"))  ?>
+                        </div>
+                </div>
+                <div class="div1">
+                        <div class="left"></div>
+                        <div class="right">
+                            <input type="checkbox" name="chkRemember"/> Remember me <br />
+                            <input class="button-login" type="submit" name="btnLogin" value="" /></div>
+                </div>
+                <div class="div1">
+                	<?php if($this->response) : ; ?>
+                                <font color="red"><?php echo $this->response['message']; ?></font>
+                        <?php endif; ?>
+                </div>                        
+                <div class="div1">
+                        <a href="/web/users/forgot">Forgot login?</a>
+                </div>                           
+                <!-- div class="div1">
+                        No account yet? <a href="/web/users/register">Register</a>
+                </div-->                                                   
+        </form>                      
+        </div>
+</div>

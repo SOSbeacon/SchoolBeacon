@@ -1,0 +1,73 @@
+<?php
+$setting = $this->phone->getSetting();
+?>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('form').validate();
+    });
+</script>
+<div class="message"><?php echo $this->message ?></div>
+<form method="post" action="" class="list">
+    <table class="list" border="0" cellpadding="0" cellspacing="0">
+        <tr><td colspan="2"><strong>Alert settings</strong></td></tr>
+        <tr><td style="width: 160px">Audio/Image capture: </td>
+            <td class="right">
+                <select name="recordTime">
+                    <option value="1" <?php if ($setting->getRecordingVoiceDuration() == 1): ?>selected="selected"<?php endif ?> >1 session</option>
+                    <option value="2" <?php if ($setting->getRecordingVoiceDuration() == 2): ?>selected="selected"<?php endif ?> >2 sessions</option>
+                    <option value="3" <?php if ($setting->getRecordingVoiceDuration() == 3): ?>selected="selected"<?php endif ?> >3 sessions</option>
+                    <option value="4" <?php if ($setting->getRecordingVoiceDuration() == 4): ?>selected="selected"<?php endif ?> >4 sessions</option>
+                    <option value="5" <?php if ($setting->getRecordingVoiceDuration() == 5): ?>selected="selected"<?php endif ?> >5 sessions</option>
+                    <option value="6" <?php if ($setting->getRecordingVoiceDuration() == 6): ?>selected="selected"<?php endif ?> >6 sessions</option>
+                </select>
+                <!-- br /><em>Number of 30 second recording session settings.</em -->
+            </td>
+        </tr>
+        <tr><td>Default group: </td>
+            <td class="right">
+                <select name="defaultGroup">
+                <?php foreach ($this->groups as $g): ?>
+                    <option <?php if($setting->getAlertSendtoGroup() == $g->getId()): ?> selected="selected" <?php endif ?> value="<?php echo $g->getId() ?>"><?php echo htmlspecialchars($g->getName()) ?></option>
+                <?php endforeach; ?>
+                </select>
+            </td>
+        </tr>
+        <tr><td>Emergency number: </td>
+            <td class="right"><input type="text" name="emergencyNumber" class="number" size="20" style="width: 100px" value="<?php echo $setting->getPanicAlertPhonenummber() ?>" /></td></tr>
+        <tr><td>Receive government alert : </td>
+            <td class="right"><input type="checkbox" name="receiveGovernment" value="1" <?php if($setting->getIncomingGovernmentAlert()): ?> checked="checked" <?php endif ?> /></td>
+        </tr>
+        <tr><td colspan="2"><strong>Good samaritans</strong></td></tr>
+        <tr><td>Receive good samaritan alert : </td>
+            <td class="right"><input type="checkbox" name="receiveSamaritanStatus" value="1" <?php if($setting->getGoodSamaritanStatus()): ?> checked="checked" <?php endif ?> /></td>
+        </tr>
+        <tr><td>Maximum distance : </td>
+            <td class="right">
+                <select name="receiveSamaritanRange">
+                    <option value="0" <?php if ($setting->getGoodSamaritanRange() == 0): ?>selected="selected"<?php endif ?> >0 Km</option>
+                    <option value="1" <?php if ($setting->getGoodSamaritanRange() == 1): ?>selected="selected"<?php endif ?> >1 Km</option>
+                    <option value="3" <?php if ($setting->getGoodSamaritanRange() == 3): ?>selected="selected"<?php endif ?> >3 Km</option>
+                    <option value="5" <?php if ($setting->getGoodSamaritanRange() == 5): ?>selected="selected"<?php endif ?> >5 Km</option>
+                    <option value="10" <?php if ($setting->getGoodSamaritanRange() == 10): ?>selected="selected"<?php endif ?> >10 Km</option>
+                    <option value="20" <?php if ($setting->getGoodSamaritanRange() == 20): ?>selected="selected"<?php endif ?> >20 Km</option>
+                </select>
+            </td>
+        </tr>
+        <tr><td>Alert nearby good samaritans : </td>
+            <td class="right"><input type="checkbox" name="alertSamaritanStatus" value="1" <?php if($setting->getPanicAlertGoodSamaritanStatus()): ?> checked="checked" <?php endif ?> /></td>
+        </tr>
+        <tr><td>Maximum distance : </td>
+            <td class="right">
+                <select name="alertSamaritanRange">
+                    <option value="0" <?php if ($setting->getPanicAlertGoodSamaritanRange() == 0): ?>selected="selected"<?php endif ?> >0 Km</option>
+                    <option value="1" <?php if ($setting->getPanicAlertGoodSamaritanRange() == 1): ?>selected="selected"<?php endif ?> >1 Km</option>
+                    <option value="3" <?php if ($setting->getPanicAlertGoodSamaritanRange() == 3): ?>selected="selected"<?php endif ?> >3 Km</option>
+                    <option value="5" <?php if ($setting->getPanicAlertGoodSamaritanRange() == 5): ?>selected="selected"<?php endif ?> >5 Km</option>
+                    <option value="10" <?php if ($setting->getPanicAlertGoodSamaritanRange() == 10): ?>selected="selected"<?php endif ?> >10 Km</option>
+                    <option value="20" <?php if ($setting->getPanicAlertGoodSamaritanRange() == 20): ?>selected="selected"<?php endif ?> >20 Km</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <input type="submit" class="" value="Update settings"/>
+</form>

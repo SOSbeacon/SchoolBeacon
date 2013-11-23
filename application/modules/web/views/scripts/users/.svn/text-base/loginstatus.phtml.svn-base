@@ -1,0 +1,25 @@
+<?php if(!(stristr($_SERVER['HTTP_USER_AGENT'], 'iphone') || stristr($_SERVER['HTTP_USER_AGENT'], 'android'))) : //If browser is mobile not show here?>  
+	<?php if(isset($this->auth)) : ?>
+	<div class="logout">
+		<a href="/web/users/logout">Logout</a>
+	</div>
+	<div class="account">
+		Welcome 
+                <strong>
+                    <?php if(isset($this->auth->name)) { echo htmlspecialchars($this->auth->name);} ?>
+                    - <?php if(isset($this->auth->number)) { echo htmlspecialchars($this->auth->number);} ?>
+                </strong> ! &nbsp;&nbsp;|&nbsp;
+		<a href="/web/phone/list/">Account</a>&nbsp;|
+                <a href="/web/groups">Manage Groups</a>&nbsp;|
+		<a href="/web/phone/smslog/">Sms Log</a>&nbsp;|
+		<a href="/web/phone/settings/">Settings</a>&nbsp;|
+	</div>
+	<?php else : ?>
+	<div class="logout">
+		<a href="/web/users/login">Login</a> or <a href="/web/users/register">Register</a>
+	</div>
+	<div class="account">
+		Welcome <strong>Guest</strong> !
+	</div>
+	<?php endif; ?>
+<?php endif; ?>

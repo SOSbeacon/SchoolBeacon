@@ -1,0 +1,58 @@
+<script type="text/javascript">
+$().ready(function() {
+
+	// validate signup form on keyup and submit
+	$("#frmLogin").validate({
+            rules: {
+                cpassword: {
+                  equalTo: "#password"
+                }
+            },
+            messages: {
+                cpassword: {
+                    equalTo: "Please enter the same password as above"
+                }
+            }
+        });
+});
+</script>
+<?php
+$form = $this->form;
+?>
+<form action="<?php echo $form->getAction() ?>" method="POST" name="frmAccount" id="frmLogin">
+    <div>
+        <div>
+        	<h1>Register successfull!!!</h1><br/><br/>
+            <div><h3>Please Login</h3></div><br/>
+            <div>
+                <div>Email</div>
+                <div>
+                    <?php echo $this->formText("email", $form->getElement("email")->getValue(),
+                            array("class" => "W300 required email", "minlength" => "2")) ?>
+                </div>
+            </div>
+            <div>
+                <div>Password</div>
+                <div>
+                    <?php
+                        echo $this->formPassword("password", $form->getElement("password")->getValue(),
+                            array("class" => "W300 required", "minlength" => "6"))
+                    ?>
+                </div>
+            </div>
+            <div>
+            	<div>
+                <?php
+                    echo $this->formSubmit("Login", "Login", $form->getElement("login")->getValue(),
+                            array("class" => "required"))
+                ?>
+                </div>
+				<?php if($this->response) { ?>
+                    <div>
+                        <font color="red"><?php echo $this->response['message']; ?></font>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+</form>

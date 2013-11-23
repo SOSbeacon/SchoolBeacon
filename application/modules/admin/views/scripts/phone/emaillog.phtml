@@ -1,0 +1,106 @@
+<script language="javascript">
+$(document).ready(function() {
+	$('#btnDelete').click(function(){
+		//Delete all item checked
+		deleteConfirm(this);
+	});
+});
+
+/**
+ * Get list id Checked Checkbox
+ * @return string id as: 1,2,3
+ */
+function getCheckedBoxId() {
+	var ids = '';
+
+	//Find all item checked of 'chk' class
+	$('.chk').each(function(index) {
+		if (this.checked)
+			ids += this.value + ',';
+	});
+	//Remove last token ',' of string ids
+	if(ids.lastIndexOf(',') != -1) {
+		ids = ids.substr(0, ids.lastIndexOf(','));
+	}
+
+	return ids;
+}
+
+function deleteConfirm(that)
+{
+	//Get list id delete
+	var ids = getCheckedBoxId();
+	//If ids = null, do nothing
+  	if(ids == '') 
+  	  	return false;
+  	
+	var answer = confirm('Are you sure want to continue deleting ?');
+	if (answer){
+	  that.href = "/admin/phone/emaillogdelete/id/"+ids;
+	}
+	else
+	  return false;
+}
+
+</script>
+<div class="phone-emaillog">
+	<div class="grid">
+        <form class="searchForm" method="get" action="/admin/phone/emaillog" >
+            <strong>Search by: </strong>
+            From <input type="text" name="searchFrom" size="20" 
+                value="<?php echo $this->escape($this->params->getParam('searchFrom', '')) ?>" />
+            To <input type="text" name="searchTo" size="20" 
+                value="<?php echo $this->escape($this->params->getParam('searchTo', '')) ?>" />
+            <input type="submit" name="doSearch" class="submit" value="Search" />  
+            <a href="/admin/phone/emaillog">Reset</a>
+        </form>
+	<form id="frm" name="frm" action="" method="post">
+		<table class="tbl" cellpadding="0" cellspacing="1">
+		<tr id="head"> 	 	 	
+			<th>
+                            <a class="sort <?php echo $this->sort_date ? ' current-sort ' : ''; echo ($this->sort_date == 'ASC') ? 'sort-asc' : 'sort-desc'; ?>"
+                                href="/admin/phone/emaillog/sort_date/<?php echo ($this->sort_date == 'ASC') ? 'desc' : 'asc'; ?>"
+                                title="Sort by this column">Date (GMT)</a></th>
+			<th> <a class="sort <?php echo $this->sort_from ? ' current-sort ' : ''; echo ($this->sort_from == 'DESC') ? 'sort-desc' : 'sort-asc'; ?>"
+                                href="/admin/phone/emaillog/sort_from/<?php echo ($this->sort_from == 'DESC') ? 'asc' : 'desc'; ?>"
+                                title="Sort by this column">From</a></th>
+			<th><a class="sort <?php echo $this->sort_to ? ' current-sort ' : ''; echo ($this->sort_to == 'DESC') ? 'sort-desc' : 'sort-asc'; ?>"
+                                href="/admin/phone/emaillog/sort_to/<?php echo ($this->sort_to == 'DESC') ? 'asc' : 'desc'; ?>"
+                                title="Sort by this column">To</a></th>
+			<th>Message</th>
+			<!-- <th>Status</th> -->
+			<th><a id="btnDelete" href="#">Delete</a></th>
+		</tr>
+<?php if(isset($this->paginator) && count($this->paginator) > 0):?>
+	<?php foreach($this->paginator as $row):?>
+	<?php
+		//Re-write sent status of smsog
+		if($row['status'] == 0)
+			$row['status'] = 'Error';
+		elseif($row['status'] == 1)
+			$row['status'] = 'Sent';
+	?>
+		<tr> 	 
+			<td class="no-wrap"><?php echo $row['created_date']?>
+                        </td>
+			<td class="no-wrap"><?php echo $row['from']?></td>
+			<td>
+                            <?php echo str_replace(',', '<br />', $row['to'])?>
+                        </td>
+			<td id="smsMessage"><?php echo $row['message']?></td>
+			<!--  <td class="center"><?php echo $row['status']?></td>-->
+			<td class="center">
+				<input type="checkbox" name="chk" class="chk" value="<?php echo $row['id']?>" />
+			</td>
+		</tr>
+	<?php endforeach;?>
+<?php else: ?>
+		<tr> 	 	 	
+			<td class="center" id="empty" colspan="6">EMPTY EMAIL LOG</td>
+		</tr>
+<?php endif; ?>
+		</table>
+	</form>
+	</div>
+	<?php echo $this->paginationControl($this->paginator, 'Sliding', 'partials/controls.phtml'); ?>
+</div>

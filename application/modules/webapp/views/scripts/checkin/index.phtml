@@ -1,0 +1,289 @@
+<?php
+  $allowfileTypes = '"' .implode('", "', Sos_Service_Functions::$imageExtension) . '", "' . implode('", "', Sos_Service_Functions::$audioExtension) . '"';
+?>
+
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
+<script type="text/javascript">   
+
+function showDialogMap(lat, lng) {
+    initializeMap(lat, lng);
+    $('#locationConfirmDialog').dialog('destroy');
+    $('#locationConfirmDialog').dialog({ 
+        title : 'Map location',
+        resizable: false,
+        modal: true,
+        height:330,
+        width:330,
+        buttons: {
+            'Yes': function() {
+                savedGEO(lat, lng);
+                getSavedGEO();
+                $(this).dialog('close');
+            },
+            'No': function() {
+                savedGEO('', '');
+                getSavedGEO();
+                $(this).dialog('close');
+                inputLocation();
+            },
+            'Cancel': function() {
+                savedGEO('', '');
+                getSavedGEO();
+                $(this).dialog('close');
+            }
+        }
+    });
+    initializeMap(lat, lng);
+}
+function requestGEO() {
+    try {
+        navigator.geolocation.getCurrentPosition(function GetLocation(location) {
+            if (location != null) {
+                var lat = location.coords.latitude;
+                var lng = location.coords.longitude;
+                showDialogMap(lat, lng);
+            } else {
+                savedGEO('', '');
+                getSavedGEO();
+                inputLocation();
+            }
+        });
+    } catch(locEx) {
+        savedGEO('', '');
+        getSavedGEO();
+        inputLocation();
+    }
+}
+
+function inputLocation() {
+    $('#locationInputDialog').dialog('destroy');
+    $('#locationInputDialog').dialog({ 
+        title : 'My location',
+        resizable: false,
+        modal: true,
+        height:200,
+        width:400,
+        buttons: {
+            'Close': function() {
+                savedGEO('', '');
+                getSavedGEO();
+                $(this).dialog('close');
+            }
+        }
+    });
+}
+
+function setLocationForm() {
+    $('#inputLocationForm').validate();
+    $('#inputLocationForm').submit(function(e){
+        if ($(this).valid()) {
+            e.preventDefault();
+            dataString = $(this).serialize();
+            $('#searchingLocation').show();
+            $.ajax({
+                type: 'POST',
+                url: '/webapp/checkin/get-location',
+                data: dataString,
+                dataType: 'json',
+                success: function(data) {
+                    $('#searchingLocation').hide();
+                    if (data.status == 'OK') {
+                        $('#locationInputDialog').dialog('close');
+                        $('#locationInputDialog').dialog('destroy');
+                        showDialogMap(data.latitude, data.longitude);
+                    } else {
+                        alert('Location is not correct, please try again.')
+                    }
+                }
+            });         
+        }
+    });
+}
+
+function savedGEO(lat, lng) {
+    $.cookie('sosbeaconWebapp_Lat', lat);
+    $.cookie('sosbeaconWebapp_Lng', lng)
+}
+
+function saveLastGroup(group) {
+    $.cookie('sosbeaconWebapp_LastSelectedGroup', group, { expires: 365, path: '/' });
+}
+function getSavedGEO() {
+    // get saved GEO location, if isset before
+    if ($.cookie('sosbeaconWebapp_Lat') != null) { 
+        var lat = $.trim($.cookie('sosbeaconWebapp_Lat'));
+        $('#geo_latitude').val(lat);
+    }
+    if ($.cookie('sosbeaconWebapp_Lng') != null) { 
+        var lng = $.trim($.cookie('sosbeaconWebapp_Lng'));
+        $('#geo_longitude').val(lng);
+    }
+}
+
+function getLastSelectedGroup() {
+    if ($.cookie('sosbeaconWebapp_LastSelectedGroup') != null) { 
+        var lastSelectedGroup = parseInt($.trim($.cookie('sosbeaconWebapp_LastSelectedGroup')));
+        if (lastSelectedGroup >= 0) $('#toGroup').val(lastSelectedGroup).attr('selected', 'selected');
+    }
+}
+
+function initializeMap(lat, lng) {
+    var myLatlng = new google.maps.LatLng(lat, lng);
+    var myOptions = {
+      zoom: 15,
+      center: myLatlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+    var markerLatLng = new google.maps.LatLng(lat, lng);  
+    var marker = new google.maps.Marker({
+        position: markerLatLng,
+        map: map
+    });
+}
+
+$(document).ready(function() {
+    getSavedGEO();
+    setLocationForm();
+    getLastSelectedGroup();
+    var fileUpload = '<div class="file-box"><input class="mediafile" type="file" name="mediafile[]" /><span id="btRemoveFile" class="remove-button" title="Remove this file">X</span></div>';
+    $('#files').html(fileUpload);
+    $('#checkinForm').submit(function() {
+        if ($("#checkinForm").valid()) {
+            if ($('#singleContactBox').is(':visible')) {
+                var singleContact = $.trim($('#singleContact').val());
+                if (singleContact == '') {
+                    alert('Please enter phone number');
+                    $('#singleContact').focus();
+                    return false;
+                }
+            }
+            if(confirm('Are you sure you want to send this group broadcast?')) {
+                var files = $('.mediafile');
+                $.each(files, function() {
+                    if ($(this).val().toString().length < 1) {
+                        $(this).remove();
+                    }
+                });
+                setLoading();
+                saveLastGroup($('#toGroup').val());
+                return true;
+            }
+            return false;
+        }
+    });
+    $('a.get-geo-button').click(function() {
+        requestGEO();
+    });
+    $('#toGroup').change(function() {
+        if ($(this).val() == '-1') {
+            $('#singleContactBox').slideDown('slow');
+            $('#singleContact').focus();
+        } else {
+            $('#singleContactBox').hide();
+            $('#singleContact').val('');
+        }
+    });
+    $('#checkinMessage').keyup(function() {
+        var msg = $(this).val();
+        var maxlength = 75;
+        var remainLenght = maxlength - msg.length;
+        if (remainLenght <= 0) remainLenght = 0;
+        var displayLengthText = '(there are ' + remainLenght.toString() + ' characters remaining)';
+        $('#smsLimitMessage').html(displayLengthText);
+        if (msg.length >= maxlength) {
+            var cutString = msg.substr(0, maxlength);
+            $(this).val(cutString);
+        }
+    });
+    $('.mediafile').live('change', function() {
+        var inputFileInfo = $(this);
+        try {
+            var fileName = inputFileInfo.val().toLowerCase();
+            var fileSize = inputFileInfo[0].files[0].size;
+            if ($.inArray(fileName.split('.').pop(), [<?php echo $allowfileTypes ?>]) == '-1') {
+                alert('This file type not allowed');
+                $(this).val('');
+            } else {
+                if (fileSize > <?php echo Sos_Service_Functions::$maxFileSize * 1024 ?>) {
+                    alert('This file size is ' + Math.round(fileSize / 1024) + ' KB larger then <?php echo Sos_Service_Functions::$maxFileSize  ?> KB');
+                    $(this).val('');
+                } else {
+                    $('#files').append(fileUpload);
+                }
+            }
+        } catch (ex) { // cannot check on IE, so continue add new file input
+            $('#files').append(fileUpload);
+        }
+    });
+    $('#btCancel').click(function() {
+        document.location.href = '/webapp';
+    });
+    $('#btRemoveFile').live('click', function() {
+        if ($(this).parent('.file-box').find('.mediafile').first().val().length > 0) {
+            $(this).parent('.file-box').remove();
+        }
+    });
+    jQuery.validator.addMethod('phoneUS', function(number, element) {
+        number = number.replace(/\s+/g, '');
+        return this.optional(element) || number.length > 9 && number.match(/^(1-?)?(\([2-9]\d{2}\)|[2-9]\d{2})-?[2-9]\d{2}-?\d{4}$/);
+    }, 'Please specify a valid US phone number');
+    $('#checkinForm').validate();
+});
+</script>
+
+<div class="message"><?php echo $this->message ?></div>
+<form method="post" action="" class="checkin-form center" enctype="multipart/form-data" id="checkinForm">
+    <div class="clr" style="height: 30px;line-height: 35px">
+        <?php if ($this->type == 'alert'): ?>Send alert to:<?php else: ?>Check-in to:<?php endif ?>
+        <a class="get-geo-button bt-white"><span></span> GeoLOCATE this computer</a>
+    </div>
+    <input type="hidden" id="geo_latitude" name="latitude" value="" />
+    <input type="hidden" id="geo_longitude" name="longitude" value="" />
+    <select name="toGroup" id="toGroup" class="to-group">
+        <?php foreach ($this->groups as $g): ?>
+        <option <?php if ($this->formGroupId == $g->getId()) : ?>selected="selected"<?php endif ?> value="<?php echo $g->getId() ?>"><?php echo htmlspecialchars($g->getName()) ?></option>
+        <?php endforeach; ?>
+      <?php if ($this->type == 'checkin'): ?>  
+        <option <?php if ($this->formGroupId == '0') : ?>selected="selected"<?php endif ?> value="0">ALL GROUPS</option>
+        <option <?php if ($this->formGroupId == '-1') : ?>selected="selected"<?php endif ?> value="-1">Single Contact</option>
+      <?php endif ?>  
+    </select>
+ <?php if ($this->type == 'checkin'): ?>
+    <div id="singleContactBox" style="<?php if ($this->formGroupId != '-1') : ?>display: none<?php endif ?>">Enter phone number: <input type="text" id="singleContact" name="singleContact" class="phoneUS" maxlength="20" size="18" /></div>
+    Short message (for SMS and email):
+    <textarea id="checkinMessage" name="checkinMessage" rows="4" class="checkin-message required"><?php echo $this->formMessage ?></textarea>
+    <div id="smsLimitMessage">(there are 75 characters remaining)</div>
+    Long message (for email - optional):
+    <textarea id="checkinMessageLong" name="checkinMessageLong" rows="6" class="checkin-message-long"><?php echo $this->formMessageLong ?></textarea>
+ <?php endif ?>
+    <div id="fileUpload">
+        <div id="files"></div>
+        <span class="description">
+            <!-- input type="submit" value="Upload" id="btUpload" name="btUpload" class="bt-upload"/ -->
+            (Accept file: <?php echo implode(', ', Sos_Service_Functions::$imageExtension) ?> 
+            ,<?php echo implode(',', Sos_Service_Functions::$audioExtension) ?>, 
+            max size: <?php echo Sos_Service_Functions::$maxFileSize ?> KB)</span><br />
+    </div>
+    <input type="submit"value="Send Group Broadcast" id="btCheckin" name="btCheckin" class="checkin-button bt-green"/>
+    <input type="button" value="Cancel" id="btCancel" class="checkin-button bt-white bt-cancel"/>
+</form>
+<div id="locationConfirmDialog" style="display: none">
+    <div id="map_canvas" class="map_canvas"></div>
+    <div style="padding:5px;font-weight: bold">Is this correct?</div>
+</div>
+<div id="locationInputDialog" style="display: none">
+    <form method="post" action="/webapp/checkin/get-location" id="inputLocationForm" > 
+        <div style="padding:10px 0;font-weight: bold">Input your address and zipcode, then press ENTER.</div>
+        <div id="searchingLocation" style="color: #026890;font-weight: bold;display:none">searching, please wait ...</div>
+        <input type="textbox" name="inputLocation" id="inputLocation" value="" size="30" class="required" />
+        <input type="submit" id="locationSubmit" value="OK" style="padding: 3px 6px" />
+    </form>
+</div>
+<?php if ($this->type == 'alert'): ?>
+<style type="text/css">
+    #content h1.title { margin-top: 90px }
+</style>
+<?php endif ?>
+

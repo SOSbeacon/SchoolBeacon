@@ -1,0 +1,37 @@
+<div class="phone-list">
+    <div class="div1-1">
+        <table class="tblList" cellpadding="1" cellspacing="1">
+            <tr>
+                <th>Phone ID</th>
+                <th>Name</th>
+                <th>Number</th>
+                <th>Email</th>
+                <th>Type</th>
+                <th>IMEI</th>
+                <th>Status</th>
+                <th>Setting ID</th>
+            </tr>
+            <?php if (isset($this->phone)) : ?>
+                <tr>
+                    <td><?php echo $this->phone->getId() ?></td>
+                    <td><?php echo htmlspecialchars($this->phone->getName()) ?></td>
+                    <td><?php echo htmlspecialchars($this->phone->getNumber()) ?></td>
+                    <td><?php echo htmlspecialchars($this->phone->getEmail()) ?></td>
+                    <td><?php echo $this->phone->getType() ?></td>
+                    <td><?php echo $this->phone->getImei() ?></td>
+                    <td><?php echo ($this->phone->getStatus() == 0) ? 'Pendding' : 'Active'; ?></td>
+                    <td><a href="/web/phone/settings/id/<?php echo $this->phone->getSettingId() ?>"><?php echo $this->phone->getSettingId() ?></a></td>
+                </tr>
+
+                <?php if (count($this->phone) == 0) : ?>
+                    <tr>
+                        <td colspan="8">
+                            <h1>You have no phone !</h1><br/><br/>
+                        </td>
+                    </tr>
+                <?php endif; ?>
+            <?php endif; ?>
+        </table>
+
+    </div>
+</div>

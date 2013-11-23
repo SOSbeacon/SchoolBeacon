@@ -1,0 +1,4 @@
+<?php
+//echo Zend_Json::decode($this->obj1, Zend_Json::TYPE_ARRAY);
+echo  Zend_Json::prettyPrint($this->response, array("indent"  => " "));
+?>

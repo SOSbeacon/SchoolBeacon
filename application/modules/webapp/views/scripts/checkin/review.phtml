@@ -1,0 +1,110 @@
+<link rel="stylesheet" href="/styles/lightbox.css" type="text/css" media="screen" />
+<script type="text/javascript"    src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript"   src="/scripts/lightbox.js"></script>
+<script type="text/javascript"   src="/scripts/jwplayer/jwplayer.js"></script>
+<script type="text/javascript">
+    function initialize(el, la,lo) {
+        //var latlng2 = new google.maps.LatLng(21.040994081750677, 105.78739643096924);
+        var latlng = new google.maps.LatLng(la, lo);
+        var myOptions = {
+            zoom: 12,
+            center: latlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(el, myOptions);
+        var marker = new google.maps.Marker({
+            position: latlng,
+            title:"My location"
+        });
+        marker.setMap(map);
+    }
+    $(window).load(function() {
+        $('.google_map_canvas').each(function() {
+            var la = $(this).attr("la");
+            var lo = $(this).attr("lo");
+            if((la != null && lo != null) && (la != 0 && lo != 0) && la != '' && lo != '') { 
+                initialize(this, la, lo); 
+            } else {
+                $(this).parent('.gmap').html('NO LOCATION DATA');
+            }
+        });        
+    });
+</script>
+
+<?php if (isset($this->alertDataRows)) : ?>
+<div class="message"><?php echo $this->message ?></div>
+<div class="alert-list">
+<?php
+if (isset($this->alertDataRows)) :
+    $count = 0;
+    $maps = $this->maps;
+?>
+<?php foreach ($this->alertDataRows as $key => $rows): ?>
+    <div class="alert-row">
+    <?php
+    if (array_key_exists($count, $this->alertlogRows)) :
+        $alogRow = $this->alertlogRows[$count];
+        $count++;
+    ?>
+        <div class="details">
+            <div class="title">Details</div>
+            <div>
+                <table cellpadding="0" cellspacing="0">
+                    <tr><td>From:</td><td><?php echo htmlspecialchars($this->phoneRows->getName()) ?></td></tr>
+                    <tr><td>Number:</td><td><?php if (isset($this->phoneRows)) echo $this->phoneRows->getnumber() ?></td></tr>
+                    <tr><td>Email:    </td><td><?php echo htmlspecialchars($this->phoneRows->getEmail()) ?></td></tr>
+                    <tr><td>Time:    </td><td><?php echo $alogRow->updated_date ?> GMT</td></tr>
+                    <tr><td>Latitude:    </td><td><?php echo $alogRow->latitude ?></td></tr>
+                    <tr><td>Longitude:  </td><td><?php echo $alogRow->longtitude ?></td></tr>
+                    <tr><td>Text:     </td><td><?php echo $alogRow->message ?></td></tr>
+                </table>
+            </div>
+        </div>
+    <?php endif ?>
+    <?php
+    if (array_key_exists($key, $maps)) :
+        $map = $maps[$key];
+    ?>
+        <div class="gmap">
+            <div class="google_map_canvas" la="<?php echo $map['latitude'] ?>" lo="<?php echo $map['longtitude'] ?>"></div>
+            <div class="date">Created Date: <?php echo $map['updated_date'] . " GMT"; ?></div>
+        </div>
+    <?php endif; ?>
+        <div class="main-photo">
+        <?php foreach ($rows as $row) : ?>
+            <?php if ($row->type != null && $row->type == 0) :  //image  ?>
+                <div class="photo-block">
+                    <div class="photo">
+                        <a href="<?php echo $row->path ?>" rel="lightbox[flowers]" title="Photo by SOSbeacon">
+                            <img src="<?php echo $row->path; ?>"/>
+                        </a>
+                    </div>
+                    <div class="date">Created Date: <?php echo $row->created_date . " GMT"; ?></div>
+                </div>
+            <?php endif; ?>
+            <?php endforeach; ?>
+        </div>
+        <div class="main-audio">
+        <?php $audioNum = 0; //Number of audio row?>
+        <?php foreach ($rows as $row) : ?>
+            <?php if ($row->type != 0) : //media  ?>
+                <?php $audioNum++//Up value Number of audio row to 1 ?>
+                    <div class="media">
+                        <object id="player" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" name="player" width="250" height="24">
+                            <param name="movie" value="/scripts/jwplayer/player.swf" />
+                            <param name="allowfullscreen" value="true" />
+                            <param name="allowscriptaccess" value="always" />
+                            <param name="flashvars" value="file=<?php echo $row->path; ?>" />
+                            <embed type="application/x-shockwave-flash" id="player2" name="player2" src="/scripts/jwplayer/player.swf" width="250" height="25" allowscriptaccess="always" allowfullscreen="true" flashvars="file=<?php echo $row->path; ?>" />
+                        </object>
+                    </div>
+                <div class="datetime">Created Date: <?php echo $row->created_date . " GMT"; ?></div>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        </div>
+        <div class="clr"></div>
+    </div>
+    <?php endforeach; ?>
+<?php endif; ?>
+</div>
+<?php endif; ?>

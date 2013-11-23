@@ -1,0 +1,97 @@
+<script language="javascript">
+$(document).ready(function() {
+	$('#box').change(function(){
+		$(window.location).attr('href', '/web/phone/smslog?box='+$('#box').val());
+	});
+
+	$('#btnDelete').click(function(){
+		//Delete all item checked
+		deleteConfirm(this);
+	});
+});
+
+/**
+ * Get list id Checked Checkbox
+ * @return string id as: 1,2,3
+ */
+function getCheckedBoxId() {
+	var ids = '';
+
+	//Find all item checked of 'chk' class
+	$('.chk').each(function(index) {
+		if (this.checked)
+			ids += this.value + ',';
+	});
+	//Remove last token ',' of string ids
+	if(ids.lastIndexOf(',') != -1) {
+		ids = ids.substr(0, ids.lastIndexOf(','));
+	}
+
+	return ids;
+}
+
+function deleteConfirm(that)
+{
+	//Get list id delete
+	var ids = getCheckedBoxId();
+	//If ids = null, do nothing
+  	if(ids == '') 
+  	  	return false;
+  	
+	var answer = confirm('Are you sure want to continue deleting ?');
+	if (answer){
+	  that.href = "/web/phone/smslogdelete/id/"+ids;
+	}
+	else
+	  return false;
+}
+
+</script>
+<div class="phone-smslog">
+	<div>
+	<form id="frm" name="frm" action="" method="post">
+		<table class="tbl" cellpadding="0" cellspacing="1">
+		<tr> 
+			<th colspan="5">
+                            Select box:	 	
+				<select id="box" name="box">
+					<option value="">All box</option>
+					<option
+						<?php if(isset($this->box)){echo ($this->box == 1) ? "selected" : "";}?> 
+						value='1'>Inbox</option>
+					<option
+						<?php if(isset($this->box)){echo ($this->box == 2) ? "selected" : "";}?> 
+						value='2'>Sent items</option>
+				</select>
+			</th>
+		</tr>
+		<tr id="head"> 	 	 	
+			<td>Date</td>
+			<td>From</td>
+			<td>To</td>
+			<td>Message</td>
+			<td>Status</td>
+			<td><a id="btnDelete" href="#">Delete</a></td>
+		</tr>
+<?php if(isset($this->smslog) && count($this->smslog) > 0):?>
+	<?php foreach($this->smslog as $row):?>
+		<tr> 	 
+			<td><?php echo $row->getCreatedDate()?> GTM</td>
+			<td><?php echo $row->getFrom()?></td>
+			<td><?php echo $row->getTo()?></td>
+			<td id="smsMessage"><?php echo $row->getMessage()?></td>
+			<td><?php echo $row->getStatus()?></td>
+			<td>
+				<input type="checkbox" name="chk" class="chk" value="<?php echo $row->getId()?>" />
+			</td>
+		</tr>
+	<?php endforeach;?>
+<?php else: ?>
+		<tr> 	 	 	
+			<td id="empty" colspan="6">EMPTY SMS LOG</td>
+		</tr>
+<?php endif; ?>
+		</table>
+	</form>
+	</div>
+</div>

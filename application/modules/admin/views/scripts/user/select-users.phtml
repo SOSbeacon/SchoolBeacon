@@ -1,0 +1,101 @@
+<script type="text/javascript">
+function selectUsers() {
+    var userList = '';
+    $('.selectUser').each(function() {
+        if ($(this).is(':checked')) {
+            var pid = $(this).val();
+            var parrentRow = $('.phone-info-' + pid.toString()); 
+            var email = parrentRow.find('.email').text();
+            var name =  parrentRow.find('.name').text();
+            if (name != null && name != '') {
+                name = name + '|';
+            } else {
+                name = '';
+            }
+            userList += '\n' + name  + email + ',';
+        }
+    });
+    
+    if (userList != '') {
+        window.opener.$('.form-emails').val(window.opener.$('.form-emails').val() + userList);
+        window.close();
+    } else {
+        alert('Please select at least one user.');
+        return false;
+    }
+}
+
+$(document).ready(function() {
+    $('#selectUsers').click(function() {
+        selectUsers();
+    });
+    
+    $('#selectAll').change( function() {
+    if ($(this).is(':checked')) {
+        $('.selectUser').attr('checked', 'checked');
+    } else {
+        $('.selectUser').removeAttr('checked');
+    }
+    });
+});
+</script>
+<style type="text/css">
+    .header-container, .nav-container, .footer-container {
+        display: none;
+    }
+    .wrapper {
+        min-width: 100%;
+    }
+</style>
+
+<div id="user-index">
+    <div class="grid">
+    <table class="tbl" cellpadding="0" cellspacing="0">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Phone number</th>
+            <th style="width: 250px">Email</th>
+            <th style="width: 50px"><input id="selectAll" type="checkbox" /></th>
+        </tr>
+        <?php if(isset($this->paginator) && count(isset($this->paginator))): ?>
+            <?php foreach($this->paginator as $row):?>
+            <tr class="phone-info-<?php echo $row['id']?>">
+                <td class="center">
+                    <?php echo $row['id']?>
+                </td>
+                <td class="name" style="white-space: nowrap"><?php echo htmlspecialchars($row['name']) ?></td>
+                <td class="phone" style="white-space: nowrap"><?php echo $row['number'] ?></td>
+                <td>
+                    <label class="email" style="white-space: nowrap"><?php echo $row['email']?></label>
+                    <?php if($row['email_enabled']): ?>
+                        <img class="receive-email" alt="Email enabled" title="Email enabled" src="/images/Icon_Contact.jpg"/>
+                    <?php else : ?>
+                        <img class="receive-email" alt="No Email" title="No Email" src="/images/Icon_Contact2.jpg"/>
+                    <?php endif; ?>
+                </td>
+                <td class="center"> 
+                <?php 
+                    if($row['email_enabled'] == '0') {
+                        echo '<strong>No email</strong> ';
+                    } 
+                    if($row['subscribe'] == '0') {
+                        echo '<strong>Unsubscribe</strong>';
+                    } 
+                    if($row['email'] && $row['email_enabled'] == '1' && $row['subscribe'] == '1') {
+                ?>
+                    <input type="checkbox" name="selectUser" class="selectUser" value="<?php echo $row['id']?>" />
+                <?php } ?>    
+                </td>
+            </tr>
+            <?php endforeach;?>
+        <?php else: ?>
+        <tr>
+            <td colspan="9">EMPTY USER</td> 	 	 	 	 	
+        </tr>
+        <?php endif; ?>
+    </table>
+    </div>
+    <?php echo $this->paginationControl($this->paginator, 'Sliding', 'partials/controls.phtml'); ?>
+    <input type="button" id="selectUsers" value="Add" />
+</div>

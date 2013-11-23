@@ -1,0 +1,51 @@
+<script type="text/javascript">
+function initialize(la,lo) {
+
+      //var latlng2 = new google.maps.LatLng(21.040994081750677, 105.78739643096924);
+      var latlng = new google.maps.LatLng(la, lo);
+      var myOptions = {
+      zoom: 12,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+        
+    var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+    var marker = new google.maps.Marker({
+        position: latlng,
+        title:"My location"
+    });
+    // To add the marker to the map, call setMap();
+    marker.setMap(map); 
+	
+    // var marker2 = new google.maps.Marker({
+        // position: latlng2,
+        // title:"My location"
+    // });
+    // // To add the marker to the map, call setMap();
+	// marker2.setMap(map);  
+}
+
+//Load ajax
+$(document).ready(function(){
+	var la = $("#map_canvas").attr("la");
+    var lo = $("#map_canvas").attr("lo");
+	//initialize(21.040994081750677,105.78739643096924);
+	if(la != null && lo != null) {
+	    initialize(la, lo);
+	}
+});
+</script>
+
+<div class="map">
+	<?php if(isset($this->paginator)): ?>
+	<?php foreach($this->paginator as $row):?>
+	<div>
+		<div class="map_canvas" id="map_canvas" la="<?php echo $row['latitude'] ?>" lo="<?php echo $row['longtitude'] ?>"></div>
+		<div class="date">Created Date: <?php echo $row['updated_date']." GMT" ; ?></div>
+	</div>
+	<?php endforeach;?>
+	<?php endif; ?>
+</div>
+
+<?php echo $this->paginationControl($this->paginator, 'Sliding', 'partials/controls.phtml'); ?>

@@ -1,0 +1,27 @@
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#requestButton').click(function() {
+            $('#requestSending').show();
+            $(this).hide();
+        });
+    });
+</script>
+    
+<div id='user-forgot'>
+<div id="title">SOSbeacon - Forgot password</div>
+If you have forgotten your username or password, you can request to have your username emailed to you<br/>
+and to reset your password. When you fill in your registered email address, you will be sent instructions on<br/> 
+how to reset your password.<br/><br/>
+
+<div class="message">
+    <strong><?php if(isset($this->resObject["message"])) echo $this->resObject["message"] ?></strong>
+</div>
+
+<form name="frm" action="" method="POST">
+    Phone number:<br/><input type="text" name="number" class="txt" /><br/>
+    Email Address:<br/><input type="text" name="email" class="txt" /><br/>
+    <input type="submit" name="submit" value="Request Account Information Now" class="btn" id="requestButton" />
+<h3 id="requestSending" style="display: none">Sending...</h3>
+</form>
+
+</div>

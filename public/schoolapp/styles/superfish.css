@@ -1,0 +1,24 @@
+.sf-menu,.sf-menu *{list-style:none;margin:0;padding:0}
+.sf-menu{line-height:1.0;float:left}
+.sf-menu ul{position:absolute;top:-999em;width:10em}
+.sf-menu li ul li.sf-menuf{background:url(../images/Sf-MTop.png) no-repeat top}
+.sf-menu li ul li.sf-menul{background:url(../images/Sf-MBottom.png) no-repeat Bottom}
+.sf-menu ul li{width:100%}
+.sf-menu li{float:left;position:relative;background:url(../images/Sf-Normal.jpg) no-repeat scroll center center transparent;border-right:1px solid #90A0BC;color:#FFFFFF;font-family:Arial,Helvetica,sans-serif;text-align:center;margin:0;padding:7px 29px}
+.sf-menu li a{color:#FFFFFF;/*font-size:0;*/font-size: 15px;text-decoration: none;font-weight:bold}
+.sf-menu li li a{font-size:12px;font-weight:normal;text-align:left;text-decoration: none;}
+.sf-menu .last{border:0 none}
+.sf-menu .home{display:block;height:15px;width:36px;background:url(/images/menu-home.png) no-repeat scroll 0 0 transparent}
+.sf-menu .home-active{background:url(/images/menu-home2.png) no-repeat scroll 0 0 transparent}
+.sf-menu .about{display:block;height:15px;width:40px;background:url(/images/menu-about.png) no-repeat scroll 0 0 transparent}
+.sf-menu .about-active{background:url(/images/menu-about2.png) no-repeat scroll 0 0 transparent}
+.sf-menu .features{display:block;height:15px;width:60px;background:url(/images/menu-features.png) no-repeat scroll 0 0 transparent}
+.sf-menu .features-active{background:url(/images/menu-features2.png) no-repeat scroll 0 0 transparent}
+.sf-menu .testimonials{display:block;height:15px;width:90px;background:url(/images/menu-testimo.png) no-repeat scroll 0 0 transparent}
+.sf-menu .testimonials-active{background:url(/images/menu-testimo2.png) no-repeat scroll 0 0 transparent}
+.sf-menu .phone{display:block;height:15px;width:42px;background:url(/images/menu-phone.png) no-repeat scroll 0 0 transparent}
+.sf-menu .phone-active{background:url(/images/menu-phone2.png) no-repeat scroll 0 0 transparent}
+.sf-menu .contact{display:block;height:15px;width:55px;background:url(/images/menu-contact.png) no-repeat scroll 0 0 transparent}
+.sf-menu .contact-active{background:url(/images/menu-contact2.png) no-repeat scroll 0 0 transparent}
+.sf-menu .li-search{border:0 none;margin-left:23px;padding:0}
+.sf-menu li li,.sf-menu li li li{background:url(../images/Sf-MPattern.png) repeat-y;width:151px;font-size:12px}

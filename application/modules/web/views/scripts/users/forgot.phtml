@@ -1,0 +1,32 @@
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#requestButton').click(function() {
+            $('#requestSending').show();
+            $(this).hide();
+        });
+    });
+</script>
+    
+<div id='user-forgot'>
+<div id="title">SOSbeacon - Forgot password</div>
+
+If you have forgotten your password, you can request to have a new password sent to your phone by text message. 
+Please enter your registered phone number, you will be sent a new password. 
+Then log in and reset your password in Account Settings using your SOSbeacon app or the WebAPP on your browser.
+<br />
+New password sent to phone via text message
+
+<br/><br/>
+
+<div class="message">
+    <strong><?php if(isset($this->resObject["message"])) echo $this->resObject["message"] ?></strong>
+</div>
+
+<form name="frm" action="" method="POST">
+    Phone number:<br/><input type="text" name="number" class="txt" /><br/>
+    <!--Email Address:<br/><input type="text" name="email" class="txt" /><br/ -->
+    <input type="submit" name="submit" value="Request Account Information Now" class="btn" id="requestButton" />
+<h3 id="requestSending" style="display: none">Sending...</h3>
+</form>
+
+</div>

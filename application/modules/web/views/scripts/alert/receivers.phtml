@@ -1,0 +1,97 @@
+<!-- responders list -->
+<div id="receiver-list" class="receiver-list tab-content clr">
+<?php if (count($this->receivers)) : ?>
+    <table cellpadding="0" cellspacing="0">
+        <tr><th>Responders</th><th>Group</th><th style="white-space: nowrap"># visits</th><th style="white-space: nowrap"># msgs</th></tr>
+    <tr><td style="text-align: left; background: #f3f3f3; font-weight: bold;color: #ff0000;" colspan="4" >
+        Total: <?php echo count($this->receivers); ?>
+    </td></tr>
+    <?php foreach ($this->receivers as $receiver) : ?>
+    <tr>
+       <td class="receiver-name">
+            <?php 
+            $receiveName = ($receiver['name'] ? $receiver['name'] : $receiver['number']);
+            echo htmlspecialchars($receiveName) ?>
+            <div class="receiver-detail">
+                <?php echo $receiver['number'] ?>
+                <?php echo $receiver['email'] ?>
+            </div>
+        </td>
+        <td style="text-align: left"><?php if (!$receiver['gid']) { echo 'Single contact ';} else {echo $receiver['group_name'];} ?></td>
+        <td><?php echo $receiver['open_link'] ?></td>
+        <td><?php echo $receiver['response_chat'] ?></td>
+    </tr>
+    <?php  endforeach; ?>
+    </table>
+<?php else: ?>
+    <p style="text-align: center; border: 1px solid #eee; padding: 5px">Empty</p>
+<?php endif; ?>
+</div>
+
+<!-- non-responders list -->
+<div id="no-response" class="receiver-list tab-content clr">
+<?php if (count($this->noResponse)) : 
+    $nonResponders = array();
+    $toNonResponders = '';
+?>
+    <input id="robocallButton" type="button" value="ROBOCALL NON-RESPONDERS" style="margin: 5px 0;padding: 3px 10px; color: #3B5998; font-weight: bold;" />
+    <table cellpadding="0" cellspacing="0">
+    <tr><th>Non-Responders</th><th>Group</th></tr>
+    <tr><td style="text-align: left; background: #f3f3f3; font-weight: bold; color: #ff0000;" colspan="2">
+            Total: <?php echo count($this->noResponse); ?>
+    </td></tr>
+    <?php foreach ($this->noResponse as $receiver) : ?>
+    <tr>
+        <td class="receiver-name">
+            <?php 
+            $textphone = $receiver['number'];
+            if ($textphone && !in_array($textphone, $nonResponders)) {
+                $nonResponders[] = $textphone;
+                $toNonResponders .= '&toNumbers[]=' . $textphone;
+            }
+            $voicephone = $receiver['voicephone'];
+            if ($voicephone && !in_array($voicephone, $nonResponders)) {
+                $nonResponders[] = $voicephone;
+                $toNonResponders .= '&toNumbers[]=' . $voicephone;
+            }
+            $receiveName = ($receiver['name'] ? $receiver['name'] : $receiver['number']);
+            echo htmlspecialchars($receiveName) ?>
+            <div class="receiver-detail">
+                <?php echo $receiver['number'] ?>
+                <?php echo $receiver['email'] ?>
+            </div>
+        </td>
+        <td style="text-align: left"><?php if (!$receiver['gid']) { echo 'Single contact ';} else {echo $receiver['group_name'];} ?></td>
+    </tr>
+    <?php  endforeach; ?>
+    </table>
+    <script type="text/javascript">
+    function setRobocall() {
+        $('#robocallButton').hide();
+        <?php if (count($nonResponders) > 0 && ($this->userRole == 2)) : ?>
+        var lastAudioFile = '';
+        if ($('.media').length > 0) {
+            lastAudioFile = $('.media').last().attr('data');
+        }
+        var lastEmailMessage = $.trim($('#lastEmailMessage').html());
+        $('#robocallButton').show();
+        $('#robocallButton').click(function() {
+            if (confirm('Are you sure you want to send a ROBOCALL to non-responders: <?php echo implode(', ', $nonResponders); ?> ?')) {
+                var callUrl = '/webapp/broadcast/call?textMessage=' + encodeURI(lastEmailMessage) + '&audioFile=' + encodeURI(lastAudioFile) + '&fromNumber=<?php echo $this->number ?>&alertId=<?php echo $this->alertId ?><?php echo $toNonResponders ?>';
+                $('#robocallButton').hide();
+                $.get(callUrl, function() {
+                });
+                alert('ROBOCALL sent successfully');
+            }
+        });
+        <?php endif ?>
+    }
+
+    $(document).ready(function() {
+        setRobocall();
+    });
+    </script>
+    <?php else: ?>
+        <p style="text-align: center; border: 1px solid #eee; padding: 5px">Empty</p>
+    <?php endif; ?>
+</div>

@@ -1,0 +1,702 @@
+body, iframe, iframe body {background: #fff;color:#000; font-family:tahoma,Helvetica,sans-serif; font-size:11px; margin:0;padding:0; min-height: 0 !important; }
+a {
+    color: #fff;
+    text-decoration: none;
+}
+a:hover {
+    color: #19b7ff;
+    text-decoration: underline
+}
+#main {
+    width: 420px;
+    margin: auto;
+    background: #060d2e url(../images/webapp.jpg) no-repeat right top;
+    border: 2px solid #999;
+    box-shadow: 5px 5px 2px #ccc;
+    border-radius: 10px;
+    color: #fff
+}
+body.not-login {
+    padding: 40px 0 0 0;
+}
+.center {
+    text-align: center;
+}
+.main-bg2 {
+    background: #060d2e !important;
+}
+#wrapper {
+    padding: 20px;
+}
+#content {
+    height: 490px;
+    overflow: auto;
+    clear: both;
+    padding: 0 0 5px 0;
+}
+.clr {clear: both}
+#header {
+    padding: 5px 0;
+    border-top: 6px solid #09002f;
+    border-bottom: 1px solid #0D2E73;
+    margin: 0 0 20px 0;
+    text-align: center;
+    position: relative;
+}
+span.normal {font-weight: normal;}
+#main-menu {
+    margin: auto;
+    padding: 0;
+    display: table;
+    position: relative;
+    width: 360px;
+    height: 45px;
+}
+#main-menu li {
+    margin: 0 1px;
+    padding: 0;
+    list-style: none;
+    display: table-cell;
+}
+#main-menu li a {
+    float: left;
+    height: 45px;
+    padding: 0 5px;
+    color: #0d2e73;
+    white-space: nowrap;
+}
+#main-menu li a:hover  {
+    color: #ff0000;
+}
+#main-menu li a span {
+    float: left;
+    text-align: center;
+    padding-top: 30px;
+}
+#main-menu li a:hover {
+    text-decoration: none;
+}
+#main-menu li.home a {
+    background: url(../images/ih.png) no-repeat top center;
+}
+#main-menu li.back a {
+    background: url(../images/back.png) no-repeat top center;
+    margin: 0 5px 0 0;
+}
+#main-menu li.checkin a {
+    background: url(../images/send.png) no-repeat top center;
+}
+#main-menu li.group a {
+    background: url(../images/ig.png) no-repeat top center;
+}
+#main-menu li.review a {
+    background: url(../images/ir.png) no-repeat top center;
+}
+#main-menu li.account a {
+    background: url(../images/ia.png) no-repeat top center;
+}
+#main-menu li.settings a {
+    background: url(../images/is.png) no-repeat top center;
+}
+#main-menu li.email a {
+    background: url(../images/iem.png) no-repeat top center;
+}
+#main-menu li.logout a {
+    background: url(../images/il.png) no-repeat top center;
+}
+h1.title {
+    margin: 0;
+    color: #fff;
+    font-size: 28px;
+    font-weight: bold;
+    text-shadow: 0 0  0.1em #fff;
+    text-align: center;
+    padding: 20px 0 20px 0;
+    text-shadow: 2px 2px 2px #4968AA;
+}
+/* Button*/
+input.action {
+    display: block;
+    margin: auto;
+    margin-top: 50px;
+    width: 300px;
+    height: 60px;
+    line-height: 60px;
+    font-weight: normal;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 15px;
+    text-shadow: 0 2px 3px rgba(255, 255, 255, 0.5);
+}
+
+input.bt-medium {
+    margin: 10px auto;
+    width: 120px;
+    height: 40px;
+    line-height: 35px;
+    font-size: 16px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+.bt-red {
+    border: solid 1px #999;
+    background:  #e71919;
+    background: -webkit-gradient(linear, left top, left bottom, from(#d53d08), to(#ff0000));
+    background: -moz-linear-gradient(top,  #d53d08,  #ff0000);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#d53d08', endColorstr='#ff0000');
+}
+.bt-red:hover {
+    background: #fb1616;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fb5916), to(#ff0000));
+    background: -moz-linear-gradient(top,  #fb5916,  #ff0000);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#fb5916', endColorstr='#ff0000');
+}
+.bt-red:active {
+    background: -webkit-gradient(linear, left top, left bottom, from(#e33939), to(#ff0000));
+    background: -moz-linear-gradient(top,  #e33939,  #ff0000);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#e33939', endColorstr='#ff0000');
+}
+.bt-green {
+    border: solid 1px #999;
+    background: #64991e;
+    background: -webkit-gradient(linear, left top, left bottom, from(#7db72f), to(#4e7d0e));
+    background: -moz-linear-gradient(top,  #7db72f,  #4e7d0e);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#7db72f', endColorstr='#4e7d0e');
+}
+.bt-green:hover {
+    background: #538018;
+    background: -webkit-gradient(linear, left top, left bottom, from(#6b9d28), to(#436b0c));
+    background: -moz-linear-gradient(top,  #6b9d28,  #436b0c);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#6b9d28', endColorstr='#436b0c');
+}
+.bt-green:active {
+    background: -webkit-gradient(linear, left top, left bottom, from(#4e7d0e), to(#7db72f));
+    background: -moz-linear-gradient(top,  #4e7d0e,  #7db72f);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#4e7d0e', endColorstr='#7db72f');
+}
+.bt-orange {
+    border: solid 1px #999;
+    background: #dfea29;
+    background: -webkit-gradient(linear, left top, left bottom, from(#dfea29), to(#f1d425));
+    background: -moz-linear-gradient(top,  #dfea29,  #f1d425);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfea29', endColorstr='#f1d425');
+}
+.bt-orange:hover {
+    background: #edca27;
+    background: -webkit-gradient(linear, left top, left bottom, from(#edca27), to(#d1b23a));
+    background: -moz-linear-gradient(top,  #edca27,  #d1b23a);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#edca27', endColorstr='#d1b23a');
+}
+.bt-orange:active {
+    background: -webkit-gradient(linear, left top, left bottom, from(#d1b23a), to(#d1b23a));
+    background: -moz-linear-gradient(top,  #d1b23a,  #d1b23a);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#d1b23a', endColorstr='#d1b23a');
+}
+.bt-white {
+    border: solid 1px #999;
+    background: #fff;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#fff));
+    background: -moz-linear-gradient(top,  #ccc,  #fff);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ccc', endColorstr='#fff');
+}
+.bt-white:hover {
+    background: #fb1616;
+    background: -webkit-gradient(linear, left top, left bottom, from(#eee), to(#fff));
+    background: -moz-linear-gradient(top,  #eee,  #fff);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#eee', endColorstr='#fff');
+}
+.message {
+    text-align: center;
+    padding: 5px;
+    font-size: 12px;
+    color: #f83c61;
+    font-weight: bold;
+}
+.message em {
+    font-weight: normal;
+}
+/* Form  */
+form {
+    margin: 0;
+    padding: 0;
+}
+form label {
+    color: #fff;
+    display: block;
+    text-align: left;
+    font-weight: bold;
+}
+input.text {
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    font-size: 15px;
+    border-radius: 5px;
+    width: 220px;
+    margin: 5px 0;
+}
+form.account-form {
+    padding: 50px 0 0 0px;
+}
+form.checkin-home {
+    padding: 30px 0 0 0;
+}
+form.account-form .padding {
+    padding: 40px 0 0 80px;
+}
+form.account-form input.bt-login {
+    margin-left: 40px;
+    width: 150px;
+}
+
+.page-loading {
+    background: #060d2e !important;
+}
+.page-loading #wrapper {
+    display: none;
+}
+#processing {
+    text-align: center;
+    padding: 20px 0;
+}
+#processing img {
+}
+.checkin-form {
+    width: 320px;
+    margin: auto;
+    text-align: left;
+    padding: 0;
+}
+
+.processing-fix {
+    position: fixed;
+    top: 5px;
+    left: 0.9px;
+    background: #09002F;
+    padding: 7px 18px;
+}
+
+.to-group, .checkin-message, .checkin-message-long {
+    margin: 5px auto;
+    display: block;
+    width: 100%;
+    font-size: 14px;
+    padding: 0;
+}
+.to-group {
+    height: 25px;
+    line-height: 25px;
+}
+.checkin-message {
+    height: 50px
+}
+.checkin-message-long {
+    height: 70px;
+}
+.checkin-button {
+    height: 40px;
+    line-height: 40px;
+    font-size: 18px;
+    margin: 10px 0 0 0;
+    padding: 0 8px;
+    border-radius: 5px;
+}
+.checkin-form .bt-cancel {
+    padding: 0 22px;
+    float: right;
+}
+.checkin-form .link-back {
+    display: block;
+    float: left;
+    font-size: 12px;
+    color: #fff;
+    text-decoration: underline;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+}
+.checkin-form .link-back:hover {
+    text-decoration: none;
+}
+#smsLimitMessage {
+    color: #ff0000;
+}
+#fileUpload{
+    padding: 5px 10px;
+    background: #ccc;
+    color: #333;
+    border-radius: 5px;
+}
+#fileUpload #files {
+    max-height: 80px;
+    overflow: auto;
+}
+#btAddFile {
+    color: #0000ff;
+}
+#fileUpload input {
+    width: 230px;
+}
+#fileUpload .remove-button {
+    color: #ff0000;
+    margin: 0 1px;
+    padding: 0 3px;
+    cursor: pointer;
+    font-weight: bold;
+    border: 1px solid #333;
+}
+.description {
+    font-size: 10px;
+    font-style: italic;
+}
+label.error {
+    color: #ff0000;
+    text-align: center;
+}
+#singleContactBox {
+    background: #fff;
+    color: #0000ff;
+    padding: 1px 3px
+}
+form.list {
+    background: #fff;
+    color: #333;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 20px 3px 5px 3px;
+}
+table.grid {
+    width: 100%;
+    border: none;
+}
+table.grid tr:hover {
+    background: #eee;
+}
+table.grid td {
+    padding: 0;
+    border: 0;
+    vertical-align: middle;
+    border-top: 1px solid #ddd;
+}
+table.grid tr.row-1 td {
+    border: none;
+}
+
+table.grid td a.view {
+    display: block;
+    font-size: 14px;
+    color: #1a31c7;
+    padding: 10px 5px;
+    font-weight: bold;
+    line-height: 1.5;
+}
+table.grid td table td, table.grid td table tr:hover {
+    border: none;
+    background: none;
+}
+.group-count {
+    color: #666;
+    font-size: 14px;
+}
+td.edit, td.delete {
+    width: 20px;
+}
+a.icon-button {
+    display: block;
+    height: 25px;
+    line-height: 25px;
+    margin: 5px 0 5px 2px;
+    color: #000;
+    font-size: 11px;
+    font-weight: bold;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    float: right;
+    padding: 0 3px 0 20px;
+    cursor: pointer;
+    font-family: sans-serif;
+}
+.import-label {
+    color: #333;
+    font-size: 11px;
+    float: left;
+    margin: 12px 0 0 3px;
+    font-weight: normal;
+    font-family: sans-serif;
+}
+.import-label a {
+    font-weight: bold;
+    color: #f83c61;
+    margin: 0 5px 0 0;
+}
+a.add {
+    background: url(../images/adds.png) no-repeat 1px 3px;
+}
+a.join {
+    background: url(../images/join.png) no-repeat 4px 4px;
+}
+a.import-google {
+    background: url(../images/google.png) no-repeat 3px 4px;
+}
+a.import-yahoo {
+    background: url(../images/yahoo.png) no-repeat 2px 4px;
+}
+a.icon-button:hover {
+    background-color: #ccc;
+}
+a.edit {
+    display: block;
+    height: 16px;
+    width: 16px;
+    text-indent: -999px;
+    overflow: hidden;
+    margin: 5px;
+    background: url(../images/edit.png) no-repeat center;
+    color: #E71919;
+    font-weight: bold;
+}
+a.delete {
+    display: block;
+    height: 16px;
+    width: 16px;
+    text-indent: -999px;
+    overflow: hidden;
+    margin: 5px;
+    background: url(../images/del.png) no-repeat center;
+}
+a.display-text {
+    width: auto !important;
+    height: auto !important;
+    background: none !important;
+    text-indent: 0 !important;
+    text-decoration: underline;
+    overflow: visible;
+}
+form.list a:hover {
+    text-decoration: none;
+}
+.edit-form {
+    clear: both;
+}
+#editGroupName {
+    font-size: 16px;
+    font-weight: bold;
+    width: 90px;
+}
+#groupEditForm {
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid #ccc;
+    padding: 2px;
+    margin: 2px 0;
+        
+}
+.editForm table {
+    width: 100%;
+    margin: 5px auto;
+    background: #ffffff;
+    border: 1px solid #ccc;
+}
+.editForm input {
+    font-weight: bold;
+}
+.editForm table td {
+    padding: 0 5px;
+}
+.contact-name-value {
+    display: block;
+    width: 100%;
+    margin: 0;
+}
+table.grid td.contact-name a.view {
+    min-height: 30px;
+    line-height: normal;
+    font-size: 14px;
+    padding: 5px;
+}
+table.grid tr.default-contact td a.view {
+    color: #ff0000;
+}
+table.grid td a.view .contact-textphone-value, 
+table.grid td a.view .contact-email-value,
+table.grid td a.view .contact-voicephone-value, 
+.contact-item .phone, .contact-item .email {
+    float: left;
+    font-size: 11px;
+    color: #666;
+}
+table.grid td a.view .contact-email-value, .contact-item .email {
+    float: right;
+}
+table.list {
+    width: 100%;
+}
+table.list td  {
+    padding: 5px 0;
+}
+table.list tr td {
+    border-bottom: 1px solid #eee;
+}
+.alert-list {
+    background: #fff;
+    color: #333;
+    padding: 3px;
+    width: 330px;
+    margin: 3px auto;
+}
+.alert-list table {
+    width: 100%;
+}
+.alert-list table td {
+    padding: 3px;
+    vertical-align: top;
+}
+.google_map_canvas {
+    width: 100%;
+    height: 200px;
+    margin: 3px auto;
+}
+.alert-row {
+    padding: 3px 6px;
+    margin: 3px 0;
+    border-bottom: 1px solid #ccc;
+}
+.details .title {
+    font-weight: bold;
+    font-size: 13px;
+}
+.contact-list {
+    width: 380px;
+    margin: auto;
+}
+.contact-list {
+    color: #333;
+    text-align: left;
+}
+.contact-list a {
+    color: #0ac8ff;
+}
+a.oauth, a.oauth:hover  {
+    width: 80px;
+    height: 80px;
+    display: block;
+    text-decoration: none;
+    background: url(../images/oauth.png) no-repeat;
+    float: left;
+    margin: 0 10px 0 0;
+}
+.icon-Google span {
+    display: block;
+    width: 60px;
+    height: 20px;
+    margin: 30px 0 0 0;
+    background: url(../images/googlelogo.png) no-repeat bottom right;
+}
+.icon-Yahoo span {
+    display: block;
+    width: 16px;
+    height: 16px;
+    background: url(../images/yahoo.png) no-repeat;
+}
+.contact-item {
+    padding: 2px 5px;
+    border-bottom: 1px solid #eee;
+    margin: 0 5px;
+}
+.contact-item:hover {
+    background: #f3f3f3;
+}
+.contact-item input.checkbox {
+    float: left;
+    margin: 5px 15px 10px 0;
+}
+.contact-list h4 {
+    margin: 2px 0;
+}
+label.selection {
+    display: block;
+    height: 30px;
+    color: #333;
+    font-weight: normal;
+}
+.photo img {
+    max-width: 320px;
+    height: auto;
+}
+
+.select-phone strong {
+    color: #f43358;
+    font-weight: normal;
+}
+.select-phone table {
+    border: 1px solid #999;
+    padding: 0;
+    margin: 5px 0;
+    border-spacing: 0;
+    background: #fff;
+    color: #333;
+}
+.select-phone table th {
+    text-align: center;
+}
+.select-phone table td {
+    border-top: 1px solid #999;
+    border-right: 1px solid #eee;
+    padding: 3px 5px;
+    color: #1959ac;
+    white-space: nowrap;
+}
+#fileUpload input.bt-upload {
+    width: auto;
+}
+.gmap {
+    text-align: center;
+    border: 1px solid #eee;
+}
+td.right {
+    text-align: right;
+}
+.alert-list .details hr {
+    border: none;
+    border-top: 1px dashed #999;
+}
+.account-menu {
+    padding: 0 0 10px 0;
+	font-size:1.2em;
+}
+.account-menu a {
+    color: #0ec8f5;
+    text-decoration: underline;
+    margin: 0 3px;
+    font-weight: bold;
+}
+.account-menu a.logout {
+    color: #e71919;
+}
+.copyright {font-size: 0.9em;color: #f3f3f3}
+a.get-geo-button {
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    float: right;
+    color: #19B7FF;
+    height: 25px;
+    line-height: 25px;
+    padding: 0 20px 0 10px;
+}
+a.get-geo-button:hover {
+    text-decoration: none;
+    color: #ed0013;
+}
+a.get-geo-button span {
+    color: #ed0013;
+    margin: 0 2px 0 0;
+}
+.map_canvas {
+    width: 300px;
+    height: 200px;
+}
+.ui-dialog .ui-dialog-buttonpane button {
+    padding: 3px 10px;
+    font-size: 1em;
+    font-weight: bold;
+}

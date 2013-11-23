@@ -1,0 +1,41 @@
+<?php 
+$uri 		= $_SERVER["REQUEST_URI"];
+$home 		= 'home';
+$about 		= (strpos($uri, '/web/about/index') === false) ? 'about' : 'about about-active';
+$features 	= (strpos($uri, '/web/about/features') === false) ? 'features' : 'features features-active';
+$testimonials = (strpos($uri, '/web/about/testimonials') === false) ? 'testimonials' : 'testimonials testimonials-active';
+$phone 		= (strpos($uri, '/web/alert/') === false) ? 'phone' : 'phone phone-active';
+$contact	= (strpos($uri, '/web/about/contact') === false) ? 'contact' : 'contact contact-active';
+?>
+<div id="SFish-Menu">
+    <div class="nav_top_center"></div>
+    <div class="nav_top_left"></div>
+    <div class="nav_top_right"></div>
+    <div class="nav_mid">
+    <div class="menu">
+    <!-- Drop down menu -->    
+    <ul class="sf-menu">
+        <li class="current first">
+            <a class="<?php echo $home?>" href="/">&nbsp;</a>
+        </li>
+        <li>
+            <a class="<?php echo $about?>" href="/web/about/index">&nbsp;</a>
+        </li>
+        <li>
+            <a class="<?php echo $features?>" href="<?php echo Sos_Service_Functions::$appUrl ?>/SOSbeacon-Features.pdf" target="_blank">&nbsp;</a>				
+        </li>
+        <li class="li-testimonials">
+            <a  class="<?php echo $testimonials?>" href="/web/about/testimonials">&nbsp;</a>
+        </li>	
+        <li class="li-phone">
+            <a  class="<?php echo $phone?>" href="/web/alert/index/go/last">&nbsp;</a>
+        </li>	
+        <li  class="last">
+            <a class="<?php echo $contact?>" href="/web/about/contact">&nbsp;</a>
+        </li>
+        <a href="http://sbeacon.org" target="_blank" class="l-school-beacon">Are you looking for School Beacon?</a>
+     </ul>
+    <!-- a class="school-admin" href="/web/users/school-admins">School Administrators for Emergency Notification CLICK HERE</a -->
+    </div>
+    </div>
+</div>  

@@ -1,0 +1,142 @@
+<div class="phone-settings">
+    <div class="div1-1">
+        <div><h2>Phone Settings</h2></div>
+        <div id="setting-list" class="setting-list">
+            <script language="javascript">
+                function clearBackground () {
+                    $('.mn-group-name').css('background','');
+                }
+
+                function hideAllContent () {
+                    $('.contacts-group').hide('slow');
+                }
+
+                function selectTab() {
+                    $('.mn-group-name').click(function(){
+                        clearBackground();
+                        $(this).css('background','#CACACA');
+                        hideAllContent();
+                        $('#contacts-' + $(this).attr('id')).show();
+                    });
+                }
+
+                $(document).ready(function() {
+                    $('.mn-group-name').first().css('background','#CACACA');
+                    $('.contacts-group').hide();
+                    $('.contacts-group').first().show();
+                    selectTab();
+
+                });
+            </script>
+            <div>
+                <?php if (isset($this->phoneDatas)) : ?>
+                    <?php $row = $this->phoneDatas ?>
+
+                    <!-- Start of User information -->
+                    <div class="div2">
+                        <table  class="tbl">
+                            <tr>
+                                <th colspan="2">Phone information</th>
+                            </tr>
+                            <tr>
+                                <td>Number:</td>
+                                <td><?php echo $row["number"] ?></td>
+                            </tr>
+                            <tr>
+                                <td>Name:</td>
+                                <td><?php echo htmlspecialchars($row["name"]) ?></td>
+                            </tr>
+                            <tr>
+                                <td>E-mail:</td>
+                                <td><?php echo $row["email"] ?></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!-- End of User information -->
+
+                    <!-- Start of Settings information -->
+                    <div class="div2">
+                        <table  class="tbl">
+                            <tr>
+                                <th colspan="2">Settings information</th>
+                            </tr>
+                            <tr>
+                                <td>recording voice duration:</td>
+                                <td><?php echo $row["recording_voice_duration"] ?></td>
+                            </tr>
+                            <tr>
+                                <td>recording location report duration:</td>
+                                <td><?php echo $row["recording_location_report_duration"] ?></td>
+                            </tr>
+                            <tr>
+                                <td>recording image duration:</td>
+                                <td><?php echo $row["recording_image_duration"] ?></td>
+                            </tr>
+                            <tr>
+                                <td>panic alert phonenummber:</td>
+                                <td><?php echo $row["panic_alert_phonenummber"] ?></td>
+                            </tr>
+                            <tr>
+                                <td>good samaritan status:</td>
+                                <td><?php echo $row["good_samaritan_status"] ?></td>
+                            </tr>
+                            <tr>
+                                <td>good samaritan range:</td>
+                                <td><?php echo $row["good_samaritan_range"] ?> km</td>
+                            </tr>
+                            <tr>
+                                <td>alert sendto group:</td>
+                                <td><?php echo $row["alert_sendto_group"] ?></td>
+                            </tr>
+                            <tr>
+                                <td>incoming government alert:</td>
+                                <td><?php echo $row["incoming_government_alert"] ?></td>
+                            </tr>
+                            <tr>
+                                <td>panic alert good samaritan status:</td>
+                                <td><?php echo $row["panic_alert_good_samaritan_status"] ?></td>
+                            </tr>
+                            <tr>
+                                <td>panic alert good samaritan range:</td>
+                                <td><?php echo $row["panic_alert_good_samaritan_range"] ?> km</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!-- End of Settings information -->
+
+                <?php endif; ?>
+
+                <div class="div2">
+                    <div class="st-menu">
+                        <?php foreach($this->groups as $k => $g) : ?>
+                            <div class="mn-group-name" id="group-<?php echo $k ?>"><?php echo htmlspecialchars($g->getName()) ?></div>
+                        <?php endforeach; ?>
+                    </div>
+                    <div class="st-content">
+                        <?php foreach ($this->contacts as $k => $c) : ?>	
+                            <div class="div3 contacts-group" id="contacts-group-<?php echo $k ?>">
+                                <table class="tbl">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Voicephone</th>
+                                        <th>Textphone</th>
+                                    </tr>
+                                    <?php foreach ($c as $row) : ?>				 	
+                                        <tr>
+                                            <td><?php echo htmlspecialchars($row->name) ?></td>
+                                            <td><?php echo htmlspecialchars($row->email) ?></td>
+                                            <td><?php echo htmlspecialchars($row->voicephone) ?></td>
+                                            <td><?php echo htmlspecialchars($row->textphone) ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </table>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

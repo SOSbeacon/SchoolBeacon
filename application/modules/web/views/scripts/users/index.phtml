@@ -1,0 +1,28 @@
+<div class="user-index">
+	<?php if(isset($this->alertRows)) { ?>
+		<table class="list-alert" cellpadding="0" cellspacing="1">
+		<tr>
+			<th>AlertLogID</th>
+			<th>PhoneID</th>
+			<th>Status</th>
+			<th>Created Date</th>
+		</tr>
+		<?php foreach($this->alertRows as $row) { ?>
+		<tr>
+			<td>
+				<a href="/web/alert/list?id=<?php echo $row->getId()?>"><?php echo $row->getId()?></a>
+			</td>
+			<td>
+				<a href="/web/alert/list?id=<?php echo $row->getId()?>"><?php echo $row->getPhoneId()?></a>
+			</td>
+			<td>
+				<a href="/web/alert/list?id=<?php echo $row->getId()?>"><?php echo $row->getStatus()?></a>
+			</td>
+			<td>
+				<a href="/web/alert/list?id=<?php echo $row->getId()?>"><?php echo $row->getCreatedDate()?></a>
+			</td>
+		</tr>	
+		<?php } ?>
+		</table>  
+	<?php } ?>
+</div>

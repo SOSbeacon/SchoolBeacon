@@ -1,0 +1,34 @@
+<table style="border:1px solid #607298">
+    <thead>
+        <tr>
+            <th colspan="2" style="background: #607298; color: #fff; height: 30px;line-height: 30px; text-align: center;">MESSAGE CENTER</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($this->rows as $item) :?>
+            <tr>
+                <td colspan="2" style="background: #ECEFF5;font-weight: bold; color: #3C4F7A; height: 25px;line-height: 25px;">Details</td>
+            </tr>
+            <tr>
+                <td style="border:1px solid #f3f3f3; padding: 3px 6px; width: 30%">From: </td>
+                <td style="border:1px solid #f3f3f3; padding: 3px 6px;  width:70%"><?php echo htmlspecialchars($this->name) ?></td>
+            </tr>
+            <tr>
+                <td style="border:1px solid #f3f3f3; padding: 3px 6px">Number: </td>
+                <td style="border:1px solid #f3f3f3; padding: 3px 6px"><?php echo htmlspecialchars($this->number) ?></td>
+            </tr>
+            <tr>
+                <td style="border:1px solid #f3f3f3; padding: 3px 6px">Email: </td>
+                <td style="border:1px solid #f3f3f3; padding: 3px 6px"><?php echo htmlspecialchars($this->email) ?></td>
+            </tr>
+            <tr>
+                <td style="border:1px solid #f3f3f3; padding: 3px 6px;">Time: </td>
+                <td style="border:1px solid #f3f3f3; padding: 3px 6px;"><?php echo $item->updated_date ?> GMT</td>
+            </tr>
+            <tr>
+                <td style="border:1px solid #f3f3f3; padding: 3px 6px">Text: </td>
+                <td style="border:1px solid #f3f3f3; padding: 3px 6px"><?php echo htmlspecialchars($item->message) ?></td>
+            </tr>
+        <?php endforeach;?>
+    </tbody>
+</table>

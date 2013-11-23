@@ -1,0 +1,75 @@
+<?php
+$auth = Sos_Service_Functions::webappAuth(false);
+$isMobile = Sos_Service_Functions::isMobileAccess();
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head> 
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+        <link rel="shortcut icon" href="/images/logo.ico" type="image/x-icon" />
+        <meta name="viewport" content="initial-scale=0.66,minimum-scale=0.66,maximum-scale=2.0,user-scalable=yes,width=device-width,height=device-height" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <link href="/styles/Global.css?b=20111229" media="screen" rel="stylesheet" type="text/css" />
+        <link href="/styles/superfish.css?d" media="screen" rel="stylesheet" type="text/css" />
+        <link href="/styles/jquery-ui/jquery-ui-1.8.16.custom.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="/styles/style.css?d" media="screen" rel="stylesheet" type="text/css" />
+    <?php if (!$auth->getId()) :?>
+        <link href="/styles/no-auth.css" media="screen" rel="stylesheet" type="text/css" />
+    <?php endif ?>
+    <?php if (stristr($_SERVER['HTTP_USER_AGENT'], 'IE')) :?>
+        <link href="/styles/style-ie.css" media="screen" rel="stylesheet" type="text/css" />
+    <?php endif ?>
+        <link rel="stylesheet" href="/scripts/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
+    <?php if ($isMobile): ?>
+        <link rel="stylesheet" href="/styles/style-mobile.css?c=20120131" type="text/css" />
+    <?php endif ?>
+        
+        <title>SOSbeacon leverages the safety in numbers</title>
+        <script type="text/javascript" src="/scripts/jquery.js"></script>
+        <script type="text/javascript" src="/scripts/jquery.validate.js"></script>
+        <script type="text/javascript" src="/scripts/jquery.pngFix.js"></script>
+        <script type="text/javascript" src="/scripts/jQueryRotate.js"></script>
+        <script type="text/javascript" src="/scripts/jquery-ui-1.8.16.custom.min.js"></script>
+        <script type="text/javascript" src="/scripts/fancybox/jquery.fancybox.pack.js"></script>
+        <script type="text/javascript" src="/scripts/jwplayer/jwplayer.js"></script>
+        <script type="text/javascript" src="/scripts/script.js"></script>
+    </head>  
+    <body>
+        <div class="wrapper">
+            <div id="Header">
+                <div class="header">
+                    <div class="logo"><a class="logo-img" href="/"></a></div>
+                    <div class="slogan"></div>
+                    <?php if (!$isMobile) echo $this->partial('partials/user-control.phtml', 'web', array('auth' => $auth)) ?>
+                </div>
+                <?php echo $this->partial('partials/navigation.phtml', 'web', array()) ?>
+            </div>
+            <div id="Container">
+                <div id="ContainerInside">
+                    <div id="Content">
+                        <div class="main-content">
+                            <?php if ($isMobile) echo $this->partial('partials/user-control.phtml', 'web', array('auth' => $auth)) ?>
+                            <?php echo $this->layout()->content ?>
+                            <div class="clr"></div>
+                        </div>
+                    </div> 
+                    <div id="ContainerFooter">
+                        <div class="footer_top">       
+                            <div class="footer_top_center">
+                                <div class="copyright">
+                                    Copyright © 2012 SOSbeacon - SOSbeacon leverages the safety in numbers
+                                    <?php echo $isMobile ? '<br />' : ' - '; ?>
+                                    All Rights Reserved - <a href="/web/about/terms">Terms of service</a> - <a href="/web/about/privacy">Privacy</a>
+                                    <?php echo $isMobile ? '<br />' : ' - '; ?>
+                                    Developed by <a target="_blank" href="http://www.cncsoftgroup.com">CNC Software Group</a>.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer_bot"></div>     
+                    </div>  
+                </div>   
+            </div>
+        </div>
+    </body>
+</html>

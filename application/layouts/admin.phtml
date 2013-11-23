@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head> 
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+    <link rel="icon" href="/images/logo.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/images/logo.ico" type="image/x-icon" />
+    <title>SOSbeacon leverages the safety in numbers</title>
+    <link href="/styles/style-adm.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/styles/superfish.css" media="screen" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/scripts/jquery.js"></script>
+    <script type="text/javascript" src="/scripts/jquery.validate.js"></script>
+    <script type="text/javascript" src="/scripts/ActionsMenu.js"></script>
+    <script type="text/javascript" src="/scripts/jquery.pngFix.js"></script>
+    <script type="text/javascript" src="/scripts/hoverIntent.js"></script>
+    <script type="text/javascript" src="/scripts/superfish.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {	
+        $(document).pngFix(); 
+        $("a[rel=shareit]").ActionMenu();	
+        $('ul.sf-menu').superfish();
+        //Load login status form
+        $('#loginRegion').load('/web/users/loginstatus');
+        });
+    </script> 
+</head>  
+<body>
+<div class="wrapper">
+    <div class="header-container"><?php echo $this->partial('partials/header.phtml', 'admin') ?></div>
+    <div class="nav-container"><?php echo $this->partial('partials/navigation.phtml', 'admin') ?></div>
+    <!-- Main region -->
+    <div class="main-container">
+        <div class="centercol">
+                <?php echo $this->layout()->content ?>		
+        </div>
+    </div>
+    <!-- END OF Main region -->
+    <!-- Footer region -->
+    <div class="footer-container">
+    <div class="footer_top_center">
+        <div class="footer-title">SOSbeacon leverages the safety in numbers</div>
+        <div class="footer-copyright">Copyright © 2010 SOSbeacon. All Rights Reserved - 
+            <a href="/web/about/terms">Terms of service</a> - 
+            <a href="/web/about/privacy">Privacy</a>
+        </div>
+    </div>
+    </div>
+    <!-- End of Footer region -->
+</div>
+</body>
+</html>

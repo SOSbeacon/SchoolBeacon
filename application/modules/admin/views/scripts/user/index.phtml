@@ -1,0 +1,176 @@
+<script type="text/javascript">
+function resetUserPhoneForm() {
+    $('label.value-display').show();
+    $('input.value-edit').attr("disabled", "disabled");
+    $('input.value-edit').hide();
+    $('label.label-edit').hide();
+    $('a.edit').html('Edit').removeClass('btupdate').addClass('btedit');
+    $('a.delete').show();
+    $('a.cancel').hide();
+    $('.value-description').hide();
+    $('#form_method').val('');
+    $('.required').removeClass('required');
+    $('label.error').remove();
+}
+
+function initEditItemForm(parent_el) {
+    $(parent_el).find('label.value-display').hide();
+    $(parent_el).find('input.value-edit').show();
+    $(parent_el).find('label.label-edit').show();
+    $(parent_el).find('input.value-edit').removeAttr("disabled");
+    $(parent_el).find('a.delete').hide();
+    $(parent_el).find('a.cancel').show();
+    $(parent_el).find('.value-description').show();
+}
+$(document).ready(function() {
+    $('a.phone-update').click(function() {
+        var pid = $(this).attr('id').replace("edit-phone-", "");
+        var parent_el = $('table.tbl tr#item-phone-' + pid);
+        if($(this).html() == 'Edit') {
+            resetUserPhoneForm();
+            $(this).html('Update').removeClass('btedit').addClass('btupdate');
+            initEditItemForm(parent_el);
+            return false;
+        }
+        else {
+            //$(parent_el).find('input[name="phoneName"]').addClass('required');
+            $(parent_el).find('input[name="phoneStatus"]').addClass('required');
+            $('#frmUserPhone').validate();
+            $('#form_method').val('update_phone');
+            $('#form_item_id').val(pid);
+            $('#frmUserPhone').submit();
+        }
+    });
+    $('a.cancel').click(function() {
+       resetUserPhoneForm();
+       return false;
+    });
+});
+
+function deleteConfirm(type, delid, val) {
+    var ask = '';
+    if (type == 'phone') {
+        ask = 'Are you sure you want to delete phone: '+val+'?'
+    }
+    var answer = confirm(ask);
+    if (answer){
+        if (type == 'phone') {
+            $('#form_method').val('delete_phone');
+        }
+        $('#form_item_id').val(delid);
+        $('#frmUserPhone').submit();
+    }
+    return false;
+}
+
+</script>
+<div id="user-index" class="phone-list">
+    <div class="grid">
+        <form class="searchForm" method="get" action="/admin/user/index">
+            <strong>Search by: </strong>
+            Phone number 
+            <input type="text" name="searchNumber" size="10"
+                value="<?php echo $this->escape($this->params->getParam('searchNumber', '')) ?>" />
+            Name <input type="text" name="searchName" size="15" 
+                value="<?php echo $this->escape($this->params->getParam('searchName', '')) ?>" />
+            Email <input type="text" name="searchEmail" size="20" 
+                value="<?php echo $this->escape($this->params->getParam('searchEmail', '')) ?>" />
+            <input type="checkbox" name="searchRole" id="searchRole" value="2" <?php echo ($this->params->getParam('searchRole', 0) == 2) ? 'checked="checked"' : ''; ?> /> <label for="searchRole">Is school admin?</label>
+            <input type="submit" name="doSearch" class="submit" value="Search" />  
+            <a href="/admin/user/index">Reset</a>
+        </form>
+        <form id="frmUserPhone" name="frmUserPhone" action=""  method="POST">
+            <input type="hidden" id="form_method" name="form_method"/>
+            <input type="hidden" id="form_item_id" name="form_item_id"/>
+            <div class="message"><?php if(isset($this->message)) echo $this->message?></div>
+            <table class="tbl" cellpadding="0" cellspacing="0">
+                <tr>
+                    <th>ID</th>
+                    <th style="width: 100px;">Phone number</th>
+                    <th style="width: 150px;">Name</th>
+                    <th style="width: 270px;">Email</th>
+                    <th style="width: 130px;">Created date (GMT)</th>
+                    <th style="width: 130px;">Modified date</th>
+                    <th>Device infor</th>
+                    <th>Type</th>
+                    <th>Activated</th>
+                    <th style="width: 30px;" title="School admin">SA</th>
+                    <th class="action">ACTION</th>
+                </tr>
+            <?php if(isset($this->paginator) && count(isset($this->paginator))): ?>
+                <?php foreach($this->paginator as $phone):?>
+                    <tr id="item-phone-<?php echo $phone['id']?>">
+                        <td class="center"><?php echo $phone['id']?></td>
+                        <td class="phone-number" style="white-space: nowrap">
+                            <label><?php echo $phone['number'] ?> 
+                            <!-- em>IMEI: <?php echo $phone['imei'] ?></em -->
+                            </label>
+                        </td>
+                        <td class="name" style="white-space: nowrap">
+                            <label class="value-display"><?php echo htmlspecialchars($phone['name']) ?></label>
+                            <input size="8" style="width: 150px" class="value-edit" name="phoneName" type="text" value="<?php echo $phone['name'] ?>" />
+                        </td>
+                        <td class="email" style="white-space: nowrap">
+                            <label class="value-display"><?php echo $phone['email']?></label>
+                            <?php if($phone['subscribe']): ?>
+                                <img class="receive-email" alt="Subscribe" title="Subscribe" src="/images/subscribe.png"/>
+                            <?php else : ?>
+                                <img class="receive-email" alt="Unsubscribe" title="Unsubscribe" src="/images/unsubscribe.png"/>
+                            <?php endif; ?>
+                            <?php if($phone['email_enabled']): ?>
+                                <img class="receive-email" alt="Email is enabled" title="Email is enabled" src="/images/Icon_Contact.jpg"/>
+                            <?php else : ?>
+                                <img class="receive-email" alt="No Email" title="No Email" src="/images/Icon_Contact2.jpg"/>
+                            <?php endif; ?>
+                            <label class="label-edit"><br />Email is enabled: </label><input class="value-edit" <?php if($phone['email_enabled']): ?> checked="checked"<?php endif; ?> name="emailEnabled" type="checkbox" value="1" size="20"/>
+                            <label class="label-edit"><br />Password: </label><input class="value-edit" name="password" type="password" value="" size="8" style="width: 120px"/>
+                            <label class="value-description"><br />(&gt;= 6 characters, empty to skip)</label>
+                        </td>
+                        <td class="center">
+                            <label class="value-display"><?php echo $phone['created_date']?></label>
+                        </td>
+                        <td class="center">
+                            <label class="value-display"><?php echo $phone['modified_date'] ?></label>
+                        </td>
+                        <td class="phone-info">
+                            <label class="value-display" title="<?php echo htmlspecialchars($phone['phone_info']) ?>">
+                                <?php echo htmlspecialchars($phone['phone_info']) ?>
+                            </label>
+                        </td>
+                        <td class="phone-type center">
+                        <?php 
+                            $typeName = '';
+                            if ($phone['type'] == 1) $typeName = 'Iphone';
+                            if ($phone['type'] == 2) $typeName = 'Android';
+                            echo $typeName;
+                        ?>
+                        </td>
+                        <td class="center" >
+                            <label class="value-display"><?php echo ($phone['status'] == '1' ? 'Yes' : '<em>No</em>');?></label>
+                            <input class="value-edit" name="phoneStatus" type="text" value="<?php echo $phone['status'] ?>" size="2" style="width: 30px"/>
+                            <label class="value-description"><br />1 = activated<br /> 0 = inactive </label>
+                        </td>
+                        <td class="center" title="School admin">
+                            <label class="value-display"><?php echo ($phone['role'] == '2' ? '<strong>Yes</strong>' : '-');?></label>
+                            <input class="value-edit" name="userRole" type="checkbox" value="2" <?php echo ($phone['role'] == '2' ? 'checked="checked"' : '');?> />
+                            <label class="value-description"><br />Select to set this user is School admin</label>
+                        </td>
+                        <td class="center action">
+                            <a title="View this phone infor" target="_blank" class="btsearch" href="/admin/index?phone_number=<?php echo $phone['number'] ?>&view_type=infor">Details</a>
+                            <a title="Login to this phone" target="_blank" class="btautologin"  href="/admin/user/index/do/loginuser/id/<?php echo $phone['id'] ?>">Login phone</a>
+                            <a title="Edit" class="btedit edit phone-update" id="edit-phone-<?php echo $phone['id']?>" href="#edit/<?php echo $phone['id'] ?>">Edit</a>
+                            <a title="Cancel" class="btcancel cancel" href="#">Cancel</a>
+                            <a title="Delete" class="btdel delete" href="#" onclick="return deleteConfirm('phone','<?php echo $phone['id'] ?>', '<?php echo $phone['number'] ?>')">Delete</a>
+                        </td>
+                    </tr>
+                <?php endforeach;?>
+            <?php else: ?>
+                <tr>
+                    <td colspan="10">No record found.</td> 	 	 	 	 	
+                </tr>
+            <?php endif; ?>
+            </table>
+        </form>
+    </div>
+    <?php echo $this->paginationControl($this->paginator, 'Sliding', 'partials/controls.phtml'); ?>
+</div>

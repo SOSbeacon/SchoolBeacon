@@ -1,0 +1,284 @@
+<?php
+
+require_once 'BaseController.php';
+
+class AlertController extends BaseController {
+
+    private $panicMessage;
+    private $emergencyMessage;
+    private $alertWitnessMessage;
+    private $singleContact;
+    private $logger;
+    private $userMail;
+
+    public function init() {
+        $bootstrap = $this->getInvokeArg('bootstrap');
+        $options = $bootstrap->getOption('resources');
+        $contextSwitch = $this->_helper->getHelper('contextSwitch');
+        $contextSwitch->addActionContext('index', array('xml', 'json'))
+                ->addActionContext('get', array('xml', 'json'))
+                ->addActionContext('post', array('xml', 'json'))
+                ->addActionContext('put', array('xml', 'json'))
+                ->initContext();
+        $this->logger = Sos_Service_Logger::getLogger();
+    }
+
+    public function postAction() {
+        $token = $this->_request->getParam('token', false);
+        $phoneId = $this->_request->getParam('phoneId', false);
+        $latitude = $this->_request->getParam('latitude', '');
+        $longitude = $this->_request->getParam('longitude', $this->_request->getParam('longtitude', ''));
+        $type = $this->_request->getParam('type', false); // 0 = alert, 1 = call emergency, 2 = checking-in message 		
+        $toGroup = $this->_request->getParam('toGroup', false); // to groupId, 0 = all groups, -1 = single contact
+        $singleContact = $this->_request->getParam('singleContact', false); // singleContact is phone number
+        $message = $this->_request->getParam('message', false);
+        $resObj = array();
+        $affectRow = 0;
+        try {
+            $this->authorizePhone($token, $phoneId);
+            $this->logger->log('Start sending alert', Zend_Log::INFO);
+            $phone = new Sos_Model_Phone();
+            $phone->find($phoneId);
+            $setting = new Sos_Model_Setting();
+            $setting->find($phone->getSettingId());
+            $alertloggroup = new Sos_Model_Alertloggroup();
+            $alertloggroupMap = new Sos_Model_AlertloggroupMapper();
+            $alertlogMapper = new Sos_Model_AlertlogMapper();
+            $alertlog = new Sos_Model_Alertlog();
+            $locationMapper = new Sos_Model_LocationMapper;
+            $location = new Sos_Model_Location();
+            // check $toGroup is valid
+            if ($toGroup > 0) { // = 0 : to all groups
+                $group = new Sos_Model_Contactgroup();
+                $group->find($toGroup);
+                if ($group->getPhoneId() != $phoneId) {
+                    throw new Zend_Validate_Exception("groupId is incorrect");
+                }
+            }
+            $db = $alertlogMapper->getDbTable()->getDefaultAdapter();
+            $db->beginTransaction();
+            //If latitude, longtitude is null will get last location status of phone
+            if ($latitude == '' || $longitude == '') {
+                $lo = $locationMapper->findLastByPid($phoneId);
+                $latitude = ($lo['latitude'] == null) ? 0 : $lo['latitude'];
+                $longitude = ($lo['longtitude'] == null) ? 0 : $lo['longtitude'];
+            }
+            $phoneNumber = $phone->getNumber();
+            $fromName = $phone->getName();
+            if (!$fromName) {
+                $fromName = 'Phone number ' . $phoneNumber;
+            }
+            $this->userMail = $phone->getEmail();
+            if ($type == 0) { // alert
+                $message = "$fromName sent an alert from $phoneNumber"; // alert log
+            } elseif ($type == 1) { // emergency alert
+                $message = 'Emergency call made to  ' . $setting->getPanicAlertPhonenummber();
+            }
+            // else is check-in message, find the most recent alert that in the same session ( less than 4 hours old)
+            $alertloggroupMap->getOneBySession($phoneId, $alertloggroup);
+            // Save last updated Date of alertloggroup
+            $alertlog->setAlertloggroupId($alertloggroup->getId());
+            $alertlog->setMessage($message);
+            $alertlog->setCreatedDate(date("Y-m-d H:i:s"));
+            $alertlog->setType($type);
+            $alertlogMapper->save($alertlog);
+            // Save new location for alertlog
+            $location->setLatitude($latitude);
+            $location->setLongtitude($longitude);
+            $location->setAlertlogId($alertlog->getId());
+            $location->setUpdatedDate(date("Y-m-d H:i:s"));
+            $locationMapper->save($location);
+            if ($type == 0) { // Normal alert
+                $this->alertWitnessMessage = "$fromName sent an alert from $phoneNumber. Link http://" . $_SERVER['HTTP_HOST'] . "/r/" . $alertloggroup->getToken();
+                //notify to selected contact
+                $this->notifyFamilyFriend($message, $phoneId, $phoneNumber, $fromName, $alertloggroup->getToken(), $setting->getAlertSendtoGroup());
+            } elseif ($type == 1) { // emergency call
+                $this->panicMessage = ' - EMERGENCY NUMBER CALLED ' . $setting->getPanicAlertPhonenummber();
+                // Message when send sms Alert Witness
+                $this->emergencyMessage = "$fromName called emergency $phoneNumber. Link http://" . $_SERVER['HTTP_HOST'] . "/r/" . $alertloggroup->getToken();
+                $this->notifyFamilyFriend($message, $phoneId, $phoneNumber, $fromName, $alertloggroup->getToken(), $setting->getAlertSendtoGroup());
+                $this->notifyGoodSamaritan($latitude, $longitude, $phoneId, $phoneNumber, $fromName, $alertloggroup->getToken());
+            } else { // checkin-message
+                //Save free alertdata of checkin to alertlog   
+                $alertdataMap = new Sos_Model_AlertdataMapper();
+                $where = "phone_id = $phoneId AND alertlog_id is null";
+                $arrAlertData = $alertdataMap->fetchList($where);
+                foreach ($arrAlertData as $row) {
+                    $row->setAlertlogId($alertlog->getId());
+                    $alertdataMap->save($row);
+                }
+                // if check in type = 3 - single contact
+                $this->singleContact = $singleContact;
+                $this->notifyChecking($message, $phoneId, $phoneNumber, $fromName, $alertloggroup->getToken(), $toGroup);
+            }
+            $resObj['success'] = "true";
+            $resObj['id'] = $alertlog->getId();
+            $db->commit();
+        } catch (Zend_Exception $ex) {
+            if (!empty($db)) {
+                $db->rollBack();
+            }
+            $this->logger->log('ERROR while sending alert: ' . $ex, Zend_Log::ERR);
+            $resObj['success'] = "false";
+            $resObj['message'] = $ex->getMessage();
+        }
+        $this->view->response = $resObj;
+    }
+
+    private function notifyFamilyFriend($message, $phoneId, $phoneNumber=NULL, $fromName=NULL, $alertToken = null, $groupId = null) {
+        $contacts = Sos_Service_Functions::getContactList($phoneId, $groupId, $this->singleContact);
+        $this->emailFamilyFriend($message, $contacts, $phoneNumber, $fromName, $alertToken);
+        $this->smsFamilyFriend($contacts, $phoneId, $phoneNumber, $fromName, $alertToken);
+    }
+
+    private function notifyChecking($checkingInMessage, $phoneId, $phoneNumber=NULL, $fromName=NULL, $alertToken = null, $groupId = null) {
+        $contacts = Sos_Service_Functions::getContactList($phoneId, $groupId, $this->singleContact);
+        Sos_Service_Functions::emailCheckin($checkingInMessage, $contacts, $phoneNumber, $fromName, $alertToken);
+        Sos_Service_Functions::smsCheckin($checkingInMessage, $contacts, $phoneId, $phoneNumber, $fromName, $alertToken);
+    }
+
+    private function notifyGoodSamaritan($latitude, $longitude, $phoneId=null, $phoneNumber=null, $fromName=null, $alertToken = '') {
+        $phones = $this->findGoodSamaritan($phoneId, $latitude, $longitude);
+        $this->emailGoodSamaritan($phones, $phoneNumber, $fromName, $alertToken);
+        $this->smsGoodSamaritan($phoneNumber, $fromName, $phones, $alertToken);
+    }
+
+    private function emailFamilyFriend($checkingInMessage, $contacts, $phoneNumber=NULL, $fromName=NULL, $alertToken = '') {
+        $this->logger->log('--email to Family/Friends', Zend_Log::INFO);
+        $from = "from $phoneNumber";
+        $link = "http://" . $_SERVER['HTTP_HOST'] . "/r/$alertToken";
+        $existEmail = array();
+        foreach ($contacts as $contact) {
+            if ($contact->getEmail() == NULL) continue; // Check NULL email
+            if (!in_array($contact->getEmail(), $existEmail)) { //No duplicate sent mail 
+                $existEmail[] = $contact->getEmail();
+            } else
+                continue;
+            $mail = new Sos_Service_ClassMail();
+            $subject = "SOSbeacon Alert from $fromName";
+            $mail->setSubject($subject);
+            $mail->setAddressTo($contact->getEmail());
+            $mail->setAddressName($fromName);
+            $body = "You received an SOSBEACON alert $from by $fromName. Detail here: <a href=\"$link\">$link</a>";
+            $body.= $this->panicMessage; // If message is PANIC message
+            $body.= $checkingInMessage; // If message is CHECK IN message
+            $mail->setBody($body);
+            try {
+                $emaillog = new Sos_Model_Emaillog();
+                $emaillogMapper = new Sos_Model_EmaillogMapper();
+                $content = '<strong class="subject">' . $subject . '</strong><br/>' . $body;
+                $emaillogMapper->saveEmaillog($this->userMail, $contact->getEmail(), $content, $emaillog);
+                $mail->sendMail();
+                $emaillog->setStatus(1);
+                $emaillogMapper->save($emaillog);
+            } catch (Exception $ex) {
+                $this->logger->log($ex->getMessage(), Zend_Log::ERR);
+            }
+        }
+    }
+
+    private function emailGoodSamaritan($phones, $phoneNumber=NULL, $fromName=NULL, $alertToken = '') {
+        $this->logger->log('--email to good samaritan', Zend_Log::INFO);
+        $link = "http://" . $_SERVER['HTTP_HOST'] . "/r/$alertToken";
+        foreach ($phones as $phone) {
+            $email = $phone->getEmail();
+            if ($email != NULL) {
+                $mail = new Sos_Service_ClassMail();
+                $subject = "SOSbeacon alert from SOMEONE WHO NEEDS HELP";
+                $mail->setSubject($subject);
+                $mail->setAddressTo($email);
+                $mail->setAddressName($fromName);
+                $body = "You received an SOSBEACON GOOD SAMARITAN alert from \"SOMEONE WHO NEEDS HELP\". 
+                         Alert information: CALLER $phoneNumber, $fromName. Detail here: 
+                         <a href=\"$link\">$link</a>" . $this->panicMessage;
+                $mail->setBody($body);
+                try {
+                    $emaillog = new Sos_Model_Emaillog();
+                    $emaillogMapper = new Sos_Model_EmaillogMapper();
+                    $content = '<strong class="subject">' . $subject . '</strong><br/>' . $body;
+                    $emaillogMapper->saveEmaillog($this->userMail, $email, $content, $emaillog);
+                    $mail->sendMail();
+                    $emaillog->setStatus(1);
+                    $emaillogMapper->save($emaillog);
+                } catch (Exception $ex) {
+                    $this->logger->log($ex, Zend_Log::ERR);
+                }
+            }
+        }
+    }
+
+    private function smsFamilyFriend($contacts, $phoneId=NULL, $phoneNumber=NULL, $fromName=NULL, $alertToken = '') {
+        $this->logger->log('--sms to Family/friend', Zend_Log::INFO);
+        if ($this->panicMessage != '')
+            $body = $this->emergencyMessage;
+        else
+            $body = $this->alertWitnessMessage;
+        $existPhone = array();
+        foreach ($contacts as $contact) {
+            if ($contact->getTextphone() == NULL) continue;
+            if (!in_array($contact->getTextphone(), $existPhone)) {
+                $existPhone[] = $contact->getTextphone();
+            } else
+                continue;
+            $this->logger->log('-FM-' . $contact->getTextphone(), Zend_Log::INFO);
+            $phoneNum = $contact->getTextphone();
+            try {
+                $this->logger->log("---- send sms to $phoneNum...", Zend_Log::INFO);
+                Sos_Service_Twilio::sendSMS("415-689-8484", $phoneNum, $body, $phoneNumber);
+            } catch (Exception $ex) {
+                $this->logger->log('Error while sms "' . $body . '" to Family/Friends: ' . $ex->getMessage(), Zend_Log::ERR);
+            }
+        }
+    }
+
+    private function smsGoodSamaritan($phoneNumber=NULL, $fromName=NULL, $phones = 0, $alertToken = '') {
+        $this->logger->log('--sms to good samaritan', Zend_Log::INFO);
+        if ($this->panicMessage != '')
+            $body = $this->emergencyMessage;
+        else
+            $body = $this->alertWitnessMessage;
+        foreach ($phones as $phone) {
+            $phoneNum = $phone->getNumber();
+            if ($phoneNum != NULL && trim($phoneNum) != '') {
+                try {
+                    $this->logger->log("---- send sms to $phoneNum...", Zend_Log::INFO);
+                    Sos_Service_Twilio::sendSMS("415-689-8484", $phoneNum, $body, $phoneNumber);
+                } catch (Exception $ex) {
+                    $this->logger->log('Error while sms to Good-samaritant: ' . $ex, Zend_Log::ERR);
+                }
+            }
+        }
+    }
+
+    private function findGoodSamaritan($phoneId, $latitude, $longitude) {
+        $phoneMapper = new Sos_Model_PhoneMapper();
+        $phone = new Sos_Model_Phone();
+        $result = $phoneMapper->fetchByLocation($phoneId, $latitude, $longitude);
+        $phones = Array();
+        foreach ($result as $row) {
+            $cls = new Sos_Model_Phone();
+            $cls->setId($row->id)
+                    ->setName($row->name)
+                    ->setNumber($row->number)
+                    ->setType($row->type)
+                    ->setImei($row->imei)
+                    ->setLocationId($row->location_id)
+                    ->setSettingId($row->setting_id)
+                    ->setToken($row->token)
+                    ->setStatus($row->status);
+            $phones[] = $cls;
+            $this->logger->log("---- good samaritant: " . $row->number, Zend_Log::INFO);
+        }
+        return $phones;
+    }
+
+    public function indexAction() {}
+
+    public function getAction() {}
+    
+    public function putAction() {}
+
+    public function deleteAction() {}
+
+}
+

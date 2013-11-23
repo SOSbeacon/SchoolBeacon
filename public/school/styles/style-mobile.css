@@ -1,0 +1,142 @@
+body{margin:0; padding:0;font-size: 14px}
+.wrapper{background:none repeat scroll 0 0 transparent; margin:0 auto; width:100%; max-width: 600px;min-width: 470px;overflow: hidden}
+
+.main-content .col-left, .main-content .col-right{width:100%}
+.page-home .col-1, .page-home .col-2 {clear: both;margin: 0 20px;text-align: left}
+.main-content .page-home .col-right { clear: both;float:none; width: auto;margin: 0 20px}
+.main-content {width: auto;padding: 0 0 20px 0;float: none}
+.features-index{font-size:14px; padding:20px}
+.features-index .div1-1{}
+
+.about-index{font-size:14px; padding:20px}
+.about-index .div1-1{}
+.about-index .div1-2{text-align:center}
+.about-index .div1-3{}
+.copyright {padding: 0;text-align: center;}
+.privacy-privacy{}
+.privacy-privacy .privacy-content{padding:20px}
+.footer_bot { margin-bottom: 15px;border-bottom-left-radius:15px, border-bottom-right-radius:15px;
+-moz-border-radius-bottomright:20px;-moz-border-radius-bottomleft:20px;}
+.terms-terms{}
+.terms-terms .terms-content{padding:20px}
+.login-region {float: none;margin: 0;padding: 15px 20px 0 20px;}
+.login-region .account, .login-region #frmLogin {padding: 30px 40px 10px 40px;background: #ECEFF5; float: none }
+.login-region .account {padding: 5px 10px;}
+#frmLogin input.text {height: 25px;line-height: 25px;width: 98%;}
+.home-index{}
+.home-index .home-content{margin:15px}
+.sf-menu {display: table-row;float: none;width: 100%; }
+.sf-menu li {padding: 0 15px; display: table-cell;float: none}
+.sf-menu li.li-phone {display: none !important}
+.header {width: 520px;}
+.header .logo, .header .slogan {margin-bottom: 0;}
+.header .slogan {margin: 5px 0 0 10px;background: url(../images/slogan-mobile.png) no-repeat top left; width: 350px;height: 90px}
+.login-panel{font-family:tahoma; font-size:1em; margin-bottom:15px; margin-top:10px}
+.login-panel .login-title{background:url("/images/home-login-title.png") no-repeat scroll 0 0 transparent; height:37px; margin-bottom:10px; margin-left:13px; width:287px}
+.login-panel .div1{margin-left:20px; margin-top:5px}
+.login-panel .div1 a{color:#0768CC; font-family:tahoma; font-size:1em; font-weight:normal}
+.submitForm .col-1, .submitForm .col-2 {width: 100%;border: none;padding: 0;margin: 0}
+#submitForm {width: 420px}
+.login-panel .div1 .left{float:left; line-height:22px; width:75px}
+.login-panel .div1 .right{}
+.login-panel .div1 .txt{height:12px; width:186px}
+.login-panel .div1 .checkbox{margin-right:10px; margin-top:2px; text-align:right; width:65px}
+.login-panel .div1 .button-login{background:url("/images/home-login.png") no-repeat scroll 0 0 transparent; border:medium none; cursor:pointer; height:21px; margin-left:60px; width:46px}
+
+.home-index .rightbar-element{float:left; font-family:tahoma; font-size:1em; margin-right:10px; margin-top:10px}
+.home-index .rightbar-element .top{float:left; height:23px; margin-right:10px; width:280px}
+.home-index .rightbar-element .top .top-left{background:url("/images/home-index-top-left.png") no-repeat scroll 0 0 transparent; float:left; height:23px; width:28px}
+.home-index .rightbar-element .top .top-center{background:none repeat scroll 0 0 #ECEFF5; float:left; height:23px; width:244px}
+.home-index .rightbar-element .top .top-right{background:none repeat scroll 0 0 #ECEFF5; float:left; height:23px; width:28px}
+.home-index .rightbar-element .mid{background:none repeat scroll 0 0 #ECEFF5; float:left; padding:0 28px; width:244px}
+.home-index .rightbar-element .mid .mid-center{}
+.home-index .rightbar-element .mid .mid-center .mid-center-top{border-bottom:1px solid #C0C9DC; color:#6C6C6C; margin-bottom:10px; padding-bottom:10px}
+.home-index .rightbar-element .mid .mid-center .mid-center-bot{color:#6478A3; text-align:center}
+.home-index .rightbar-element .bot{}
+.home-index .rightbar-element .bot .bot-left{background:none repeat scroll 0 0 #ECEFF5; float:left; height:23px; width:28px}
+.home-index .rightbar-element .bot .bot-center{background:none repeat scroll 0 0 #ECEFF5; float:left; height:23px; width:245px}
+.home-index .rightbar-element .bot .bot-right{background:url("/images/home-index-bot-right.png") no-repeat scroll 0 0 transparent; float:left; height:23px; width:27px}
+
+.alert-list{}
+.alert-list .div1{color:#6478A3; font-size:15px !important; height:250px; padding:10px; text-align:center}
+.alert-list .date{margin:10px 0; text-align:center}
+.alert-list .title{background:url("/images/review-phone-history.png") no-repeat scroll 0 0 transparent; height:37px; margin:5px 0; width:200px; float:none}
+.alert-list .add-note{display:block; font-weight:bold; margin:10px 10px 20px}
+.alert-list .details{background:none repeat scroll 0 0 #ECEFF5; height:auto; margin-bottom:10px; margin-left:10px; margin-top:10px; overflow:visible; width:100%; padding-bottom:10px}
+.alert-list .scroll-details{background:none repeat scroll 0 0 transparent; height:auto; overflow:visible}
+.alert-list .details .details-title{border-bottom:1px solid #C0C9DC; color:#6478A3; font-size:14px; text-align:center; width:240px}
+.alert-list .details div{margin-left:30px}
+.alert-list .details div td{color:#6C6C6C; padding:1px 15px 1px 0}
+.alert-list .location{margin-left:10px}
+.alert-list .location h1{padding:10px 0}
+.alert-list .location .map{margin:15px 0}
+
+.gmap{    padding:0}
+
+.div-add-note{    height:auto;     padding:5px 0}
+.alert-list .location .map .map_canvas{background-color:#E5E3DF; height:240px; overflow:hidden; position:relative; width:280px; z-index:0}
+.alert-list .alert{padding:10px}
+.alert-list .alert .main-photo{float:left; margin:10px 0; width:100%}
+.alert-list .alert .main-photo .photo-txt{font-size:20px; font-weight:bold; margin:10px 0 0}
+.alert-list .alert .main-photo .photo-block{padding: 3;  margin:3px 0}
+.alert-list .alert .main-photo .photo{ height:auto;  text-align:center;}
+.alert-list .alert .main-photo .photo img{ max-width:460px; width: 98%; max-height:none;}
+.alert-list .alert .main-audio{float:left; margin:10px 0; width:100%}
+.alert-list .alert .main-audio .audio-text{font-size:20px; font-weight:bold; margin:10px 0}
+.alert-list .alert .main-audio .mp3-play{height:24px; overflow:hidden}
+.alert-list .alert .main-audio .mp3-play img{margin-top:-24px; }
+.alert-list .alert .main-audio .mp3-play img:Hover{margin-top:0px}
+
+.alert-list .alert .main-audio .play{background:url("/sosdata/images/play_overlay_bg.png") no-repeat scroll 0 0 transparent; border:3px solid #999; display:block; height:240px; overflow:hidden; position:relative; vertical-align:bottom; width:317px; border-bottom:0}
+.alert-list .alert .main-audio .play div{bottom:0; display:block; float:left; margin-bottom:0px; margin-left:-1px; margin-right:-1px; position:absolute}
+.alert-list .alert .main-audio .audio{min-height:100px}
+.alert-list .alert .main-audio .date{float:left; margin:10px 0; width:100%}
+.alert-list .alert .main-audio .div_link{float:left; margin-top:0; width:100%}
+.alert-list .recording-list{border:1px solid #E8E8E8; height:120px; margin-left:10px; overflow-x:hidden; overflow-y:scroll; width:100%}
+.alert-list .recording-list .list-alert{text-align:center; width:99%}
+.alert-list .recording-list .list-alert td{border-color:#E8E8E8; border-right:1px solid #E8E8E8; border-style:none solid solid none; border-width:0 1px 1px 0; padding:5px 0}
+.alert-list .recording-list .list-alert td .first{border:1px solid #E8E8E8}
+.alert-list .recording-list .list-alert td .last{border:1px solid #E8E8E8}
+.alert-list .recording-list .list-alert th{border-bottom:1px solid #E8E8E8; border-right:1px solid #E8E8E8; color:#666; padding:5px 0}
+.alert-list .div-add-note{padding-left:0; padding-right:0}
+.alert-list .last-clear{clear:left}
+
+.alert-list .number{ margin:0 0 5px 8px}
+
+.user-index .list-alert{margin:10px}
+.user-index .list-alert th{text-align:center; padding:5px; border:1px solid #E8E8E8; font-size:13px}
+.user-index .list-alert td{border:1px solid #E8E8E8; padding:5px; text-align:center}
+.user-index .list-alert td a{display:block; width:100%}
+
+.login-home{ padding:20px}
+.logo, .slogan{}
+
+.alert-list .alert .scroll-alert{ max-height:none !important}
+
+.alert-list .recording-list{ margin:0;  float:none;  clear:both}
+
+.main-content .alert-list .col-right, .main-content .alert-list .col-left{width:auto !important; float: none; padding: 5px 0 0 0}
+
+.alert-list .scroll-details{ width:100%}
+
+.alert-list .details{ width:auto;  margin:5px 0}
+
+.alert-list .details .details-title{ float:none;  width:auto}
+
+.alert-list .alert{ padding:3px 0}
+.google_map_canvas{ height:200px; margin: 2px 10px}
+.alert-list .add-note{ margin:0}
+
+.alert-list .alert-list-select-phone{ width:100%}
+
+.alert-list{ padding: 0 20px}
+
+.alert-list h2.log-title span{ display:none}
+
+input.send_files_to_email{ float:none}
+
+.login-panel .login-title{ width:260px}
+
+#noteList #chat-content { margin: 0 }
+.main-content .col-left, .main-content .col-right {margin: 0}
+.main-content .col-sp {display: none;}

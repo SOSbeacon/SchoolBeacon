@@ -1,0 +1,12 @@
+<div class="phone-account-active">
+<div class="div1-1">
+	<h1>SOSbeacon Activation Phone</h1>
+	<h2>Please enter ACTIVE CODE to activate your phone:</h2>
+	<div>
+	<form name="frm" action="/web/phone/doactive" method="post">
+		<input type="text" name="code" id="code" value="<?php if(isset($this->code)) echo $this->code;?>" size="30"/> 
+		<input type="submit" name="active" id="active" value="Activate Phone"/>
+	</form>
+	</div> 
+</div>
+</div>

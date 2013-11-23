@@ -1,0 +1,65 @@
+<script type="text/javascript">
+$(document).ready(function(){
+	var id = null;
+	$('.aStt').click(function(){
+		id = (this.id).replace('aStatus', '');
+		$('#aStatus'+id).hide();
+		$('#slStatus'+id).show();
+		$selectedValue = document.getElementById('aStatus'+id).innerHTML;
+		document.getElementById('slStatus'+id+$selectedValue).selected = true;
+	});
+	$('.slStt').blur(function(){
+		id = (this.id).replace('slStatus', '');
+		$('#aStatus'+id).show(function(){
+				$('#aStatus'+id).html($('#slStatus'+id).val()); 
+			});
+		$('#slStatus'+id).hide();
+	});	
+	$('.slStt').change(function(){
+		id = (this.id).replace('slStatus', '');
+		var status = document.getElementById('slStatus'+id).value;
+
+		var url="/web/alert/save?id="+id+"&status="+status; 
+		$.get(url, function(data){
+			
+		});
+	});	
+});
+</script>
+
+<div class="user-index">
+	<?php if(isset($this->alertRows)) { ?>
+		<table class="list-alert" cellpadding="0" cellspacing="1">
+		<tr>
+			<th>AlertLogID</th>
+			<th>Phone Number</th>
+			<th>Status</th>
+			<th>Created Date</th>
+		</tr>
+		<?php foreach($this->alertRows as $row) { ?>
+		<tr>
+			<td>
+				<a href="/web/alert/list?id=<?php echo $row->getToken()?>"><?php echo $row->getId()?></a>
+			</td>
+			<td>
+				<a href="/web/alert/list?id=<?php echo $row->getToken()?>"><?php echo $row->getPhoneId()?></a>
+			</td>
+			<td>
+				<a class="aStt" id="aStatus<?php echo $row->getId()?>" href="#"><?php echo $row->getStatus()?></a>
+				<select class="slStt"  id="slStatus<?php echo $row->getId()?>" style="display:none;">
+					<option id="slStatus<?php echo $row->getId()?>Open" value="Open">Open</option>
+					<option id="slStatus<?php echo $row->getId()?>Connected" value="Connected">Connected</option>
+					<option id="slStatus<?php echo $row->getId()?>Closed" value="Closed">Closed</option>
+				</select>
+			</td>
+			<td>
+				<a href="/web/alert/list?id=<?php echo $row->getToken()?>"><?php echo $row->getCreatedDate()." GMT"?></a>
+			</td>
+		</tr>	
+		<?php } ?>
+		</table>
+		<?php if(count($this->alertRows) == 0) :?>  
+		<div class="alert-index-none">Record Empty</div>
+		<?php endif; ?>
+	<?php } ?>
+</div>

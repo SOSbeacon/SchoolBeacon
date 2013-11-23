@@ -1,0 +1,39 @@
+<?php
+$logType = array(
+  '0' => 'EMERG',
+  '1' => 'ALERT',
+  '2' => 'CRIT',
+  '3' => 'ERR',
+);
+?>
+<div class="message"><?php if(isset($this->message)) echo $this->message?></div>
+<div class="grid">
+<table class="tbl" cellpadding="0" cellspacing="0">
+        <tr>
+                <th style="width: 160px;">Time (GMT)</th>
+                <th style="width: 50px;">Event</th>
+                <th>Message</th>
+        </tr>
+        <?php if(isset($this->paginator) && count(isset($this->paginator))): ?>
+        <?php foreach($this->paginator as $row):?>
+            <tr>
+                <td class="no-wrap"><?php echo $row['timestamp']?></td>
+                <td><?php echo $logType[$row['priority']] ?></td>
+                <td><?php echo $row['message']?></td>
+            </tr>
+        <?php endforeach;?>
+        <?php else: ?>
+        <tr>
+                <td colspan="9">EMPTY LOG</td>
+        </tr>
+        <?php endif; ?>
+</table>
+</div>
+<?php echo $this->paginationControl($this->paginator, 'Sliding', 'partials/controls.phtml'); ?>
+<div style="text-align: left; width: 100%; font-size: 11px; clear: both">
+    <strong>Server error log:</strong>   <br />
+EMERG  =  Emergency: system is unusable <br />
+ALERT = Alert: action must be taken immediately<br />
+CRIT = Critical: critical conditions<br />
+ERR = Error: error conditions
+ </div>

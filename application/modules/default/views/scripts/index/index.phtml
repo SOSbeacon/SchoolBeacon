@@ -1,0 +1,44 @@
+<?php
+$isMobile = Sos_Service_Functions::isMobileAccess();
+$popUpSuffix = $isMobile ? '-mobile' : '';
+?>
+<script type="text/javascript">
+<!--
+$(document).ready(function(){
+	$('.sf-menu .home').addClass('home-active');
+});
+//-->
+</script>
+<div class="home-index page-home">
+    <div class="col-left">
+        <div class="col-1">
+           <img alt="" src="/images/family0.png" />
+           <div class="quote">
+               In distress? Push one button on your mobile phone to connect emergency services, 
+               your family and friends with your location, images and audio message. 
+           </div>
+           <!--a href="/web/about/take-the-tour" class="fancybox fancybox.ajax"-->
+           <img alt="" src="/images/family1.png" style="margin:auto" />
+           <div class="summary">
+               Use SOSbeacon for emergencies. Your family & friends will be notified when you call 911. 
+               They can hear your call* and use the group collaboration site to get you the help you need. 
+               SOSbeacon's Good Samaritans can reduce first response time.
+           </div>
+           <!-- a href="/images/for-family<?php echo $popUpSuffix ?>.jpg" rel="sosbeacon" class="fancybox fancybox.image" -->
+           <img alt="" src="/images/family2.png" />
+        </div>
+        <div class="col-2">
+            <img alt="" src="/images/for-family-1.jpg" />
+        </div>    
+    </div>
+    
+    <div class="col-right">
+        <img alt="" src="/images/freeapp.png" />
+        <a target="_blank" href="http://itunes.apple.com/us/app/sosbeacon/id422777570?mt=8&ls=1" class="itune-app" title="iPhone App">iPhone App</a>
+        <a target="_blank" href="https://market.android.com/details?id=cnc.sosbeacon" class="android-market" title="Android App">Android App</a>
+    </div>
+</div>
+<!-- div class="preload" style="width: 1px; height: 1px;overflow: hidden;visibility: hidden;">
+    <div style="background: url(/images/for-family<?php echo $popUpSuffix ?>.jpg) no-repeat;"></div>
+    <div style="background: url(/images/for-school<?php echo $popUpSuffix ?>.jpg) no-repeat"></div>
+</div -->

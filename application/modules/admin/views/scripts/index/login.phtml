@@ -1,0 +1,42 @@
+<title>SOSbeacon leverages the safety in numbers</title>
+<link rel="icon" href="/images/logo.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/images/logo.ico" type="image/x-icon" />
+<link href="/styles/style-adm.css" rel="stylesheet" type="text/css"/>
+<style type="text/css">
+body {
+background:none repeat scroll 0 0 #F8F8F8;
+text-align:center;
+}
+</style>
+<div class="login-container">
+	<div class="login-box">
+		<form id="loginForm" action="" method="post">
+			<div class="login-form">
+				<input type="hidden" value="3561yb5futPnIGQt" name="form_key">
+				<h2>SOSbeacon - Log in to Admin Panel</h2>
+				<?php if(isset($this->response)):?>
+				<div id="messages">
+					<ul class="messages">
+						<li class="success-msg">
+							<ul><li><?php echo $this->response?></li></ul>
+						</li>
+					</ul>
+				</div>
+				<?php endif;?>
+				<div class="input-box input-left"><label for="username">User Name:</label><br>
+					<input type="text" class="required-entry input-text" value="" name="username" id="username"></div>
+				<div class="input-box input-right"><label for="login">Password:</label><br>
+					<input type="password" value="" class="required-entry input-text" name="password" id="login"></div>
+				<div class="clear"></div>
+				<div class="form-buttons">
+					<a href="#" class="left">Forgot your password?</a>
+					<input type="submit" title="Login" value="Login" class="form-button"></div>
+			</div>
+			<p class="legal">SOSbeacon leverages the safety in numbers. Copyright © 2010 SOSbeacon. </p>
+		</form>
+		<div class="bottom"></div>
+		<script type="text/javascript">
+			 var loginForm = new varienForm('loginForm');
+		</script>
+   </div>
+</div>

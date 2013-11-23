@@ -1,0 +1,622 @@
+<?php
+$loginId = $this->auth->getId();
+$isMobile = $this->isMobile;
+$chatName = '';
+$lastMessage = '';
+if ($this->auth->getId()) {
+    $chatName = $this->auth->getName();
+    if (!$chatName) $chatName = $this->auth->getNumber();
+}
+if ($this->alertLogGroupId) :
+
+?>
+<link rel="stylesheet" href="/styles/lightbox.css" type="text/css" media="screen" />
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="/scripts/lightbox.js"></script>
+<script type="text/javascript" src="/scripts/jwplayer/jwplayer.js?a"></script>
+<script type="text/javascript" src="/scripts/jquery.verticalscrollplus.js"></script>
+<script type="text/javascript" src="/scripts/jquery.cookie.js"></script>
+
+<script src="/scripts/AudioJS/audio.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="/scripts/AudioJS/audio-js.css" type="text/css" media="all" title="Audio JS" charset="utf-8" />
+<link rel="stylesheet" href="/scripts/AudioJS/skins/vim.css" type="text/css" media="all" title="Audio JS" charset="utf-8" />
+
+<script type="text/javascript">
+    var token = '<?php if (isset($this->token)) echo $this->token; ?>';
+    function loadAlertList() {
+        $('#recording-list').load('/web/alert/alertlist?token=' + token + '&timezone=' + encodeURI('<?php echo $this->timezone ?>'));
+    }
+    var chatIntervalDelay = 30000; // miliseconds
+    var chatInterval;
+    var currentChatContent = "";
+    var noteListMaxHeight = 260;
+    
+    function loadChat() {
+        var alertLogGroupId = $('#alg_id').val();
+        url = '/web/alert/loadnote?alertlogId=' + alertLogGroupId  + '&curUser=<?php echo ($this->isOwner ? 'owner': 'user') ?>&timezone=' + encodeURI('<?php echo $this->timezone ?>') + '&number=' + encodeURI('<?php echo $this->auth->getNumber(); ?>') + '&userRole=<?php echo $this->auth->getRole(); ?>';
+        $.get(url, "", function (responseText, textStatus, XMLHttpRequest) {
+            if (responseText != currentChatContent) { // only update when chat content has changed
+                currentChatContent = responseText;
+                $('#noteList').html(responseText);
+                var chatScrollHeight = $('#noteList #chat-content #note-scroll').height();
+                $('#noteList #chat-content').height('auto'); // set auto height then get height
+                var chatBoxHeight = $('#noteList #chat-content').height();
+                //$('#noteList #chat-content').height(chatBoxHeight); // set for plugin scroll
+                if (chatBoxHeight < 1) {$('#noteList #chat-content').hide();} else {$('#noteList #chat-content').show();}		
+                jq_simple_tab('.alert-list');
+                // scroll down to bottom
+            <?php if ($isMobile) : ?>
+                // setMobileChatBoxScroll();
+                // $('#noteList #chat-content #note-scroll').css('bottom', '0px');
+            <?php else: ?>        
+                //$('#noteList #chat-content').scrollTop(chatScrollHeight); 
+            <?php endif; ?>
+                $('#noteList #chat-content').scrollTop(chatScrollHeight);
+                // create animation 
+                $('#noteList .note-count .node-count-content').css({'color': 'red', 'width': '1px'}).animate({"width": "100%"}, 500, function() {
+                    $(this).css('color', '#800105');
+                });
+                
+            }
+        });
+    }
+    function jq_simple_tab(el) {
+        if ($('.tabs-header').length > 0) {
+            $(el).find('.tabs-header .tabs').show();
+            //Default Action
+            $(el).find(".tab-content").hide(); //Hide all content
+            $(el).find(".tabs-header li").removeClass("active")
+            $(el).find(".tabs-header li:first").addClass("active").show(); //Activate first tab
+            $(el).find(".tab-content:first").show(); //Show first tab content
+            $(el).find("ul.tabs li").click(function(){
+                toggleTab(true);
+                $(el).find("ul.tabs li").removeClass("active"); //Remove any "active" class
+                $(this).addClass("active"); //Add "active" class to selected tab
+                $(el).find(".tab-content").hide(); //Hide all tab content
+                activeTab = $(this).find("a").attr("href"); //Find the rel attribute value to identify the active tab + content
+                $(activeTab).slideDown(); //Fade in the active content
+                return false;
+            });
+        }
+    }
+    var toggleOpen = '<span>[+]</span> show all';
+    var toggleClose = '<span>[+]</span> close';
+    function toggleTab(reset) {
+        var fixHeight = '250px';
+        var activeTab = $('.tab-content:visible');
+        if(activeTab.css('max-height') == fixHeight) {
+            $('#toggleListButton').html(toggleClose);
+            activeTab.css('max-height', 'none');
+        } else {
+            activeTab.css('max-height', fixHeight);
+            $('#toggleListButton').html(toggleOpen);
+            document.location.href = '#noteList';
+        }
+        if (reset) {
+            activeTab.css('max-height', fixHeight);
+            $('#toggleListButton').html(toggleOpen);
+        }
+        if (activeTab.attr('id') == 'chat-content') {
+            var chatScrollHeight = $('#chat-content #note-scroll').height();
+            activeTab.scrollTop(chatScrollHeight);
+        }
+        $('.tab-content:hidden').css('max-height', fixHeight);
+    }
+    function setToogleContent() {
+        if ($('#toggleListButton').length > 0) {
+            $('#toggleListButton').click(function() {
+                toggleTab(false);
+            });
+        }
+        if ($('#toggleHistoryButton').length > 0) {
+            var historyList = $('#recording-list');
+            var fixHeight = '120px';
+            $('#toggleHistoryButton').click(function() {
+                if(historyList.css('height') == fixHeight) {
+                    $(this).html(toggleClose);
+                    historyList.css('height', 'auto');
+                } else {
+                    historyList.css('height', fixHeight);
+                    $(this).html(toggleOpen);
+                }
+            });
+        }
+    }
+    function setMobileChatBoxScroll() {
+        $("#chat-content").verticalScrollPlus({speed: 500, step: 180, upID: "#btnChatUp", downID: "#btnChatDown", scrollerID:'#note-scroll'});
+    }
+    function setChatInterval(setup) {
+        if (setup) {
+            chatInterval = setInterval(loadChat, chatIntervalDelay);
+        } else {
+            window.clearInterval(chatInterval);
+        }
+    }
+    function initDeleteChat() {
+      <?php if ($this->isOwner): ?>
+         $('#noteList .note-row .delete').live('click', function(){
+            var url = "/web/alert/deletenote?alertlogId="+$('#alg_id').val()+"&noteId="+$(this).attr('id');
+            setChatInterval(false);
+            $.post(url, function(data){
+                if(data == 'success') {
+                    loadChat();
+                    setChatInterval(true);
+                } else {}
+            });
+	});
+      <?php endif; ?>
+    }
+    function doComment() {
+        var msgEnterName = 'Enter your name';
+        var msgEnterMessage = 'Enter message';
+        $('#divAddNote').click(function() {
+            $('#chat-form').slideToggle('slow', function() {
+                document.location.href = '#enter-chat';
+            });
+        });
+        $('#noteCancel').click(function() {
+            $('#chat-form').slideUp('slow');
+        });	
+        $('#noteFrom').focus(function() { if($('#noteFrom').val() == msgEnterName) $('#noteFrom').val(''); });
+        $('#noteFrom').blur(function(){ if($('#noteFrom').val() == '') { $('#noteFrom').val(msgEnterName); }});
+        $('#noteMsg').focus(function(){ if($('#noteMsg').val() == msgEnterMessage) $('#noteMsg').val(''); });
+        $('#noteMsg').blur(function() { if($('#noteMsg').val() == '') $('#noteMsg').val(msgEnterMessage); });
+        // press enter
+        $('#noteFrom').keydown(function(event) { if (event.keyCode == 13) { $('#noteMsg').focus(); }});
+        $('#noteMsg').keydown(function(event) { if (event.keyCode == 13) { $('#noteAdd').click(); } });
+        // send message to server
+        $('#noteAdd').click(function() {
+            if( ($('#noteFrom').val() == msgEnterName) || (jQuery.trim($('#noteFrom').val()) == '')) {
+                alert('Please enter your name');
+                $('#noteFrom').focus();
+            }
+            else if(($('#noteMsg').val() == msgEnterMessage) || (jQuery.trim($('#noteMsg').val()) == '')) {
+                alert('Please enter message');	
+                $('#noteMsg').focus();
+            }
+            else {
+                var alertLogGroupId = $('#alg_id').val();
+                var url = '/web/alert/addnote?alertlogId=' + alertLogGroupId + '&rcvCid=' + $('#rcvCId').val()  + '&agrId=' + $('#alg_id').val() +'&from=' + $('#noteFrom').val() + '&message=' + $('#noteMsg').val();
+                // before send message
+                setChatInterval(false); //stop chat repeat request
+                // after send message
+                $.post(url, function(data){
+                    if(data == 'success') {
+                        $('#noteMsg').val('');
+                        loadChat();
+                    } else {
+                        alert('SERVER ERROR: Message was not sent');
+                    }
+                    $('#noteMsg').focus();
+                    setChatInterval(true); // continous chat
+                });
+            }
+        });
+    }
+    
+    function setChatName() {
+        var chatName = '';
+        var chatId = '';
+        var isSentUrl = false; // only use if user open link as send url (format /r/cid/token)
+        try {
+            if ($('#rcvName').length > 0) {
+                chatId = $.trim($('#rcvId').val());
+                chatName = $.trim($('#rcvName').val());
+                if (document.location.href.indexOf('/r/') > 0) {
+                    isSentUrl = true;
+                }
+            }
+        } catch (ex) {}
+    <?php //if (!$this->auth->getId()) : //confirm chat name, if user is not login ?>
+        //if ($.cookie('sosbeacon_detect_username') != null) { // get name from cookie, if isset before
+        //    chatName = $.trim($.cookie('sosbeacon_detect_username'));
+        //} else {
+            if (chatName != '' && isSentUrl) {  // confirm name, and set to cookie
+                $confirmNameText = 'Are you ' + chatName + '?'; 
+                //if (!confirm($confirmNameText)) {
+                //    chatName = '';
+                //}
+                $('#confirmDialogContent').html($confirmNameText);
+                $('#confirmDialogContent').dialog("destroy");
+		$('#confirmDialogContent').dialog({ 
+                    title : 'SOSbeacon',
+                    resizable: false,
+                    height:150,
+                    modal: true,
+                    buttons: {
+                        "Yes": function() {
+                                $(this).dialog( "close" );
+                                $('#noteFrom').attr('readonly', 'readonly');
+                        },
+                        "No": function() {
+                                chatName = '';
+                                $('#rcvCId').val('');
+                                $('#noteFrom').val('Enter your name');
+                                $('#noteFrom').removeAttr('readonly');
+                                $(this).dialog( "close" );
+                        }
+                    }
+		});
+                
+        //      $.cookie('sosbeacon_detect_username', chatName);
+            }
+        //}
+    <?php //endif; ?>
+        if (chatName.length > 0) {
+            $('#rcvCId').val(chatId);
+            $('#noteFrom').val(chatName);
+        }
+    }
+    
+    function setListHeight() {
+        var alertListHeight = $('.alert-list .col-left .scroll-alert').height();
+        var noteListHeight = $('.col-left #noteList').height();
+        alertListHeight = alertListHeight + noteListMaxHeight - noteListHeight;
+        $('.alert-list .col-left .scroll-alert').css('max-height', alertListHeight.toString() + 'px');
+    }
+    //Google map
+    function initialize(el, la,lo) {
+        var latlng = new google.maps.LatLng(la, lo);
+        var myOptions = {
+            zoom: 12,
+            center: latlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(el, myOptions);
+        var marker = new google.maps.Marker({
+            position: latlng,
+            title:"My location"
+        });
+        marker.setMap(map);
+    }
+    function timezoneSelect() {
+        $('#selectTimeZone').change(function() {
+            $('#formTimeZone').submit();
+        });
+    }
+    function roateImage() {
+        $('a.bt-rotate').click(function() {
+            var rotateImageId = $(this).attr('rel');
+            $('#' + rotateImageId).rotate({animateTo:90});
+        });
+    }
+    function downloadEmail() {
+        if ($('.send_files_to_email').length > 0) {
+            $('.send_files_to_email').click(function() {
+                $('#send-email-select').slideToggle();
+            });
+            $('#send-files-submit').click(function() {
+                var downloadOptions = $('.de-option');
+                var selectCount = 0;
+                $.each(downloadOptions, function() {
+                    if ($(this).is(':checked')) selectCount++;
+                });
+                
+                if (selectCount >0 ) {
+                    if (confirm('Are you sure you want to send phone website data to your email?')) {
+                        $('.message-info').html('<h2>Start sending email, please wait and don\'t reload your browser ...</h2>');
+                        document.location.href = "#";
+                    } else {
+                        return false;
+                    }
+                } else {
+                    alert('Please select your download options.');
+                    return false;
+                }
+            });
+            $('.bt-cancel').click(function() {
+                $('#send-email-select').slideUp();
+            });
+        }
+    }
+  
+    $(document).ready(function() {
+        timezoneSelect();
+        doComment();
+        loadChat();
+        setChatInterval(true);
+        initDeleteChat();
+        // Load alertlist by phoneNumber
+        <?php if ($loginId): ?>loadAlertList();<?php endif; ?>
+        $('.google_map_canvas').each(function() {
+            var la = $(this).attr("la");
+            var lo = $(this).attr("lo");
+            if((la != null && lo != null) && (la != 0 && lo != 0) && la != '' && lo != '') { 
+                initialize(this, la, lo); 
+            } else {
+                $(this).parent('.gmap').html('NO LOCATION DATA');
+            }
+        });
+        setToogleContent();
+        setChatName();
+        downloadEmail();
+        roateImage();
+        AudioJS.setup();
+    });
+    $(window).load(function() {
+        jq_simple_tab('.alert-list');
+        setListHeight();
+    <?php if (!$this->isOwner) : ?>  
+            $('#noteList .note-row .delete').css('display', 'none !important');
+    <?php endif; ?>
+    });
+    var lastPlayer;
+</script>
+<?php 
+$audioNum = 0; //Number of audio row
+$totalAudio = 0;
+$rowCount = 0;
+?>
+<?php if ($this->openStatus == "Open"  || $this->isOwner) :?>
+<span id="confirmDialogContent" style="display: none"></span>
+    <input type="hidden" id="rcvCId" value="" />
+    <div class="alert-list id-<?php echo $loginId; ?> <?php  if ($this->isOwner) : ?>page-owner<?php endif ?>">
+        <div class="alert-list-select-phone">
+            <div class="title"></div>
+            <form id="formTimeZone" method="get" action="" class="select-timezone">
+                <input type="hidden" value="<?php echo $this->token?>" name="id" />
+                <label>Timezone:</label>
+                <select id="selectTimeZone" name="timezone">
+                <?php foreach($this->systemTimezones as $systemZoneKey => $systemZoneValue) :?>
+                    <option <?php if ($this->timezone == $systemZoneKey): ?>selected="selected"<?php endif ?> value="<?php echo $systemZoneKey ?>"><?php echo $systemZoneValue ?></option>
+                <?php endforeach ?>
+                </select>
+            </form>
+        </div>
+        <div class="clr"><div class="message message-info"><?php echo $this->message ?></div></div>
+        <!-- COL-LEFT -->
+        <div class="col-left">
+            <h2 style="text-align: center" class="log-title">MESSAGE CENTER</h2>
+            <?php if ($loginId && $isMobile) : ?>
+                <div id="recording-list" class="recording-list"></div>
+                <a id="toggleHistoryButton" class="toggleListButton"><span>[+]</span> show all</a>
+                <div class="clr"></div>
+            <?php endif ?>
+            <div id="divAddNote" class="div-add-note"><input id="enter-chat" class="add-note" type="button" name="btnNoteAdd" value="Add Message"/></div>
+            <?php if ($loginId) : ?>
+            <div class="tabs-header">
+                <ul class="tabs">
+                  <li class="first active"><a href="#chat-content">Msg Posts</a></li>
+                  <li class=""><a href="#receiver-list">Responders</a></li>
+                  <li class=""><a href="#no-response">No response</a></li>
+                </ul>
+            </div>
+            <?php endif ?>
+            <div class="note-list clr" id="noteList"></div>
+            <?php if ($isMobile) : ?>
+              <a id="toggleListButton" class="toggleListButton"><span>[+]</span> show all</a>
+            <?php endif; ?>
+            <div id="chat-form" class="form-add-note" style="display: none;">
+                <input class="noteFrom" type="text" id="noteFrom" name="noteFrom" value="<?php if ($chatName) {echo $chatName;} else { echo 'Enter your name';} ?>" maxlength="50"/>
+                <input class="noteMsg"  type="text" id="noteMsg"  name="noteMsg"  value="Enter message" />
+                <br />
+                <input class="noteAdd" type="submit" id="noteAdd" name="noteAdd" value="Send"/>
+                <input class="noteCancel" type="button" id="noteCancel" name="noteCancel" value="Cancel"/>
+            </div>
+            <div class="scroll-alert">
+            <?php
+            if (!$isMobile) : // If mobile show alertLog with datalog
+            ?>
+            <?php if (isset($this->alertlogRows) && count($this->alertlogRows) > 0) : ?>
+            <?php foreach ($this->alertlogRows as $row) : 
+                $lastMessage = $row->message;
+            ?>
+                <div class="details">
+                    <div class="details-title">
+                        Details
+                    </div>
+                    <div>
+                        <table cellpadding="0" cellspacing="0">
+                            <tr><td>From:</td><td><?php echo htmlspecialchars($this->phoneRows->getName()) ?></td></tr>
+                            <tr><td>Number:</td><td><?php if (isset($this->phoneRows)) echo $this->phoneRows->getNumber() ?></td></tr>
+                            <tr><td>Email:    </td><td><?php echo htmlspecialchars($this->phoneRows->getEmail()) ?></td></tr>
+                            <tr><td>Time:    </td><td><?php echo Sos_Service_Functions::convertTimezone($row->updated_date, $this->timezone) ?></td></tr>
+                            <tr><td>Latitude:    </td><td><?php echo $row->latitude ?></td></tr>
+                            <tr><td>Longitude:  </td><td><?php echo $row->longtitude ?></td></tr>
+                            <tr><td>Text:     </td><td><div style="width:340px;word-wrap:break-word;margin: 0"><?php echo $row->message ?></div></td></tr>
+                        </table>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    <?php endif; ?>
+        </div>
+    </div>        
+    <div class="col-right">
+        <input type="hidden" id="alg_id" value="<?php echo $this->alertLogGroupId ?>" />
+        <?php if ($loginId && !$isMobile) : ?>
+            <div id="recording-list" class="recording-list"></div>
+        <?php endif ?>
+        <!-- div class="clr"></div>
+    <?php  if ($isMobile) : ?>
+    <div id="divAddNote" class="div-add-note"><input id="enter-chat" class="add-note" type="button" name="btnNoteAdd" value="Add Message"/></div>
+    <div id="scroll-button">
+        <a id="btnChatUp" title="Up">&nbsp;</a>
+        <a id="btnChatDown" title="Down">&nbsp;</a>
+    </div>
+    <div class="note-list" id="noteList"></div>
+    <div class="clr"></div>
+    <div id="chat-form" class="form-add-note" style="display: none;">
+        <input class="noteFrom" type="text" id="noteFrom" name="noteFrom" value="<?php if ($chatName) {echo $chatName;} else { echo 'Enter your name';} ?>" maxlength="50"/>
+        <input class="noteMsg" multiple="multiple" type="text" id="noteMsg"  name="noteMsg"  value="Enter message" />
+        <br />
+        <input class="noteAdd" type="button" id="noteAdd" name="noteAdd" value="Send"/>
+        <input class="noteCancel" type="button" id="noteCancel" name="noteCancel" value="Cancel"/>
+    </div>
+    <div class="clr"></div>
+    <?php endif ?> -->
+        <form method="post" action="">
+            <div class="download-header">
+                <span class="download-title">DOWNLOAD CENTER</span>
+            <?php if ($loginId && $this->isOwner): ?>
+                <input type="button" class="send_files_to_email" value="EMAIL DOWNLOADS"/>
+                <div id="send-email-select">
+                    <input type="checkbox" id ="deOption1" name="downloadEmailOptions[]" class="de-option" value="1" /> 
+                    <label for="deOption1"> List of Messages</label> <br />
+                    <input type="checkbox" id ="deOption2" name="downloadEmailOptions[]" class="de-option" value="2" /> 
+                    <label for="deOption2">List of Responders</label> <br />
+                    <input type="checkbox" id ="deOption3" name="downloadEmailOptions[]" class="de-option" value="3" /> 
+                    <label for="deOption3">List of the non responders</label> <br />
+                    <input type="checkbox" id ="deOption4" name="downloadEmailOptions[]" class="de-option" value="4" /> 
+                    <label for="deOption4">ALL images and audio files</label> <br />
+                    <input type="submit" id="send-files-submit" name="send_files_to_email" value="Start download"/>
+                    <input type="button" class="bt-cancel" value="Cancel"/>
+                </div>
+            <?php endif ?>
+                <div class="clr"></div>
+            </div>
+        </form>
+        <div class="alert">
+            <div class="scroll-alert <?php if (!$loginId) : ?>alert-not-login<?php endif ?>">
+                <?php
+                $count = 0;
+                $maps = $this->maps;
+                ?>
+                <?php 
+                foreach ($this->alertDataRows as $key => $rows) {
+                    foreach ($rows as $row) {
+                        if($row->type != 0) $totalAudio++;
+                    }
+                }
+                ?> 
+                <?php foreach ($this->alertDataRows as $key => $rows): ?>
+                <div class="alert-rows">
+                    <?php
+                    if ($isMobile) { // If mobile, show alertlog with same column
+                        if (array_key_exists($count, $this->alertlogRows)) {
+                            $alogRow = $this->alertlogRows[$count];
+                            $count++;
+                            $lastMessage = $alogRow->message;
+                    ?>
+                    <div class="details">
+                        <div class="details-title">Details</div>
+                        <div>
+                            <table cellpadding="0" cellspacing="0">
+                                <tr><td>From:</td><td><?php echo htmlspecialchars($this->phoneRows->getName()) ?></td></tr>
+                                <tr><td>Number:</td><td><?php if (isset($this->phoneRows)) echo $this->phoneRows->getnumber() ?></td></tr>
+                                <tr><td>Email:    </td><td><?php echo htmlspecialchars($this->phoneRows->getEmail()) ?></td></tr>
+                                <tr><td>Time:    </td><td><?php echo Sos_Service_Functions::convertTimezone($alogRow->updated_date, $this->timezone) ?></td></tr>
+                                <tr><td>Latitude:    </td><td><?php echo $alogRow->latitude ?></td></tr>
+                                <tr><td>Longitude:  </td><td><?php echo $alogRow->longtitude ?></td></tr>
+                                <tr><td>Text:     </td><td><div style="width:290px;word-wrap:break-word;margin: 0"><?php echo $alogRow->message ?></div></td></tr>
+                            </table>
+                        </div>
+                    </div>
+                                <?php
+                            }
+                        }
+                    ?>
+            <?php
+            if (array_key_exists($key, $maps)) :
+                $map = $maps[$key];
+            ?>
+                <div class="gmap">
+                    <div class="google_map_canvas" la="<?php echo $map['latitude'] ?>" lo="<?php echo $map['longtitude'] ?>"></div>
+                    <div class="date">Created Date: <?php echo Sos_Service_Functions::convertTimezone($map['updated_date'], $this->timezone) ?></div>
+                </div>
+            <?php endif; ?>
+            <div class="main-photo">
+            <?php foreach ($rows as $row) : ?>
+                <?php if ($row->type != null && $row->type == 0) :  //image  ?>
+                    <div class="photo-block">
+                        <div class="photo">
+                            <a href="<?php echo $row->path ?>" rel="lightbox[flowers]" title="Photo by SOSbeacon">
+                                <img id="alertImage<?php echo $row->id; ?>" src="<?php echo $row->path; ?>"/>
+                            </a>
+                        </div>
+                        <div class="date">
+                            Created Date: <?php echo Sos_Service_Functions::convertTimezone($row->created_date, $this->timezone) ?>
+                            <a style="display:none" class="bt-rotate" rel="alertImage<?php echo $row->id; ?>">Rotate</a>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
+            <div class="main-audio">
+            <?php foreach ($rows as $row) : 
+             $rowCount++;
+                ?>
+                <?php if ($row->type != 0) : //media  ?>
+                    <?php $audioNum++ ; //Up value Number of audio row to 1 
+                    ?>
+                    <div class="media" data="<?php echo $row->path; ?>"><div id="media-<?php echo $audioNum ?>"></div></div>
+                    <?php if ($isMobile) : ?>
+                        <div class="audio-js-box vim-css">
+                            <audio class="audio-js" controls preload <?php if ($totalAudio == $audioNum): ?>autoplay="autoplay"<?php endif; ?> >
+                                <source src="<?php echo Sos_Service_Functions::$appUrl . $row->path; ?>">
+                            </audio>
+                        </div>
+                    <?php else : ?>
+                        <audio class="audio" id="audio-<?php echo $audioNum ?>" src="<?php echo $row->path; ?>" height="25" width="420"></audio>
+                        <script type="text/javascript">
+                            lastPlayer = jwplayer("audio-<?php echo $audioNum ?>").setup({
+                                flashplayer: "/scripts/jwplayer/player.swf",
+                                controlbar: { position : "bottom" },
+                                backcolor : "#ffffff",
+                                lightcolor : "#ffffff"
+                            });
+                        </script>
+                    <?php endif; ?>
+                    <div class="datetime">Created Date: <?php echo Sos_Service_Functions::convertTimezone($row->created_date, $this->timezone) ?></div>
+                <?php endif; ?>
+            <?php endforeach; ?>
+            <?php $isIphoneCheckin = 0; ?>
+            <?php foreach ($rows as $row) : ?>
+            <?php
+            if ($audioNum == 0 && $row->alertlogType == 1) { //IF Emergency
+                $isIphoneCheckin = 1;
+            }
+            ?>
+            <?php endforeach; ?>
+            <?php if ($isIphoneCheckin == 1) : ?>
+                <!-- div class="emergency-null">Emergency calls CAN NOT be recorded on iPhones due to Apple policy</div -->
+            <?php endif; ?>
+                </div>
+                <div class="clearFloat"></div>
+            </div>
+        <?php endforeach; ?>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+    <?php if ($audioNum > 0) :?>
+        lastPlayer.play();
+    <?php endif; ?>
+});
+</script>
+<div class="clr" id="lastEmailMessage" style="display:none">
+<?php 
+$textToSpeechMessage = '';
+$lastMessageArray = explode('<hr />', $lastMessage);
+$lastMessageEmail = (count($lastMessageArray) > 1) ? $lastMessageArray[1] : $lastMessage;
+$fromNumberChars = str_split($this->phoneRows->getNumber());
+$fromNumberString = implode(' ', $fromNumberChars);
+if (trim($this->phoneRows->getName())) {
+    $textToSpeechMessage = $this->phoneRows->getName() . ' checked in from ' . 
+        $fromNumberString . ' . Message: ' . $lastMessageEmail;
+} else {
+    $textToSpeechMessage = $fromNumberString . ' checked in. Message: ' . $lastMessageEmail;
+}
+if (strpos($lastMessage, 'sent an alert from') !== false) {
+    $textToSpeechMessage = 'You received an SOS Beacon alert from ' . $fromNumberString . '';
+}
+if (strpos($lastMessage, 'Emergency call made to') !== false) {
+    $textToSpeechMessage = 'You received an SOS Beacon alert from ' . $fromNumberString . ' . ' . $lastMessage;
+}
+echo $textToSpeechMessage;
+?>
+</div>
+</div>
+<?php 
+else : ?>
+    <p style="padding:10px; text-align: center"><strong>This alert page was closed by its owner.</strong></p>
+<?php endif; ?>
+<?php else : ?>
+    <div class="alert-list">
+        <div class="div1">
+            <br/><br/>
+            Cannot found Review Phone History page with ID string: "<?php if (isset($this->token)) echo $this->token ?>"
+        </div>
+    </div>
+<?php endif; ?>

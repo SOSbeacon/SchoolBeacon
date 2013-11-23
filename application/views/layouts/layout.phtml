@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+
+     <?php
+     echo $this->headTitle();
+     $this->headLink()->appendStylesheet('/styles/Global.css');      
+     $this->headLink()->appendStylesheet('/styles/superfish.css');         
+     echo $this->headLink(); 
+          
+     $this->headScript()->appendFile('/scripts/jquery.js');
+     $this->headScript()->appendFile('/scripts/jquery.validate.js');
+     $this->headScript()->appendFile('/scripts/ActionsMenu.js');
+     $this->headScript()->appendFile('/scripts/jquery.pngFix.js');
+     $this->headScript()->appendFile('/scripts/hoverIntent.js');
+     $this->headScript()->appendFile('/scripts/superfish.js');
+          
+     echo $this->headScript();    
+	
+     ?>
+     
+      <script type="text/javascript">
+    $(document).ready(function() {	
+    						   
+        $(document).pngFix(); 
+    	
+    	$("a[rel=shareit]").ActionMenu();	
+    	$('ul.sf-menu').superfish();
+    });
+    </script> 
+
+
+</head>  
+<body>
+   <!-- Header -->
+   <div id="Header">
+     <div id="LogoContainer"><a href="/"><img src="/images/SMS_Central_Logo.jpg" alt="" width="70" height="70" hspace="30" vspace="0" /></a></div>
+       <div id="SFish-Menu">
+       <!-- Drop down menu -->    
+   		<ul class="sf-menu">
+			<li class="current">
+				<a href="/accounts/">ACCOUNTS</a>
+				
+			</li>
+			<li><a href="/contacts/">CONTACTS</a></li>
+			<li>
+				<a href="#">SERVICES</a>				
+		  </li>
+			<li>
+				<a href="#">TOOLS</a>
+				<ul>
+					<li class="sf-menuf"><a href="#">menu item</a></li>
+					<li><a href="#">menu item</a></li>					
+			  </ul>
+			</li>	
+	 </ul>
+     <!-- /Drop down menu -->
+    </div>  
+</div>
+   <!-- /Header -->
+   <!-- Container -->
+<div id="Container">
+     <div id="ContainerInside">
+       <!-- Main Titl --> 
+       <div id="MainTitleContainer">
+         <div id="MainTitleContainer-Left"></div>
+          <div id="MainTitleContainer-Right">
+              <h1><?php echo $this->placeholder('ContainerTitle'); ?></h1>
+          </div>
+       </div> 
+       <!-- /Main Title --> 
+       <!-- Content -->
+       <div id="Content">
+               <?php echo $this->layout()->content ?>
+                           
+       </div> 
+       <!-- /Content -->     
+       <!-- Container Footer -->
+       <div id="ContainerFooter">
+         <div id="ContainerFooter-Left"></div>
+          <div id="ContainerFooter-Right"></div>          
+       </div>  
+       <!-- /Container Footer -->
+     </div>   
+ </div>
+ <!-- /Container -->
+ <div id="ActionMenu"> 
+     <ul>
+  	    <li class="ActionMenu-Top"></li>
+	   		<li><a href="#" class="Contact">Contact</a></li>
+	      <li><a href="#" class="Services">Services</a></li>
+	 	  	<li class="ActionMenu-Bottom"></li>
+		</ul> 
+ </div> 
+</body>
+</html>

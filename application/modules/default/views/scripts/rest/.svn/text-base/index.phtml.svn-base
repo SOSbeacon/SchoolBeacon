@@ -1,0 +1,5 @@
+<?php
+echo "Success: ".$this->success."<br />";
+echo "Version: ".$this->version;
+?>
+

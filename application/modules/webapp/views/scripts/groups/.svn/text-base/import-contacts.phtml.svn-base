@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>SosBeacon Webapp</title>
+        <?php
+        $this->headLink()->appendStylesheet('/styles/webapp.css');
+        echo $this->headLink(); 
+        $this->headScript()->appendFile('/scripts/jquery.js');
+        echo $this->headScript();    
+        ?>
+    <?php if($this->oauthName == 'Yahoo') : ?>
+        <!-- Combo-handled YUI JS files: -->
+        <script type="text/javascript" src="http://yui.yahooapis.com/combo?2.7.0/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+        <script type="text/javascript" src="/scripts/popupmanager.js"></script>
+        <?php if ($this->closeScript) echo $this->closeScript; ?>
+    <?php endif ?>
+    </head>
+    <body>
+    <div class="phone-list contact-list">
+        <h1>Import <?php echo $this->oauthName ?> contacts</h1>
+        <div class="clr">
+            <a class="oauth icon-<?php echo $this->oauthName ?>" href="http://en.wikipedia.org/wiki/OAuth" target="_blank"><span></span></a>
+            <strong>Import contacts to <em><?php echo htmlspecialchars($this->groupName) ?></em></strong>
+            <br /> This page use <a href="http://en.wikipedia.org/wiki/OAuth" target="_blank">OAuth</a> to import contacts from service provider.
+            <br /> You have to request access and grant site to read your contacts data.
+            <h4>
+            <?php if ($this->backUrl): ?>
+                <a href="<?php echo $this->backUrl ?>">&lsaquo;&lsaquo; Back to contact list</a> | 
+            <?php endif ?>
+            <?php  if($this->groupId && $this->oauthName == 'Google') : ?>  
+                <?php if ($this->loginUrl): ?><?php echo $this->loginUrl; ?><?php endif ?>
+            <?php endif ?>
+            <?php if($this->oauthName == 'Yahoo') : 
+                if($this->hasSession == FALSE) {
+                    // if a session does not exist, output the
+                    // login / share button linked to the auth_url.
+                    echo sprintf("<a href=\"%s\" id=\"yloginLink\"><img src=\"/images/yahoosi.png\"></a>\n", $this->authUrl);
+                } else if($this->hasSession && $this->profile) {
+                    // if a session does exist and the profile data was
+                    // fetched without error, print out a simple usercard.
+                    //echo sprintf("<p>Hi: <em><a href=\"%s\" target=\"_blank\">%s</a>!</em>", $this->profile->profileUrl, $this->profile->nickname);
+                    echo '<a href="?logout">Exit Yahoo connect</a></p>';
+                }
+            ?>
+            </h4>
+            <script type="text/javascript">
+              var Event = YAHOO.util.Event;
+              var _gel = function(el) {return document.getElementById(el)};
+              function handleDOMReady() {
+                if(_gel("yloginLink")) {
+                  Event.addListener("yloginLink", "click", handleLoginClick);
+                }
+              }
+              function handleLoginClick(event) {
+                // block the url from opening like normal
+                Event.preventDefault(event);
+
+                // open pop-up using the auth_url
+                var auth_url = _gel("yloginLink").href;
+                PopupManager.open(auth_url,600,435);
+              }
+              Event.onDOMReady(handleDOMReady);
+            </script>
+            <?php endif ?>
+            <div class="clr"></div>    
+        </div>
+        <div class="message"><?php echo $this->message ?></div>
+        <?php if (count($this->contacts)) : ?>
+        <form method="post" action="" class="clr">
+            <div style="background: #ccc; height: 20px; border: 1px solid #ccc"></div>
+            <div style="height: 400px;overflow: auto; border: 1px solid #ccc">
+            <?php 
+            $count = 0;
+            foreach ($this->contacts as $contact) : 
+                $count++;
+                ?>
+                <div class="contact-item">
+                    <input id="cbContact<?php echo $count ?>" type="checkbox" class="checkbox" name="contacts[]" value='{"name": "<?php echo $contact['name'] ?>", "phone": "<?php echo $contact['phone'] ?>", "email": "<?php echo $contact['email'] ?>"}' />
+                    <label class="selection" for="cbContact<?php echo $count ?>">
+                        <h4><?php echo htmlspecialchars($contact['name']) ?></h4>
+                        <span class="phone"><?php echo htmlspecialchars($contact['phone']) ?></span>
+                        <span class="email"><?php echo htmlspecialchars($contact['email']) ?></span>
+                    </label>
+                </div>
+            <?php endforeach; ?>
+            </div>
+            <input type="submit" onclick="return confirm('Are you sure you want to import selected contacts to your contact list (<?php echo $this->groupName ?>) ?')" name="submitContact" value="Import selected contacts" style="font-weight: bold; height: 30px; margin: 10px 5px" />
+        </form>
+        <?php endif; ?>
+    </div>
+</body>
+</html>

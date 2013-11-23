@@ -1,0 +1,74 @@
+<?php
+if ($this->pageCount) {
+    // you need to add each of the request parameters to url 
+    $params = Zend_Controller_Front::getInstance()->getRequest()->getQuery();
+    // remove the system parameters 
+    unset($params['module']);
+    unset($params['controller']);
+    unset($params['action']);
+    ?> 
+    <div class="paginationControl"> 
+        <!-- Previous page link --> 
+        <ul class="countItems">
+            <li>
+        	Showing 
+                <?php echo $this->itemCountPerPage * ($this->current - 1) . ' to' ?>
+                <?php echo (isset($this->next)) ? $this->itemCountPerPage * $this->current : $this->totalItemCount ?>
+                <?php echo' of ' . $this->totalItemCount ?> 
+        	Records
+            </li>
+        </ul>
+
+        <ul>
+            <?php if (isset($this->first)) { ?> 
+                <li class="pager-nav first">
+                    <a href="<?php echo $this->url(array_merge(
+                        $params, array('page' => $this->first))); ?>"> 
+                        «
+                    </a>
+                </li>
+            <?php } ?> 
+
+            <?php if (isset($this->previous)){ ?> 
+            <li class="pager-nav prev">
+                <a href="<?php echo $this->url(array_merge(
+                        $params, array('page' => $this->previous))); ?>"> 
+                    ‹
+                </a>
+            </li>
+        <?php } ?> 
+
+        <!-- Numbered page links --> 
+        <?php foreach ($this->pagesInRange as $page) { ?> 
+            <?php if ($page != $this->current) { ?>
+                <li>
+                    <a href="<?php echo $this->url(array_merge($params, array('page' => $page))); ?>"> 
+                        <?php echo $page; ?> 
+                    </a> 
+                </li> 
+            <?php } else { ?>
+                <li class="active"> 
+                    <?php echo $page; ?>  
+                </li>
+            <?php }
+        } ?> 
+        <!-- Next page link --> 
+        <?php if (isset($this->next)) { ?>
+            <li class="pager-nav next"> 
+                <a href="<?php echo $this->url(
+                array_merge($params, array('page' => $this->next))); ?>"> 
+                    ›
+                </a>
+            </li> 
+        <?php } ?>
+        <?php if (isset($this->last)) { ?> 
+            <li class="pager-nav last">
+                <a href="<?php echo $this->url(array_merge(
+                    $params, array('page' => $this->last))); ?>"> 
+                    »
+                </a>
+            </li>
+        <?php } ?>     
+    </ul> 
+</div> 
+<?php } ?>

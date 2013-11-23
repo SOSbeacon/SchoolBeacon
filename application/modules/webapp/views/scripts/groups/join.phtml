@@ -1,0 +1,69 @@
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.btJoin').click(function() {
+            if ($(this).hasClass('bt-join') && $('.existJoinedGroup').length > 0) {
+                alert('You have to unjoin current joined group if you want to join to other group.');
+                return false;
+            } else {
+                var btStr = $(this).val();
+                btStr = btStr.toLowerCase();
+                var warnStr = '';
+                if (btStr == 'join') warnStr = ' Existing neighborhood watch group contacts will be removed entirely and replaced by this group contacts?';
+                if (confirm('Are you sure you want to ' + btStr + ' this group?' + warnStr)) {
+                    $('#joinGroupId').val($(this).attr('data_gId'));
+                    $('#joinContactId').val($(this).attr('data_cId'));
+                    $('#joinGroupJoinId').val($(this).attr('data_gjId'));
+                    $('#joinAction').val($(this).attr('data_action'));
+                } else {
+                    return false;
+                }
+            }
+        });
+        <?php if ($this->rediectUrl) : ?>
+            setTimeout(function() {
+                document.location.href='<?php echo $this->rediectUrl; ?>';
+            }, 1000); 
+        <?php endif ?>
+    });
+</script>
+
+<div class="message"><?php echo $this->message ?></div>
+<label class="import-label" style="padding: 5px;"><a href="/webapp/groups/contacts/groupId/<?php echo $this->groupId ?>">&lsaquo;&lsaquo; Back</a></label>
+<?php if ($this->isAllowJoinGroup) : ?>
+<form method="post" action="" class="list <?php if ($this->existJoinedGroup) echo 'existJoinedGroup'; ?>" style="clear: both;">
+    <input type="hidden" name="joinId" id="joinGroupJoinId" value="" />
+    <input type="hidden" name="joinGroupId" id="joinGroupId" value="" />
+    <input type="hidden" name="joinContactId" id="joinContactId" value="" />
+    <input type="hidden" name="joinAction" id="joinAction" value="" />
+    <strong>Search group name: <br />
+        <em>Neighborhood Watch </em></strong>
+    <input type="text" name="groupName" size="15" value=""/>
+    <input type="submit" name="btSearch" value="Search" />
+    <table class="grid" cellpadding="0" cellspacing="0"> 
+        <?php if (count($this->results)) : ?>
+        <thead>
+        <tr>
+            <td style="padding: 5px 0;"><strong>Phone</strong></td>
+            <td><strong>Group name</strong></td>
+            <td><strong>Join</strong></td>
+        </tr>
+        </thead>
+        <?php foreach ($this->results as $r) : ?>
+        <tr>
+            <td><strong><?php echo htmlspecialchars($r['phone_number']); ?></strong></td>
+            <td class="group-name">
+                <a class="view" style="font-size: 12px;"><?php echo htmlspecialchars($r['group_name']); ?></a>
+            </td>
+            <td>
+                <input data_gjId="<?php echo $r['joid_id'] ?>" data_gId="<?php echo $r['group_id'] ?>" data_cId="<?php echo $r['contact_id'] ?>" type="submit" 
+                    value="<?php echo $r['joid_id'] ? 'Unjoin' : 'Join' ?>" 
+                    data_action="<?php echo $r['joid_id'] ? '2' : '1' ?>"
+                    name="btJoin" class="btJoin <?php echo $r['joid_id'] ? 'bt-unjoin' : 'bt-join' ?>"
+                    style="padding: 2px 5px" />
+            </td>
+        </tr>
+        <?php endforeach; ?>
+        <?php endif; ?>
+    </table>
+</form>
+<?php endif; ?>

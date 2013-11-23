@@ -1,0 +1,75 @@
+<script type="text/javascript">
+    function changeAlertLogStatus(){
+        var id = null; 
+        $('.aStt').click(function(){
+            id = (this.id).replace('aStatus', '');
+            $('#aStatus'+id).hide();
+            $('#slStatus'+id).show();
+            var selectedValue = document.getElementById('aStatus'+id).innerHTML;
+            document.getElementById('slStatus'+id+selectedValue).selected = true;
+        });
+        $('.slStt').blur(function(){
+            id = (this.id).replace('slStatus', '');
+            $('#aStatus'+id).show(function(){
+                $('#aStatus'+id).html($('#slStatus'+id).val()); 
+            });
+            $('#slStatus'+id).hide();
+        });	
+        $('.slStt').change(function(){
+            id = (this.id).replace('slStatus', '');
+            var status = document.getElementById('slStatus'+id).value;
+
+            var url="/web/alert/save?id="+id+"&status="+status; 
+            $.get(url, function(data){
+
+            });
+        });	
+    }
+    //Load ajax
+    $(document).ready(function(){
+        //Change alertlog status when user click on status
+        changeAlertLogStatus();
+    });
+</script>
+
+<table class="list-alert" cellpadding="0" cellspacing="0">
+    <tr>
+        <th>Alert ID</th>
+        <th>Last Updated</th>
+        <th>Status</th>
+    </tr>
+    <?php if (isset($this->alertlogRows)) : ?>
+        <?php foreach ($this->alertlogRows as $row) { ?>
+            <?php
+            if (isset($this->alertlogRow)) { // If row is current row
+                $activeClass = ($this->alertlogRow->getId() == $row->getId()) ? "active" : '';
+            }
+            ?>
+            <tr>
+                <td class="first <?php echo $activeClass ?>" >
+                    <div class="id-img">
+                        <?php if ($row->getStatus() == 'Open') : ?><img src="/images/red-circle-ico.png" title="Open"/><?php endif; ?>
+                        <?php if ($row->getStatus() == 'Connected') : ?><img src="/images/orange-circle-ico.png" title="Open"/><?php endif; ?>
+                        <?php if ($row->getStatus() == 'Closed') : ?><img src="/images/black-circle-ico.png" title="Closed"/><?php endif; ?>
+                    </div>
+                    <div class="id-num">
+                        <a class="<?php echo $activeClass ?>" href="/web/alert/list?id=<?php echo $row->getToken() ?>"><?php echo $row->getId() ?></a>
+                    </div>
+                </td>
+                <td class="last <?php echo $activeClass ?>">
+                    <a class="<?php echo $activeClass ?>" href="/web/alert/list?id=<?php echo $row->getToken() ?>">
+                        <?php echo Sos_Service_Functions::convertTimezone($row->getLastUpdated(), $this->timezone) ?>
+                    </a>
+                </td>
+                <td class="<?php echo $activeClass ?>">
+                    <a class="aStt" id="aStatus<?php echo $row->getId() ?>" href="#"><?php echo $row->getStatus() ?></a>
+                    <select class="slStt"  id="slStatus<?php echo $row->getId() ?>" style="display:none;">
+                        <option id="slStatus<?php echo $row->getId() ?>Open" value="Open">Open</option>
+                        <!-- option id="slStatus<?php echo $row->getId() ?>Connected" value="Connected">Connected</option -->
+                        <option id="slStatus<?php echo $row->getId() ?>Closed" value="Closed">Closed</option>
+                    </select>
+                </td>
+            </tr>	
+        <?php } ?>
+    </table>  
+<?php endif; ?>

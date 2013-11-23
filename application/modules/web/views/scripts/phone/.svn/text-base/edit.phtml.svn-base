@@ -1,0 +1,79 @@
+<script language="javascript">
+function submitForm() {
+	var name = document.getElementById('txtName').value;
+	var number = document.getElementById('txtNumber').value;
+	if(name == '' || name == ' ') {
+		alert("Name field canot be null!");
+	} 
+	else if(number == '' || number == ' ') {
+		alert("Number field canot be null!");
+	} 
+	else {
+		document.frm.submit();
+	}
+}
+</script>
+
+<div class="phone-list">
+<div class="div1-1">
+<?php if(isset($this->phoneRow)) : ?>
+	<form name="frm" action="/web/phone/edit/id/<?php echo $this->phoneRow->getId()?>/" method="post">
+	
+	<h2>Edit phone detail</h2>
+	
+	<table class="tblEdit">
+		<tr>
+			<td>Phone name</td>
+			<td><input class="txt" type="text" name="txtName" id="txtName" value="<?php echo $this->phoneRow->getName()?>"/></td>
+		</tr>
+		<tr>
+			<td>Phone number</td>
+			<td><input class="txt" type="text" name="txtNumber" id="txtNumber" value="<?php echo $this->phoneRow->getNumber()?>" readonly /></td>
+		</tr>
+		<tr>
+			<td>Phone type</td>
+			<td>
+				<select name="txtType" class="sl">
+					<option value="1" <?php echo ($this->phoneRow->getType() == 1) ? "selected='true'" : ''?>>Iphone</option>
+					<option value="2" <?php echo ($this->phoneRow->getType() == 2) ? "selected='true'" : ''?>>Android</option>
+					<option value="0" <?php echo ($this->phoneRow->getType() == 0) ? "selected='true'" : ''?>>Unknown</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>Phone imei</td>
+			<td><input class="txt" type="text" name="txtImei" id="" value="<?php echo $this->phoneRow->getImei()?>"/></td>
+		</tr>
+		<tr>
+			<td>Location ID</td>
+			<td><input class="txt" type="text" name="txtLocationId" id="" value="<?php echo $this->phoneRow->getLocationId()?>" readonly/></td>
+		</tr>
+		<tr>
+			<td>Setting ID</td>
+			<td><input class="txt" type="text" name="txtSettingId" id="" value="<?php echo $this->phoneRow->getSettingId()?>" readonly/></td>
+		</tr>
+		<tr>
+			<td>Token</td>
+			<td><input class="txt" type="text" name="txtToken" id="" value="<?php echo $this->phoneRow->getToken()?>" readonly/></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="tdButton">
+				<input type="hidden" name="hdType" value="update"/>
+				<a href="#" onclick="submitForm();">Update</a>
+				<a href="/web/phone/list/">Cancel</a>
+			</td>
+		</tr>
+		<?php if(isset($this->message)) :?>
+		<tr>
+			<td></td>
+			<td colspan="2" class="tdMessage">
+				<?php echo $this->message; ?>
+			</td>
+		</tr>
+		<?php endif; ?>
+	</table>
+	</form>
+<?php endif; ?>
+</div>
+</div>

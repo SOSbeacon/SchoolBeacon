@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>HTML5 Audio Player</title>
+
+  <!-- Include the AudioJS Library -->
+  <script src="audio.js" type="text/javascript" charset="utf-8"></script>
+
+  <script type="text/javascript" charset="utf-8">
+    // Run the script on page load.
+
+    // If using jQuery
+    // $(function(){
+    //   AudioJS.setup();
+    // })
+
+    // If using Prototype
+    // document.observe("dom:loaded", function() {
+    //   AudioJS.setup();
+    // });
+
+    // If not using a JS library
+    window.onload = function(){
+      AudioJS.setup();
+    }
+
+  </script>
+  <!-- Include the AudioJS Stylesheet -->
+  <link rel="stylesheet" href="audio-js.css" type="text/css" media="all" title="Audio JS" charset="utf-8">
+  <link rel="stylesheet" href="skins/hu.css" type="text/css" media="all" title="Audio JS" charset="utf-8">
+  <link rel="stylesheet" href="skins/tube.css" type="text/css" media="all" title="Audio JS" charset="utf-8">
+  <link rel="stylesheet" href="skins/vim.css" type="text/css" media="all" title="Audio JS" charset="utf-8">
+  
+</head>
+<body>
+
+
+  <!-- Begin AudioJS -->
+  <div class="audio-js-box vim-css">
+    <!-- Using the Audio for Everybody Embed Code http://camendesign.com/code/audio_for_everybody -->
+    <audio class="audio-js" controls preload autoplay="autoplay">
+      <source src="http://stream41.gonct.info/2a244ab375c6038818d9ee67dc957425/5049f517/NhacCuaTui229/EmAnhVaCoAy-PhamQuynhAnh_46xzx.mp3">
+    </audio>
+  </div>
+  
+</body>
+</html>

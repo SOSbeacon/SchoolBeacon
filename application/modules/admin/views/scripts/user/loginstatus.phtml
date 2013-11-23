@@ -1,0 +1,6 @@
+<?php if(isset($this->auth)) : ?>
+<div class="logout">
+	Logged in as <strong><?php echo $this->auth->username ?></strong> &nbsp;|&nbsp;
+	<a href="/admin/user/logout">Log Out</a>
+</div>
+<?php endif; ?>

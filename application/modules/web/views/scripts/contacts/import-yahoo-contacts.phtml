@@ -1,0 +1,95 @@
+<?php
+if ($this->closeScript) :
+    echo $this->closeScript;
+ else :
+?>
+<!-- Combo-handled YUI JS files: -->
+<script type="text/javascript" src="http://yui.yahooapis.com/combo?2.7.0/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="/scripts/popupmanager.js"></script>
+
+<div class="phone-list contact-list">
+    <h1 class="yahoo">Import Yahoo Contacts</h1>
+    <div style="text-align: right">
+        Phone number: <strong><a href="/web/contacts/list/phoneId/<?php echo $this->phoneId ?>/groupId/<?php echo $this->groupId ?>"><?php echo $this->phoneNumber ?></a></strong>
+        | Group: <strong><?php echo $this->groupName ?></strong>
+    </div>
+     <?php
+      if($this->phoneId && $this->groupId) {
+          if($this->hasSession == FALSE) {
+            // if a session does not exist, output the
+            // login / share button linked to the auth_url.
+            echo sprintf("<a href=\"%s\" id=\"yloginLink\"><img src=\"/images/yahoosi.png\"></a>\n", $this->authUrl);
+          }
+          else if($this->hasSession && $this->profile) {
+            // if a session does exist and the profile data was
+            // fetched without error, print out a simple usercard.
+            echo sprintf("<p>Hi: <em><a href=\"%s\" target=\"_blank\">%s</a>!</em>", $this->profile->profileUrl, $this->profile->nickname);
+            echo '&nbsp;&nbsp; | &nbsp;&nbsp;<a href="/web/contacts/list/phoneId/' . $this->phoneId .'/groupId/' . $this->groupId . '">&lt; &lt;Back</a>';
+            echo "&nbsp;&nbsp; | &nbsp;&nbsp;<a href=\"?logout\">Exit Yahoo connect</a></p>";
+          }
+      }
+    ?>
+    <?php echo $this->message ?>
+    <script type="text/javascript">
+      var Event = YAHOO.util.Event;
+      var _gel = function(el) {return document.getElementById(el)};
+
+      function handleDOMReady() {
+        if(_gel("yloginLink")) {
+          Event.addListener("yloginLink", "click", handleLoginClick);
+        }
+      }
+
+      function handleLoginClick(event) {
+        // block the url from opening like normal
+        Event.preventDefault(event);
+
+        // open pop-up using the auth_url
+        var auth_url = _gel("yloginLink").href;
+        PopupManager.open(auth_url,600,435);
+      }
+
+      Event.onDOMReady(handleDOMReady);
+    </script>
+
+     <?php if (count($this->contacts)) : ?>
+    <form method="post" action="">
+        <div style="width: 688px;background: #eee">
+            <table border="0" style="width: 666px; text-align: center">
+                <thead>
+                    <tr>
+                        <th style="width: 10%">&nbsp;</th>
+                        <th style="width: 20%">Name</th>
+                        <th style="width: 30%">Phone number</th>
+                        <th style="width: 40%">Email</th>
+                    </tr>
+                </thead>
+        </table>
+        </div>
+        <div style="height: 444px;width: 688px; overflow: auto; border: 1px solid #eee">
+        <table class="tblList" style="width: 666px">
+            <?php foreach ($this->contacts as $contact) : ?>
+                <tr>
+                    <td style="width: 10%">
+                        <input type="checkbox" name="contacts[]" value='{"name": "<?php echo $contact['name'] ?>", "phone": "<?php echo $contact['phone'] ?>", "email": "<?php echo $contact['email'] ?>"}' />
+                    </td>
+                    <td style="text-align: left; width: 20%">
+                        <?php echo htmlspecialchars($contact['name']) ?>
+                    </td>
+                    <td style="width: 30%">
+                        <?php echo htmlspecialchars($contact['phone']) ?>
+                    </td>
+                    <td style="width: 40%">
+                        <?php echo htmlspecialchars($contact['email']) ?>
+                    </td>
+                </tr>
+
+            <?php endforeach; ?>
+        </table>
+        </div>
+        <input type="submit" onclick="return confirm('Are you sure you want to import selected contacts to your contact list (<?php echo $this->groupName ?>) ?')" name="submitContact" value="Import selected contacts" style="font-weight: bold; height: 30px; margin: 10px" />
+    </form>
+    <? endif; ?>
+
+    </div>
+<? endif; ?>

@@ -1,0 +1,122 @@
+<?php
+if (isset($this->error)) { 
+	echo "<h2>$this->error</h2>";	
+} else { ?> 
+
+
+<script type="text/javascript">
+$().ready(function() {
+
+	// validate signup form on keyup and submit
+	$("#frmRegister").validate({
+            rules: {
+                cpassword: {
+                  equalTo: "#password"
+                },
+                cemail: {
+                    equalTo: "#email"
+                },
+                phoneNumber: {
+                    required: true,
+                    number: true
+                }
+            },
+            messages: {
+                cpassword: {
+                    equalTo: "Please enter the same password as above"
+                },
+                cemail: {
+                    equalTo: "Please enter the same email as above"
+                }
+            }
+
+	});
+
+	//SET blank field
+	$('#cemail').val('');
+	$('#password').val('');
+    
+});
+</script>
+<?php
+$form = $this->form;
+?>
+<form action="<?php echo $form->getAction() ?>" method="POST" name="frmAccount" id="frmRegister">
+    <div class="user-register">
+    	
+    
+        <div class="div1">
+        	<h2>Registration is done from your phone after the app has been downloaded, intialized and activated.</h2>
+        <!-- 	
+            <div><h1>Register</h1><br/></div>
+            <div>
+            	<table class="tblReg">
+            		<tr>
+            			<td>Phone number :</td>
+            			<td> 
+            				<?php echo $this->formText("phoneNumber", $form->getElement("phoneNumber")->getValue(),
+                            array("class" => "txt required", "minlength" => "2")) ?>
+						</td>
+						<td class="hint"></td>
+            		</tr>    
+            		<tr>
+            			<td>Email :</td>
+            			<td><?php echo $this->formText("email", $form->getElement("email")->getValue(),
+                            array("class" => "txt required email", "minlength" => "2")) ?></td>
+                            <td class="hint">Ex: example@gmail.com</td>
+            		</tr>
+            		<tr>
+            			<td>Confirm Email :</td>
+            			<td><?php echo $this->formText("cemail", $form->getElement("cemail")->getValue(),
+                            array("class" => "txt required equalTo:#email", "minlength" => "2")) ?></td>
+                            <td class="hint"></td>
+            		</tr>
+                <?php if(isset($this->response['message'])) { ?>
+            		<tr>
+            			<td></td>
+            			<td><font color="red"><?php echo $this->response['message']; ?></font></td>
+            			<td></td>
+            		</tr>                    
+                <?php } ?>
+            		<tr>
+            			<td>Password :</td>
+            			<td> <?php
+                        echo $this->formPassword("password", $form->getElement("password")->getValue(),
+                            array("class" => "txt required", "minlength" => "6")) ?>
+						</td>
+						<td></td>
+            		</tr>                
+            		<tr>
+            			<td>Confirm Password :</td>
+            			<td><?php
+	                        echo $this->formPassword("cpassword", $form->getElement("cpassword")->getValue(),
+                            array("class" => "txt required equalTo:#password", "minlength" => "6")) ?>
+						</td>
+						<td></td>
+            		</tr>      
+            		<tr>
+            			<td>Name :</td>
+            			<td><?php
+                    		echo $this->formText("name", $form->getElement("name")->getValue(),
+                            array("class" => "txt required", "minlength" => "2")) ?>
+						</td>
+						<td></td>
+            		</tr>                      		
+            		<tr>
+            			<td></td>
+            			<td><?php
+                    		echo $this->formSubmit("submit", "submit", $form->getElement("submit")->getValue(),
+                            array("class" => "required")) ?>
+                        </td>
+                        <td></td>
+            		</tr>
+            	</table>
+             -->
+            </div>
+		
+        </div>
+    </div>
+</form>
+
+
+<?php } ?>

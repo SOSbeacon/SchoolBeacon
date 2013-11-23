@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SOSbeacon Restful APIs</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+
+        <h1>GROUP API</h1>
+        <h2>GET PHONE GROUPS</h2>
+        <form method="get" action="groups">
+            <input type="hidden" name="_method" value="index" />
+            <input type="hidden" name="format" value="json" />
+            phoneId: <input name="phoneId" type="text" /><br />
+            token: <input name="token" type="text" /><br />
+            <input type="submit" value="Submit" />
+        </form>
+        <hr />
+        
+        <h2>GET GROUP CONTACTS</h2>
+        <form method="get" action="contacts">
+            <input type="hidden" name="_method" value="index" />
+            <input type="hidden" name="format" value="json" />
+            groupId <input name="groupId" type="text" /><br />
+            token: <input name="token" type="text" /><br />
+            <input type="submit" value="Submit" />
+        </form>
+        
+        
+        
+        <em>(* is required)</em>
+    </body>
+</html>

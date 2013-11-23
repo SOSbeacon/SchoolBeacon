@@ -1,0 +1,21 @@
+<div id="chat-content" class="clr chat-content tab-content">
+<?php $count = count($this->notes); if($count > 0) :?>
+    <div id="note-scroll" class="note-scroll">
+        <?php  $class = 'even';
+        foreach($this->notes as $n) : $class == 'odd' ? $class = 'even' : $class = 'odd';
+        ?>
+        <div class="clr note-row <?php echo $class ?>">
+            <?php // if($this->auth) :?>
+                <div id="<?php echo $n->getId() ?>" class="delete" style="display:none;" ></div>
+            <?php // endif;?>
+            <div class="from"><?php echo $n->getFrom(); ?></div>
+            <div class="datetime"><?php echo Sos_Service_Functions::convertTimezone($n->getCreatedDate(), $this->timezone) ?></div>
+            <div class="message clr"><?php echo htmlspecialchars($n->getMessage()) ?></div>
+        </div>
+        <?php endforeach;?>
+       <div class="note-count clr">
+        <div class="node-count-content">Has <span id="note-count-value"><?php echo $count?></span> added message(s)</div>
+        </div> 
+    </div>
+<?php endif; ?>
+</div>

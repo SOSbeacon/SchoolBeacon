@@ -1,0 +1,50 @@
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#send-email-form').validate();
+        $('#formSelect1').change(function() {
+            if ($(this).is(':checked')) {
+                $('.form-emails').slideUp().removeClass('required').removeClass('error');
+                $('label.error').remove();
+            }
+        });
+        $('#formSelect2').change(function() {
+            if ($(this).is(':checked')) {
+                $('.form-emails').slideDown().addClass('required');
+            }
+        });
+        $('.selectEmailLink').click(function() {
+            $('#formSelect2').click().change();
+            window.open('/admin/user/select-users', 'selectEmailsWindow', 'scrollbars=yes,menubar=no,location=no,width=700,height=500');
+        });
+    });
+</script>
+
+
+<form id="send-email-form" method="POST" action="">
+    <h2>Send Newsletter Email</h2>
+    <div class="message"><?php echo $this->message ?></div>
+    <?php echo $this->numberEmails ?>
+    <div class="form-item">
+        <strong>From:</strong> <?php echo $this->from ?>
+    </div>
+    <div class="form-item">
+        <strong>To:</strong> <br />
+        <input type="radio" class="formSelectTo" name="formSelectTo" value="1" id="formSelect1" checked="checked" /> <label for="formSelect1"><?php echo $this->to ?></label> <br />
+        <input type="radio" class="formSelectTo" name="formSelectTo" value="2" id="formSelect2" /> 
+        <label for="formSelect2">Selected emails, split by "<em>,</em>" and "<em>Name|email-address</em>"</label> 
+        <a href="#" class="selectEmailLink">[<strong>Select</strong>]</a>.
+        <br />
+        <textarea name="formEmails" rows="5" class="form-emails" style="display: none"></textarea>
+    </div>
+    <div class="form-item">
+        <strong>Subject</strong><br />
+        <input type="text" name="formSubject" class="form-subject required input-text" />
+    </div>
+    <div class="form-item">
+        <strong>Message</strong><br />
+        <textarea name="formMessage" rows="10" class="form-message required"></textarea>
+    </div>
+    <div class="form-item">
+        <input class="form-submit" type="submit" value="Send"  onclick="return confirm('Are you sure you want to send this email?')"/>
+    </div>
+</form>

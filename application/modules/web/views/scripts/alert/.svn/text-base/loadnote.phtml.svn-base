@@ -1,0 +1,30 @@
+<div id="chat-content">
+<?php if(isset($this->arrNote) && count($this->arrNote)>0) :?>
+    <div class="note-scroll">
+        <?php 
+        $class = "even";
+        foreach($this->arrNote as $row) :
+            if ($class == "odd") {
+                $class = "even";
+            } else {
+                $class = "odd";
+            }
+        ?>
+        <div class="note-row <?php echo $class ?>">
+            <?php if(isset($this->auth)) :?>
+                <div id="<?php echo $row->getId()?>" class="delete" style="display:none;" ></div>
+            <?php endif;?>
+            <div class="from"><?php echo htmlspecialchars($row->getFrom()) ?></div>
+            <div class="datetime"><?php echo $row->getCreatedDate()?></div>
+            <div class="message clr"><?php echo htmlspecialchars($row->getMessage()) ?></div>
+        </div>
+        <?php endforeach;?>
+    </div>
+    <div class="note-count">
+        <div class="node-count-content">
+            <?php $count = count($this->arrNote);?>
+            Has <span id="note-count-value"><?php echo $count?></span> added message<?php if($count>1) echo 's'?>
+        </div>    
+    </div>
+<?php endif; ?>
+</div>

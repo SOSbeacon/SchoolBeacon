@@ -1,0 +1,108 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+</head>
+<body>
+<h1> SCHOOL BEACON  </h1>
+
+<hr>
+<h1> USER LOGIN  </h1>
+<form method='GET' action='users'>
+    <input type='hidden' name='_method' value='get'/>
+    <input type='hidden' name='format' value='xml'/>
+    <div> email : <input type='text' name='email' /></div>
+    <div> password : <input type='text' name='password' /></div>
+    <div> phoneType : <input type='text' name='phoneType' /> (1, 2)</div>
+    <div> phoneInfo : <input type='text' name='phoneInfo' /></div>
+    <div> imei : <input type='text' name='imei' /></div>
+    <div> schoolId : <input type='text' name='schoolId' /></div>
+    <div> <input type='submit' name='submit'> </div>
+</form>
+<hr>
+<h1> USER UPDATE  </h1>
+<form method='POST' action='users'>
+    <input type='hidden' name='_method' value='put'/>
+    <input type='hidden' name='format' value='xml'/>
+    <div> userId : <input type='text' name='userId' /></div>
+    <div> token : <input type='text' name='token' /></div>
+    <div> name : <input type='text' name='name' /></div>
+    <div> email : <input type='text' name='email' /></div>
+    <div> number : <input type='text' name='number' /></div>
+    <div> password : <input type='text' name='password' /></div>
+    <div> phoneType : <input type='text' name='phoneType' /> (1,2)</div>
+    <div> phoneInfo : <input type='text' name='phoneInfo' /></div>
+    <div> imei : <input type='text' name='imei' /></div>
+    <div> <input type='submit' name='submit'> </div>
+</form>
+
+
+<hr>
+<h1> UPDATE SETTINGS  </h1>
+<form method='POST' action='setting'>
+    <input type='hidden' name='_method' value='put'/>
+    <input type='hidden' name='format' value='xml'/>
+    <div> userId : <input type='text' name='userId' /></div>
+    <div> schoolId : <input type='text' name='schoolId' /></div>
+    <div> token : <input type='text' name='token' /></div>
+    <div> recordDuration : 
+        <select name="recordDuration">
+            <option value="1">30 seconds</option>
+            <option value="2">1 minute</option>
+            <option value="3">1.5 minute</option>
+            <option value="4">2 minutes</option>
+            <option value="5">2.5 minutes</option>
+            <option value="6">3 minutes</option>
+        </select>
+    </div>
+    <div> defaultGroupId : <input type='text' name='defaultGroupId' /></div>
+    <div> <input type='submit' name='submit'> </div>
+</form>
+
+<hr>
+<h1> SEND SCHOOL BROADCAST  </h1>
+<form method='POST' action='alert'>
+    <input type='hidden' name='_method' value='post'/>
+    <input type='hidden' name='format' value='xml'/>
+    <div> userId : <input type='text' name='userId' /></div>
+    <div> schoolId : <input type='text' name='schoolId' /></div>
+    <div> token : <input type='text' name='token' /></div>
+    <div> type : <input type='text' name='type' /> (1 or 2)</div>
+    <div> toGroupIds1 : <input type='text' name='toGroupIds[]' /></div>
+    <div> toGroupIds2 : <input type='text' name='toGroupIds[]' /></div>
+    <div> toGroupIds3 : <input type='text' name='toGroupIds[]' /></div>
+    <div> shortMessage : <input type='text' name='shortMessage' /></div>
+    <div> longMessage : <input type='text' name='longMessage' /></div>
+    <div> latitude : <input type='text' name='latitude' /></div>
+    <div> longitude : <input type='text' name='longitude' /></div>
+    <div> <input type='submit' name='submit'> </div>
+</form>
+
+<hr>
+<h1> SCHOOL BROADCAST LIST  </h1>
+<form method='GET' action='alert'>
+    <input type='hidden' name='_method' value='get'/>
+    <input type='hidden' name='format' value='xml'/>
+    <div> userId : <input type='text' name='userId' /></div>
+    <div> schoolId : <input type='text' name='schoolId' /></div>
+    <div> token : <input type='text' name='token' /></div>
+    <div> toGroupIds1 : <input type='text' name='toGroupIds[]' /></div>
+    <div> toGroupIds2 : <input type='text' name='toGroupIds[]' /></div>
+    <div> toGroupIds3 : <input type='text' name='toGroupIds[]' /></div>
+    <div> <input type='submit' name='submit'> </div>
+</form>
+
+<hr>
+<h1> GET SCHOOL GROUP LIST  </h1>
+<form method='GET' action='groups'>
+    <input type='hidden' name='_method' value='get'/>
+    <input type='hidden' name='format' value='xml'/>
+    <div> userId : <input type='text' name='userId' /></div>
+    <div> school Id : <input type='text' name='schoolId' /></div>
+    <div> token : <input type='text' name='token' /></div>
+    <div> <input type='submit' name='submit'> </div>
+</form>
+
+
+</body>
+</html>
+

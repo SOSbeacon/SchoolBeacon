@@ -1,0 +1,235 @@
+<script type="text/javascript">
+    function resetForm() {
+        $('#editForm').slideUp();
+        $('#editForm').remove();
+        $('.student-name .view').show();
+    }
+    function setFilerForm() {
+        $('#filterGroupId').change(function() {
+            var groupId = $('#filterGroupId').val();
+            document.location.href = '/webapp/groups/students/groupId/' + groupId;
+        });
+    }
+    function setAddStudentsToGroupButton() {
+        if ($('.addStudentsToGroup').length > 0) {
+            var toGroup = $('#filterGroupId option:selected');
+            $('.addStudentsToGroup').click(function() {
+                var selectCount = $('input.studentAll:checked').length;
+                if (selectCount > 0) {
+                    if (confirm('Are you sure you want to add ' + selectCount + ' selected students to group "' + toGroup.html() + '"?')) {
+                        return true;
+                    };
+                } else {
+                    alert('Please select students to add');
+                }
+                return false;
+            });
+        }
+    }
+    function setRemoveStudentsFromGroupButton() {
+        if ($('.removeStudentsFromGroup').length > 0) {
+            var fromGroup = $('#filterGroupId option:selected');
+            $('.removeStudentsFromGroup').click(function() {
+                var selectCount = $('input.studentInGroup:checked').length;
+                if (selectCount > 0) {
+                    if (confirm('Are you sure you want to remove ' + selectCount + ' selected students from group "' + fromGroup.html() + '"?')) {
+                        return true;
+                    };
+                } else {
+                    alert('Please select students to remove');
+                }
+                return false;
+            });
+        }
+    }
+    function setExportToContactListButton() {
+        if ($('.exportToContactList').length > 0) {
+            $('.exportToContactList').click(function() {
+                resetForm();
+                $('#exportToContactList').val('1');
+                setLoading();
+                $('form').submit();
+            });
+        }
+    }
+    $(document).ready(function() {
+        jQuery.validator.addMethod('phoneUS', function(number, element) {
+            number = number.replace(/\s+/g, "");
+            return this.optional(element) || number.length > 9 && number.match(/^(1-?)?(\([2-9]\d{2}\)|[2-9]\d{2})-?[2-9]\d{2}-?\d{4}$/);
+        }, 'Please specify a valid US phone number');
+
+        jQuery.validator.addMethod('requireEmailOrPhone', function(value, element) {
+            return ($.trim($('#editEmail1').val()) != '') || ($.trim($('#editMobile1').val()) != '');
+        }, 'Please enter email or mobile number');
+        
+        var studentForm = '<div id="editForm" class="editForm" style="display:none"><table>' +
+                        '<tr><td>Student name:</td><td><input type="text" id="editName" name="editName" class="required" maxlength="50" size="20" /></td></tr>' +
+                        
+                        '<tr class="subheading"><td colspan="2">Parent 1 <input type="hidden" id="contact1Id" name="contact1Id" /></td></tr>' +
+                        '<tr><td>Name:</td><td><input type="text" id="editName1" name="editName1" class="required" size="20" maxlength="50" /></td></tr>' +
+                        '<tr><td>Email:</td><td><input type="text" id="editEmail1" name="editEmail1" class="email requireEmailOrPhone" maxlength="50" size="20" /></td></tr>' +
+                        '<tr><td>Mobile:</td><td><input type="text" id="editMobile1" name="editMobile1" class="requireEmailOrPhone" maxlength="20" size="20" /></td></tr>' +
+                        '<tr><td>Voicephone:</td><td><input type="text" id="editVoicephone1" name="editVoicephone1" class="phoneUS" maxlength="20" size="20" /></td></tr>' +
+                        
+                        '<tr class="subheading"><td colspan="2">Parent 2 <input type="hidden" id="contact2Id" name="contact2Id" /></td></tr>' +
+                        '<tr><td>Name:</td><td><input type="text" id="editName2" name="editName2" class="" maxlength="50" size="20" /></td></tr>' +
+                        '<tr><td>Email:</td><td><input type="text" id="editEmail2" name="editEmail2" class="email" maxlength="50" size="20" /></td></tr>' +
+                        '<tr><td>Mobile:</td><td><input type="text" id="editMobile2" name="editMobile2" class="" maxlength="20" size="20" /></td></tr>' +
+                        '<tr><td>Voicephone:</td><td><input type="text" id="editVoicephone2" name="editVoicephone2" class="phoneUS" maxlength="20" size="20" /></td></tr>' +
+                        
+                        '</table><input type="hidden" id="editId" name="editId" />' +
+                        '<input type="submit" name="editSubmit" id="editSubmit" value="Save" />' +
+                        '<input type="button" id="cancel" value="Cancel" />' +
+                        '</div>';
+        $('a.add').click(function() {
+            resetForm();
+            $('#addForm').html(studentForm);
+            $('#editForm').slideDown();
+        });
+        $('.students-in-group a.view').click(function() {
+            resetForm();
+            $(this).parents('tr').find('.edit-form').html(studentForm);
+            $('#editForm').slideDown();
+            $(this).parents('tr').find('.student-name .view').hide();
+            $('#editName').val($(this).parents('tr').find('.student-name-value').text());
+            
+            $('#contact1Id').val($(this).parents('tr').find('.student-contact1Id-value').text());
+            $('#editName1').val($(this).parents('tr').find('.student-name1-value').text());
+            $('#editEmail1').val($(this).parents('tr').find('.student-email1-value').text());
+            $('#editMobile1').val($(this).parents('tr').find('.student-mobile1-value').text());
+            $('#editVoicephone1').val($(this).parents('tr').find('.student-voicephone1-value').text());
+            
+            $('#contact2Id').val($(this).parents('tr').find('.student-contact2Id-value').text());
+            $('#editName2').val($(this).parents('tr').find('.student-name2-value').text());
+            $('#editEmail2').val($(this).parents('tr').find('.student-email2-value').text());
+            $('#editMobile2').val($(this).parents('tr').find('.student-mobile2-value').text());
+            $('#editVoicephone2').val($(this).parents('tr').find('.student-voicephone2-value').text());
+            
+            $('#editId').val($(this).parents('tr').find('.student-id-value').text());
+            var type = parseInt($(this).parents('tr').find('.student-type-value').text());
+            if (type == 1) {
+                $('#editForm table input').attr('disabled', 'disabled');
+                $('#editSubmit').attr('disabled', 'disabled');
+            }
+        });
+        $('#cancel').live('click', function() {
+            resetForm();
+        });
+        $('a.delete').click(function() {
+            if(confirm('Are you sure you want to delete this student?')) {
+                resetForm();
+                $('#deleteId').val($(this).parents('tr').find('.student-id-value').text());
+                setLoading();
+                $('form').submit();
+            }
+        });
+        $('#editSubmit').live('click', function() {
+            if ($('form').isValid()) {
+                setLoading();
+            }
+        });
+        $('form').validate();
+        setFilerForm();
+        setAddStudentsToGroupButton();
+        setRemoveStudentsFromGroupButton();
+        setExportToContactListButton();
+    });
+</script>
+<div class="message"><?php echo $this->message ?></div>
+<form method="post" action="" class="student-form list">
+    <div class="toolbar">
+        <div class="left">
+            <label class="import-label"><a href="/webapp/groups">&lsaquo;&lsaquo; Back</a></label>
+            <select id="filterGroupId" class="filer-select" style="margin-top: 5px;">
+            <?php foreach ($this->groups as $k => $v): ?>
+                <option <?php if ($this->groupId == $k): ?>selected="selected"<?php endif ?> value="<?php echo $k ?>"><?php echo $this->escape($v) ?></option>
+            <?php endforeach ?>
+            </select>
+       </div> 
+       <div class="right">
+           <!-- a class="icon-button save exportToContactList" title="Export students to contact list" style="margin-left:5px;margin-right: 10px;">Save all to contact list</a -->
+           <a class="icon-button add">Add student</a>
+       </div>  
+    <div class="clr"></div>
+    </div>
+    <input type="hidden" id="deleteId" name="deleteId" />
+    <input type="hidden" id="exportToContactList" name="exportToContactList" value="0" />
+    <div id="addForm" class="edit-form" style="width: 400px;"></div>
+    <div class="col col-1">
+    <?php if (count($this->students)) : ?>
+    <table class="grid students-in-group" cellpadding="0" cellspacing="0"> 
+    <?php foreach ($this->students as $c): 
+        $contact1 = $c['contact1'];
+        $contact2 = $c['contact2'];
+        ?>
+        <tr id="student-<?php echo $c['id']; ?>">
+            <td class="col-select">
+                <input type="checkbox" name="studentInGroup[]" class="studentInGroup" value="<?php echo $c['id'] ?>" />
+            </td>
+            <td class="student-name">
+                <a class="view" title="View / edit students" href="#student-<?php echo $c['id'] ?>">
+                    <span class="value-display student-name-value"><?php echo htmlspecialchars($c['name']) ?></span>
+                    <span class="student-id-value" style="display: none"><?php echo $c['id'] ?></span>
+                    
+                    <span class="student-contact1Id-value" style="display: none"><?php echo htmlspecialchars($c['contact1_id']) ?></span>
+                    <span class="student-name1-value" style="display: none"><?php echo htmlspecialchars($contact1->getName()) ?></span>
+                    <span class="student-email1-value" style="display: none"><?php echo $contact1->getEmail() ?></span>
+                    <span class="student-mobile1-value" style="display: none"><?php echo $contact1->getTextphone() ?></span>
+                    <span class="student-voicephone1-value" style="display: none"><?php echo $contact1->getVoicephone() ?></span>
+                    
+                    <span class="student-contact2Id-value" style="display: none"><?php echo htmlspecialchars($c['contact2_id']) ?></span>
+                    <span class="student-name2-value" style="display: none"><?php echo htmlspecialchars($contact2->getName()) ?></span>
+                    <span class="student-email2-value" style="display: none"><?php echo $contact2->getEmail() ?></span>
+                    <span class="student-mobile2-value" style="display: none"><?php echo $contact2->getTextphone() ?></span>
+                    <span class="student-voicephone2-value" style="display: none"><?php echo $contact2->getVoicephone() ?></span>
+                </a>
+                <div class="edit-form"></div>
+            </td>
+            <td class="delete"><a title="Delete" class="delete" href="#student-<?php echo $c['id'] ?>">Delete</a></td>
+        </tr>
+    <?php endforeach; ?>
+    </table>
+    <?php else: ?>
+        No student in this group.
+    <?php endif; ?>
+    </div>
+    
+    <div class="col col-2">
+    <?php if (count($this->allStudents)) : ?>    
+    <table class="grid" cellpadding="0" cellspacing="0"> 
+    <?php foreach ($this->allStudents as $c):  
+        $groupNames = array();
+        if ($c['group_ids']) {
+            $groupIds = explode(',', $c['group_ids']);
+            foreach($groupIds as $gId) {
+                if (array_key_exists($gId, $this->groups)) $groupNames[] = $this->escape($this->groups[$gId]);
+            }
+        }
+        ?>
+        <tr id="student-<?php echo $c['id']; ?>">
+            <td class="col-select"><input type="checkbox" class="studentAll" name="studentAll[]" value="<?php echo $c['id'] ?>" /></td>
+            <td class="student-name">
+                <a class="view">
+                    <span class="student-name-value value-display">
+                        <?php echo htmlspecialchars($c['name']) ?> 
+                        <em><?php if (count($groupNames)) { echo implode(', ', $groupNames); } else { echo 'No group'; } ?></em>
+                    </span>
+                </a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+    </table>
+    <?php else: ?>
+        No student records.
+    <?php endif; ?>    
+    </div>    
+    <div class="clr"></div>
+    <div class="action-bar">
+        <?php if (count($this->students) > 0) : ?>
+              <input type="submit" value="Remove selected students from group" class="left button removeStudentsFromGroup" name="removeStudentsFromGroup" />  
+        <?php endif ?>  
+        <?php if (count($this->allStudents) && $this->groupId) : ?>
+              <input type="submit" value="Add selected students to group" class="right button addStudentsToGroup" name="addStudentsToGroup" />  
+        <?php endif ?>
+    </div>
+</form>

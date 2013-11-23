@@ -1,0 +1,56 @@
+<?php 
+if ($this->pageCount):
+    // you need to add each of the request parameters to url 
+    $params = Zend_Controller_Front::getInstance()->getRequest()->getParams(); 
+    // remove the system parameters 
+    unset($params['module']); 
+    unset($params['controller']); 
+    unset($params['action']); 
+?> 
+<div class="paginationControl"> 
+<!-- Previous page link --> 
+	<ul>	
+		<?php if (isset($this->previous)): ?> 
+			<li>
+			  <a href="<?php echo $this->url(array_merge( 
+			      $params, array('page' => $this->previous))); ?>"> 
+			    &lt;&lt; 
+			  </a>
+			</li>
+		<?php else :?>
+			<li class="disabled">&lt;&lt;</li> 
+		<?php endif; ?> 
+		 
+		<!-- Numbered page links --> 
+		<?php foreach ($this->pagesInRange as $page): ?> 
+		<?php if ($page != $this->current):?>
+			<li>
+				<a href="<?php echo $this->url(array_merge($params, 
+					array('page' => $page))); ?>"> 
+					<?php echo $page; ?> 
+				</a> 
+			</li> 
+		<?php else : ?>
+			<li class="active"> 
+		<?php echo $page; ?>  
+		</li>
+		<?php endif;?> 
+		<?php endforeach;?>
+		
+		 <!-- Next page link --> 
+		<?php if (isset($this->next)): ?>
+		<li> 
+		  <a href="<?php echo $this->url( 
+		      array_merge($params, array('page' => $this->next))); ?>"> 
+		    &gt;&gt;
+		  </a>
+		</li> 
+		<?php else : ?>
+		<li class="disabled">&gt;&gt;</li>
+		<?php endif; ?>
+	</ul>
+	
+	<div style="clear:both;"></div> 
+</div> 
+<?php endif; ?> 
+ 

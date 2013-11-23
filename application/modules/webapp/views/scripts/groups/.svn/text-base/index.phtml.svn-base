@@ -1,0 +1,66 @@
+<script type="text/javascript">
+    function resetForm() {
+        $('#groupEditForm').slideUp();
+        $('#groupEditForm').remove();
+        $('.group-name .view').show();
+    }
+    $(document).ready(function() {
+        var groupForm = '<div id="groupEditForm" class="groupEditForm" style="display:none">' +
+                        'Name: <input type="text" id="editGroupName" name="editGroupName" class="required" size="10" />' +
+                        '<input type="hidden" id="editGroupId" name="editGroupId" />' +
+                        '<input type="submit" id="editGroupSubmit" value="Save" />' +
+                        '<input type="button" id="cancel" value="Cancel" />' +
+                        '</div>';
+        $('a.add').click(function() {
+            resetForm();
+            $('#groupAddForm').html(groupForm);
+            $('#groupEditForm').slideDown();
+        });
+        $('a.edit').click(function() {
+            resetForm();
+            $(this).parents('tr').find('.edit-form').html(groupForm);
+            $('#groupEditForm').slideDown();
+            $(this).parents('tr').find('.group-name .view').hide();
+            $('#editGroupName').val($(this).parents('tr').find('.group-name-value').text());
+            $('#editGroupId').val($(this).parents('tr').find('.group-id-value').text());
+        });
+        $('#cancel').live('click', function() {
+            resetForm();
+        });
+        $('a.delete').click(function() {
+            if(confirm('Are you sure you want to delete this group?')) {
+                resetForm();
+                $('#deleteGroupId').val($(this).parents('tr').find('.group-id-value').text());
+                setLoading();
+                $('form').submit();
+            }
+        });
+        $('#editGroupSubmit').live('click', function() {
+            setLoading();
+        });
+        $('form').validate();
+    });
+</script>
+
+<div class="message"><?php echo $this->message ?></div>
+<form method="post" action="" class="group-form list">
+    <a class="add icon-button">Add group</a>
+    <input type="hidden" id="deleteGroupId" name="deleteGroupId" />
+    <div id="groupAddForm" class="edit-form"></div>
+    <table class="grid" cellpadding="0" cellspacing="0"> 
+    <?php $count = 0; foreach ($this->groups as $g): $count++; $type = intval($g['type']); ?>
+        <tr id="group-<?php echo $g['id'] ?>">
+            <td class="group-name">
+                <a class="view" title="View contacts" href="/webapp/groups/contacts/groupId/<?php echo $g['id'] ?>">
+                    <span class="group-id-value" style="display: none"><?php echo $g['id'] ?></span>
+                    <span class="group-name-value"><?php echo $g['name'] ?></span> 
+                    <span class="group-count">(<?php echo $g['contactCount'] ?>)</span>
+                </a>
+                <div class="edit-form"></div>
+            </td>
+            <td class="edit"><?php if ($type > 2): ?><a title="Edit" class="edit" href="#group-<?php echo $g['id'] ?>">Edit</a><?php endif ?></td>
+            <td class="delete"><?php if ($type > 2): ?><a title="Delete" class="delete" href="#group-<?php echo $g['id'] ?>">Delete</a><?php endif ?></td>
+        </tr>
+    <?php endforeach; ?>
+    </table>
+</form>

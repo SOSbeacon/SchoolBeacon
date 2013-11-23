@@ -1,0 +1,244 @@
+.header, .header a {color: #ffffff;}
+a.bt-get-free-account {margin: 20px auto; display: block; cursor: pointer; text-decoration: none;background: url(../images/bt_free_account.png) no-repeat; width: 700px;height: 100px;}
+.wrapper{width:1000px;min-height:800px;margin:0 auto}
+#Footer {background: #11111c; padding: 15px 0;clear: both;}
+.login-region {float:right;position:relative;text-align:left;margin:0;}
+.login-region .account{float:right;text-align: right;font-size: 0.9em;line-height: 1.8}
+.login-region .logout{float:right;margin-right:20px;margin-top:2px}
+.phone-active .div1-1 .do-active{font-size:18px;text-align:center}
+.phone-smslog{padding:20px 10px}
+.phone-smslog .tbl{width:864px}
+.phone-smslog .tbl td{border:1px solid #DADADA;text-align:center;padding:2px 3px}
+.phone-smslog .tbl #empty{color:#1959AC;font-size:20px;padding:20px}
+.phone-smslog .tbl #head{background:none repeat scroll 0 0 #FAFAFA;font-size:0.9em;font-weight:bold}
+.phone-smslog #smsMessage a{color:#1959AC!important}
+.phone-smslog #smsMessage a:hover{color:blue!important;font-weight:normal!important}
+.phone-settings{font-size:14px;padding:5px}
+.phone-settings .div1-1{font-size:13px}
+.phone-settings .div2{border:1px solid #ccc;display:block;float:left;width:600px;margin:2px}
+.phone-settings .tbl th{border:1px solid #E6E6E6;color:#666;font-size:0.9em;text-align:center}
+.phone-settings .tbl td{border:1px solid #E6E6E6;text-align:left;padding:0 3px}
+.phone-settings .setting-list .st-menu{height:25px;background:#f3f3f3}
+.phone-settings .setting-list .st-menu div{background:none repeat scroll 0 0 #F3F6F6;border-bottom:1px solid #999;border-right:1px solid #999;cursor:pointer;float:left;font-size:0.9em;font-weight:bold;text-align:center;padding:5px 20px}
+.phone-settings .setting-list .st-menu div:Hover{background:none repeat scroll 0 0 #e2e5e5}
+.phone-settings .setting-list .st-content{float:left;overflow:hidden;width:99%}
+.phone-list{padding:5px}
+.phone-list .tblList{width:872px}
+.phone-list .sl{width:254px}
+.phone-list .tblList th{border:1px solid #E6E6E6;text-align:center}
+.phone-list .tblList td{border:1px solid #E6E6E6;text-align:center;padding:3px 2px}
+.phone-list .tblEdit .txt{width:250px}
+.phone-list .tblEdit .tdButton a{font-size:14px}
+.phone-list .tblEdit .tdMessage{color:#3B5998;font-size:13px;font-weight:bold}
+.contact-index .div1 .left{float:left;width:480px;margin-bottom:50px}
+.contact-index .div1 .left .submit{background:none repeat scroll 0 0 #606A80;border:medium none;color:#FFF;cursor:pointer;float:right;margin-right:50px;margin-top:5px;text-transform:uppercase;width:150px;padding:8px}
+.contact-index .div1 .left .text,.textarea{background:none repeat scroll 0 0 #F5F4F4;border:1px solid #8393B3;margin-bottom:10px;margin-top:3px;width:420px;padding:4px}
+.contact-index .div1 .left .loader{display:none;float:right;margin:14px 15px 0 0}
+.contact-index .div1 .left .flag{color:#3B5998;float:left;font-weight:bold;margin-top:5px;width:400px}
+.contact-index .div1 .right{float:left;width:300px}
+.contact-index .div1 .right ul{list-style:none outside none;margin:0;padding:0}
+.contact-index .div1 .right ul li{display:block;height:28px;line-height:24px;margin:0 0 7px;padding:0 0 0 33px}
+.contact-index .div1 .right .telephone{background:url(../images/telephone.gif) no-repeat scroll 0 2px transparent}
+.contact-index .div1 .right .email{background:url(../images/email.gif) no-repeat scroll 0 1px transparent}
+.contact-index .div1 .right .skype{background:url(../images/skype.gif) no-repeat scroll 0 3px transparent}
+.contact-index .div1 .right .twitter{background:url(../images/twitter.gif) no-repeat scroll 0 3px transparent}
+.home-index .home-content{margin:50px 15px 15px}
+.home-index .home-content .div-take-tour{float:left;margin-left:253px;margin-top:154px}
+.home-index .home-content .btn-take-tour{background:url(../images/btn-take-tour.png) no-repeat scroll 0 0 transparent;display:block;height:130px;width:130px}
+.home-index .home-content .btn-take-tour:Hover{background:url(../images/btn-take-tour.png) no-repeat scroll 0 -130px transparent}
+.home-index .home-content .index-content{background:url(../images/promo.jpg) no-repeat scroll 0 0 transparent;display:block;height:505px;width:540px}
+.alert-list{padding:10px 15px;clear: both}
+.alert-list .div1{height:250px;font-size:30px!important;text-align:center;color:#6478A3;padding:20px}
+.alert-list .date{text-align:center;margin:10px 0}
+.alert-list .title{float:left;background:url(../images/review-phone-history.png) no-repeat scroll 0 0 transparent;height:37px;width:130px;margin:0}
+.alert-list .number{color:#3D507B;float:left;font-size:16px;font-weight:bold;margin:6px 0 0 10px}
+.alert-list .add-note{-khtml-border-radius:0 12px 12px 0;-moz-border-radius:0 12px 12px 0;-webkit-border-top-left-radius:0;-webkit-border-top-right-radius:12px;-webkit-border-bottom-left-radius:12px;-webkit-border-bottom-right-radius:0;border-radius:0 12px 12px 0;height:28px;line-height:28px;color:#3B5998;cursor:pointer;border:1px solid #bbb;font-weight:bold;font-size:1em;background:url(../images/edit.png) no-repeat 2px 5px;margin:3px 0;padding:0 15px 0 30px}
+.alert-list .details{background:none repeat scroll 0 0 #ECEFF5;padding:5px 0}
+.alert-list .details tr:hover{background:#fafafa}
+.alert-list .scroll-details{background:none repeat scroll 0 0 #ECEFF5;height:195px;overflow-x:hidden;overflow-y:scroll;width:300px}
+.alert-list .details .details-title{background:none repeat scroll 0 0 #FFF;border:1px solid #C0C9DC;color:#6478A3;font-size:14px;text-align:center;clear:both;float:none;margin:2px 5px 10px;padding:3px}
+.alert-list .details div{margin-left:30px}
+.alert-list .details div td{color:#6C6C6C;vertical-align:top;padding:1px 15px 1px 0}
+.alert-list .note-list{clear:both;width:100%}
+.alert-list .note-list .note-count{background:url(../images/comment_icn.png) no-repeat scroll 5px 4px #f3f3f3;border-top:none;color:#3B5998;margin:0;padding:5px 0 5px 25px}
+.note-count .node-count-content{overflow:hidden;white-space:nowrap}
+.alert-list .note-list .note-row{background-color:#ECEFF5;margin-top:1px;padding:3px 7px}
+.alert-list .note-list .even{background-color:#fff}
+.alert-list .note-list .note-row:hover .delete{display:block!important;margin: 0 3px}
+.alert-list .note-list .from{color:#3B5998;float:left;font-size:0.9em;font-weight:bold}
+.alert-list .note-list .message{padding:2px 0}
+.alert-list .note-list .datetime{color:gray;font-size:0.9em;float:right}
+.alert-list .note-list .delete{background:url(../images/pk-breadcrumb-delete.png) no-repeat scroll 0 0 transparent;cursor:pointer;display:block;float:right;height:16px;margin-right:-7px;margin-top:-7px;width:16px;opacity:0.6}
+.alert-list .note-list .delete:Hover{background:url(../images/pk-breadcrumb-delete.png) no-repeat scroll 0 -16px transparent;opacity:0.9}
+.alert-list .location h1{padding:10px 0}
+.alert-list .location .map{margin:10px 0 15px}
+.alert-list .location .map .map_canvas{background-color:#E5E3DF;height:240px;overflow:hidden;position:relative;width:300px;z-index:0}
+.alert-list .alert{clear:both;padding:0}
+.alert-list .scroll-alert{clear:both;max-height:415px;overflow-x:hidden;overflow-y:auto;padding:0}
+.alert-list .col-left .scroll-alert{max-height:300px}
+.alert-list .alert-not-login{max-height:587px}
+.alert-list .alert .main-photo{width:100%;margin:0 10px 0 0}
+.alert-list .alert .main-photo .photo-txt{font-size:20px;font-weight:bold;margin:10px 0 0}
+.alert-list .alert .main-photo .photo-block{border:1px solid #E8E8E8;margin:3px 3px 3px 0;padding:5px}
+.alert-list .alert .main-photo .photo img{max-height:none;max-width:395px;width:98%}
+.alert-list .alert .main-audio{border-bottom:1px dashed #7A7A7A;padding-bottom:10px;margin:15px 5px 15px 0}
+.alert-list .alert .main-audio .emergency-null{margin-top:10px}
+.alert-list .alert .main-audio .audio-text{font-size:20px;font-weight:bold;margin:10px 0}
+.alert-list .alert .main-audio .mp3-play{height:24px;overflow:hidden}
+.alert-list .alert .main-audio .mp3-play img{margin-top:-24px}
+.alert-list .alert .main-audio .mp3-play img:Hover{margin-top:0}
+.alert-list .alert .main-audio .play{background:url(/sosdata/images/play_overlay_bg.png) no-repeat scroll 0 0 transparent;border:3px solid #999;display:block;height:240px;overflow:hidden;position:relative;vertical-align:bottom;width:317px;border-bottom:0}
+.alert-list .alert .main-audio .play div{bottom:0;display:block;float:left;margin-bottom:0;margin-left:-1px;margin-right:-1px;position:absolute}
+.alert-list .alert .main-audio .audio{min-height:100px}
+.alert-list .alert .main-audio .date{float:left;width:100%;margin:10px 0}
+.alert-list .alert .main-audio .div_link{float:left;margin-top:0;width:100%}
+.alert-list .recording-list{height:156px;overflow-x:hidden;overflow-y:scroll;width:100%;float:none;border-color:#E8E8E8;border-style:solid none solid solid;border-width:1px 0 1px 1px;margin:0 0 10px}
+.alert-list .alert-list-select-phone{height:50px}
+.select-timezone{font-size:14px;float:left;margin:5px 0 0 10px}
+.select-timezone select{height:25px;line-height:25px;font-size:14px;width:265px}
+.alert-list .recording-list a:visited{color:#1959AC}
+.alert-list .recording-list .active{background:none repeat scroll 0 0 #ECEFF5;font-weight:bold}
+.alert-list .recording-list .list-alert{text-align:center;width:100%}
+.gmap{text-align:center;border:1px solid #eee;padding:0 1px}
+.google_map_canvas{width:auto;height:300px}
+.main-content .alert-list .col-right,.main-content .alert-list .col-left{width:49%}
+.alert-list .recording-list .list-alert .aStt{color:#6C6C6C}
+.alert-list .recording-list .list-alert td,.receiver-list td{border-right:1px solid #E8E8E8;border-color:#E8E8E8;border-style:none solid solid none;border-width:0 1px 1px 0;padding:2px 0}
+.alert-list .recording-list .list-alert th{border-bottom:1px solid #E8E8E8;border-right:1px solid #E8E8E8;color:#666;padding:2px 0}
+.alert-list .recording-list .list-alert .id-img{float:left;height:16px;margin-left:3px;width:16px}
+.receiver-list{max-height:250px;overflow:auto;width:100%;margin:0 0 5px}
+.receiver-list table{width:100%;border-left:1px solid #ccc}
+.receiver-list th{border:1px solid #ccc;border-left:none;background:#ECEFF5;font-weight:normal}
+.receiver-list td,.receiver-list th{text-align:center;padding:3px 5px}
+.receiver-list td.receiver-name{text-align:left;font-weight:bold}
+.alert-list .form-add-note{clear:both;border:1px solid #ddd;margin:5px 1px;padding:2px 5px}
+#formAddNote h3{font-size:15px;color:#333;background:url(../images/cancel.png) no-repeat left center;height:18px;line-height:18px;margin:3px 0;padding:0 0 0 20px}
+.alert-list .form-add-note input.noteFrom{color:#666;font-weight:bold;width:95%;height:25px;border:1px solid #ccc;margin:5px 0;padding:0 5px}
+.alert-list .form-add-note .noteMsg{color:#666;height:30px;line-height:20px;width:95%;border:1px solid #ccc;font-size:15px;padding:5px}
+.alert-list .last-clear{clear:left}
+.user-index .list-alert{width:864px;margin:10px}
+.user-index .list-alert th{text-align:center;border:1px solid #E8E8E8;font-size:13px;padding:5px}
+.user-index .list-alert td{border:1px solid #E8E8E8;text-align:center;padding:5px}
+.user-index .list-alert td a{display:block;width:100%}
+.user-index .alert-index-none{font-size:25px;text-align:center;margin:50px}
+#user-forgot{margin:20px 150px 50px 140px}
+#user-forgot #title{font-size:16px;font-weight:bold;margin:5px 0 20px}
+#user-forgot .txt{width:300px;margin:3px 0}
+#user-forgot .message{color:#3B5998;font-weight:bold;margin:15px 0}
+.user-register .div1{margin-left:20px;margin-top:5px;padding:20px}
+.user-register .tblReg td,th{line-height:20px;vertical-align:top}
+.user-register .tblReg .txt{width:248px}
+.user-register .tblReg .hint{color:#999;font-style:italic}
+.user-register .tblReg .country-code{width:50px}
+.user-register .tblReg .phone-num{width:182px}
+.addition-text{display:none;color:#FFF;float:left;font-family:arial;font-size:19px;text-align:center;width:100%;margin:30px 0}
+.paginationControl{text-align:right;margin:10px}
+.paginationControl li{border:1px solid #CACACA;cursor:pointer;float:left;list-style:none outside none;min-height:14px;min-width:16px;text-align:center;margin:0 2px;padding:1px}
+.paginationControl a{font-family:Verdana,Arial,"Helvetica Neue",Helvetica,sans-serif!important;text-decoration:none!important;display:block}
+.paginationControl li.active{font-size:0.9em;font-weight:bold;background:#1959AC;color:#fff!important}
+a.android-market{display:block;overflow:hidden;text-indent:-999px;width:231px;height:73px;background:url(../images/androidmarket.png) no-repeat;margin:8px auto}
+a.itune-app{display:block;overflow:hidden;text-indent:-999px;width:231px;height:70px;background:url(../images/itune.png) no-repeat;margin:8px auto}
+.message-info{color:blue;text-align:center;margin:3px 0;padding:5px}
+input.send_files_to_email{font-weight:bold;font-size:14px;height:26px;line-height:26px;margin:0}
+#emailDownloadSelect{width:180px;height:25px;line-height:26px;font-size:14px;margin:0 0 0 10px}
+.download-header{padding:5px 0}
+.download-header .download-title{float:left;line-height:28px;height:30px;font-size:18px;font-weight:bold}
+.download-header #send-email-select{border:1px solid #bbb;clear:both;background:#ECEFF5;display:none;margin:3px 5px;padding:10px 20px}
+.download-header #send-files-submit,.download-header .bt-cancel{font-weight:bold;margin:5px 2px;padding:5px 10px}
+.contact-list table td{vertical-align:top}
+a.add-contact{display:block;float:left;background:url(../images/add.png) no-repeat left;height:18px;line-height:18px;padding-left:30px;font-weight:bold;text-decoration:none!important;font-size:16px!important;color:#1959ac!important;margin:5px}
+a.import-google-contacts{display:block;float:left;background:url(../images/google.png) no-repeat left;height:18px;line-height:18px;padding-left:22px;font-weight:bold;text-decoration:none!important;font-size:16px!important;color:#1959ac!important;margin:5px}
+a.import-yahoo-contacts{display:block;float:left;background:url(../images/yahoo.png) no-repeat left;height:18px;line-height:18px;padding-left:22px;font-weight:bold;text-decoration:none!important;font-size:16px!important;color:#1959ac!important;margin:5px}
+a.edit-contact{background:url(../images/edit.png) no-repeat left;line-height:16px;text-decoration:none!important;margin:5px;padding:5px}
+a.update-contact{background:url(../images/save.png) no-repeat left;line-height:16px;text-decoration:none!important;margin:5px;padding:3px}
+a.cancel-contact{background:url(../images/cancel.png) no-repeat left;line-height:16px;text-decoration:none!important;margin:5px;padding:3px}
+a.delete-contact{background:url(../images/del.png) no-repeat left;line-height:16px;text-decoration:none!important;margin:5px;padding:3px}
+a.browse{background:url(../images/Icon_Search.jpg) no-repeat center center;display:block;line-height:16px;text-decoration:none!important;margin:1px 5px;padding:1px 3px}
+h1.yahoo{height:60px;line-height:60px;background:url(../images/yahoo48.png) no-repeat left center;padding:0 0 0 50px}
+h1.google{height:60px;line-height:60px;background:url(../images/google48.png) no-repeat left center;padding:0 0 0 60px}
+#noteList{overflow:hidden}
+#noteList .chat-content{border:1px solid #eee;max-height:250px;overflow:auto;clear:both;margin:3px 0;padding:0 1px}
+#note-count-value{font-weight:bold}
+#btnChatUp{display:block;float:left;width:32px;height:32px;background:url(../images/bt-up.png) no-repeat center center;margin:0 6px 0 0}
+#btnChatDown{display:block;float:left;width:32px;height:32px;background:url(../images/bt-down.png) no-repeat center center;margin:0}
+#scroll-button{float:right;padding:3px 0 0}
+div.school-admin{padding:40px 20px}
+a.school-admin{display:block;float:right;width:200px;height:35px;background:url(../images/salink.png) no-repeat;overflow:hidden;text-indent:-9999px;font-size:0;margin:-2px 5px 0 0;padding:0}
+.school-admin .right img.exp{display:block;margin:0 0 30px}
+a.big-red-bt{display:block;width:510px;height:72px;overflow:hidden;text-indent:-9999px;font-size:0;text-align:left;margin:70px 0 0;padding:0}
+a.big-red-bt:hover,a.school-admin:hover{text-decoration:none}
+a.sabt1{background:url(../images/sabt1.png) no-repeat}
+a.sabt2{background:url(../images/sabt2.png) no-repeat}
+a.sabt3{background:url(../images/sabt3.png) no-repeat}
+.select-phone strong{color:#f43358;font-weight:normal}
+.select-phone table{border:1px solid #999;border-spacing:0;background:#fff;margin:5px 0;padding:0}
+.select-phone table td{border-top:1px solid #999;border-right:1px solid #eee;color:#1959ac;white-space:nowrap;padding:3px 5px}
+.tabs-header{float:right;margin:5px 0 0}
+.tabs-header ul.tabs{display:block;height:22px;list-style:none;border-bottom:2px solid #6478A3;margin:0;padding:0}
+.tabs-header ul.tabs li{display:block;float:left;margin:0 0 0 3px}
+.tabs-header ul.tabs li.first{margin-left:0}
+.tabs-header ul.tabs li a{display:block;float:left;line-height:22px;height:22px;text-align:center;color:#666;font-weight:normal;background:#bbcfff;text-decoration:none;-moz-border-radius:6px 6px 0 0;border-radius:6px 6px 0 0;margin:0;padding:0 12px}
+.tabs-header ul.tabs li a:hover,.tabs-header ul.tabs li.active a{background:#6478A3;color:#fff}
+.alert-list .details hr{border:none;border-top:1px dashed #999}
+.ui-dialog .ui-dialog-buttonpane button{padding:3px 10px}
+#confirmDialogContent{display:block;font-size:1em;padding:20px 5px}
+#frmLogin{font-size:0.9em;margin:0;padding:0}
+.login-panel #frmLogin { width: 290px;}
+#frmLogin input.text{font-size:1em;font-weight:normal;color:#444!important;height:16px;line-height:16px;width:170px;padding-left:3px;margin:0 0 5px}
+#frmLogin .row{clear:both;height:22px}
+#frmLogin .right{float:right;margin-right:5px}
+input.button-login{width:47px;height:21px;border:none;background:url(../images/btlogin.png) no-repeat;cursor: pointer}
+.copyright{text-align: center;margin: auto;}
+.copyright, .copyright a {color: #66799f;}
+.page-home .col-1,.page-home .col-2, .page-home .col-3{float:left;width:325px; margin: 0 10px 0 0;text-align: center}
+.page-home .col-3{margin: 0}
+.page-home .summary {color: #444; padding: 5px 15px 5px 10px; font-size: 1.2em;text-align: justify;font-weight: bold;}
+.phone-account-active,.contact-index,.privacy-privacy .privacy-content,.terms-terms .terms-content,.login-home{padding:20px}
+.phone-smslog .tbl #smsMessage,.receiver-list td.left,.receiver-list th.left{text-align:left}
+.phone-settings .tbl,#noteList .note-scroll,.alert-list .scroll-alert table{width:100%}
+.phone-settings .setting-list .st-menu .mn-family,.phone-settings .setting-list .st-menu .mn-friend{width:45px}
+.phone-settings .setting-list .st-content .friend,.phone-settings .setting-list .st-content .neighbor,.phone-settings .setting-list .st-content .groupa,.phone-settings .setting-list .st-content .groupb,.paginationControl li.disabled{display:none}
+.testimonials-index,.features-index,.about-index{font-size:1.2em;padding:0 100px;color: #333}
+.about-index .div1-2,.alert-list .alert .main-photo .photo,.select-phone table th{text-align:center}
+.alert-list .note-list .from em,.receiver-detail{font-weight:normal}
+.alert-list .alert .alert-rows,.clearFloat{clear:both}
+.alert-list .recording-list .list-alert td .first,.alert-list .recording-list .list-alert td .last{border:1px solid #E8E8E8}
+.alert-list .form-add-note .noteAdd,.alert-list .form-add-note .noteCancel{font-size:15px;font-weight:bold;height:30px;line-height:30px;margin:5px;padding:0 15px}
+.paginationControl li:hover,.paginationControl a:hover{background:#1959AC;color:#fff!important}
+.div-add-note,.school-admin .left,#frmLogin .left{float:left}
+.download-header .send_files_to_email,.school-admin .right{float:right}
+.login-panel{margin-bottom:5px; margin-top:5px}
+.login-panel .login-title{background:url("/images/home-login-title.png") no-repeat scroll 0 0 transparent; height:37px; margin-bottom:10px;}
+.login-panel .div1{padding:5px 0 0 0; clear:both; line-height:20px}
+.login-panel .div1 a{color:#0768CC; font-family:tahoma; font-size:0.9em; font-weight:normal}
+.login-panel .div1 .left{float:left; line-height:22px; height:22px; width:120px; white-space:nowrap; overflow:hidden}
+.login-panel .div1 .right{   width:165px;    overflow:visible;    float:left}
+.login-panel .div1 .txt{height:18px;width:160px;font-size:13px !important}
+.login-panel .div1 .checkbox{padding:0 10px 0 0; text-align:right; width:65px}
+.login-panel .div1 .checkbox input{    margin:1px 0 0 0}
+.login-panel .div1 .button-login{background:url("/images/home-login.png") no-repeat scroll 0 0 transparent; border:medium none; cursor:pointer; height:21px; margin-right:10px; width:46px; float:right}
+.fancybox-outer {background: white !important;}
+.submitForm h2, .contactForm h2 {font-size: 20px;font-weight: normal;margin: 10px 0;color: #213A70}
+.submitForm .row {padding: 5px 0 0 0;clear: both}
+.submitForm .row label.label {display: block; float: left;padding: 0; line-height: 20px}
+.submitForm .row .right {float: right}
+.submitForm .row .left {float: left}
+.schoolAccountForm {width: 100%}
+.schoolAccountForm form {}
+.submitForm .row .text {background: #f6f6f6;border: 1px solid #8393B3;min-height: 20px;padding: 0 5px}
+.submitForm .submit {height: 30px;line-height: 30px;cursor: pointer;color: #fff;font-size: 13px;margin: 10px 0;padding: 0 20px;background:#606A80; border:none;}
+.submitForm label.error {display: inline;border: none;background: none;float: right;padding: 0;margin: 0 1px;font-size: 0.9em}
+.submitForm em {font-size: 0.9em}
+.submitForm .message {font-weight: bold;color: #0768CC; padding: 3px;}
+.submitForm .col-1, .submitForm .col-2 {float: left;width: 450px; margin: 0 5px;border-right: 1px solid #ddd;padding-right: 10px}
+.submitForm .col-2 {margin-right: 0; ;border: none;}
+a.toggleListButton {color: #3B5998; border: 1px solid #bbb;display: block;float: right;height: 23px;line-height: 23px;margin: 6px 6px 0 0;padding: 0 6px 0 3px;
+-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;font-size: 1em;font-weight: bold;cursor: pointer;}
+a.toggleListButton:hover {text-decoration: none}
+a.toggleListButton span {font-size: 0.8em;font-weight: normal}
+.fQuickReply {line-height: normal;border: 1px solid #ccc;padding: 3px 10px;margin: 3px 20px;background: #fff;}
+.tbQuickReply {height: 20px;}
+.btnQuickReply, .btnCancel {height: 26px;}
+.replyMessage {margin: 0 0 0 10px; color:#009933;font-weight: bold;border-left: 1px solid #ddd; padding: 0 5px;}
+
+.select-school {background: #f3f3f3; padding: 5px;margin: 5px;}

@@ -1,0 +1,36 @@
+<script type="text/javascript">
+    $(document).ready(function() {
+        jQuery.validator.addMethod('phoneUS', function(number, element) {
+            number = number.replace(/\s+/g, "");
+            return this.optional(element) || number.length > 9 && number.match(/^(1-?)?(\([2-9]\d{2}\)|[2-9]\d{2})-?[2-9]\d{2}-?\d{4}$/);
+        }, 'Please specify a valid US phone number');
+        jQuery.validator.addMethod('passwordLength', function(v, element) {
+            return this.optional(element) || v.length >= 6;
+        }, 'New password can not be shorter than 6 characters.');
+        jQuery.validator.addMethod('passwordConfirm', function(v, element) {
+            return ($('#npassword').val()!= '') ? (v == $('#npassword').val()) : true;
+        }, 'Confirm password is not correct.');
+        $('form').validate();
+    });
+</script>
+<div class="message"><?php echo $this->message ?></div>
+<form method="post" action="" class="list">
+    <table>
+        <tr><td style="width:120px">Name: </td><td><input type="text" name="name" size="20" value="<?php echo htmlspecialchars($this->phone->getName()) ?>" /></td></tr>
+        <tr><td>Phone number: * </td><td><input type="text" name="number" size="20" disabled="disabled" value="<?php echo $this->phone->getNumber() ?>" /></td></tr>
+        <tr><td>Email: </td><td><input type="text" name="email" size="20" class="email" value="<?php echo $this->phone->getEmail() ?>" /></td></tr>
+        <tr><td>Current password : * </td>
+            <td>
+                <input type="password" name="cpassword" id="cpassword" size="20" class="required" value="" />
+                <br /><em>Confirm your current password to update account informations.</em>
+            </td>
+        </tr>
+        <tr>
+            <td>New password : </td><td>
+                <input type="password" name="npassword" id="npassword" size="20" class="passwordLength" value=""/>
+                <br /><em>Blank to skip change password.</em>
+            </td></tr>
+        <tr><td>Confirm new password : </td><td><input type="password" name="rpassword" id="rpassword" size="20" class="passwordConfirm" value=""/></td></tr>
+    </table>
+    <input type="submit" class="" value="Update account"/>
+</form>

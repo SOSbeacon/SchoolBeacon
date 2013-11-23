@@ -1,0 +1,26 @@
+.sf-menu,.sf-menu *{list-style:none;margin:0;padding:0}
+.sf-menu{line-height:1.0;float:left}
+.sf-menu ul{position:absolute;top:-999em;width:10em}
+.sf-menu li ul li.sf-menuf{background:url(../images/Sf-MTop.png) no-repeat top}
+.sf-menu li ul li.sf-menul{background:url(../images/Sf-MBottom.png) no-repeat Bottom}
+.sf-menu li { float: left; position: relative; background: url(../images/menu_sp.png) no-repeat right; border:none; margin: 0; padding: 0 28px; height: 50px;}
+.sf-menu li.first { }
+.sf-menu li.last {background: none;padding-right: 0}
+.sf-menu li a {font-size:0;float: left;height: 30px; margin: 10px 0 0 0;}
+.sf-menu li.active {background: url(../images/menu-hover.png) no-repeat top; padding: 0;}
+.sf-menu li.active a {width: 105px !important;}
+.sf-menu li li a { }
+.sf-menu .home a {width:40px;background:url(../images/menu-home.png) no-repeat center}
+.sf-menu .home-active a {background:url(../images/menu-home2.png) no-repeat center}
+.sf-menu .about a {width:42px;background:url(../images/menu-about.png) no-repeat center}
+.sf-menu .about-active a {background:url(../images/menu-about2.png) no-repeat center}
+.sf-menu .features a {width:62px;background:url(../images/menu-features.png) no-repeat center}
+.sf-menu .features-active a {background:url(../images/menu-features2.png) no-repeat center}
+.sf-menu .testimonials a {width:90px;background:url(../images/menu-testimo.png) no-repeat center}
+.sf-menu .testimonials-active a {background:url(../images/menu-testimo2.png) no-repeat center}
+.sf-menu .phone a {width:100px;background:url(../images/menu-phone.png) no-repeat center}
+.sf-menu .phone-active a {background:url(../images/menu-phone2.png) no-repeat center}
+.sf-menu .contact a {width:56px;background:url(../images/menu-contact.png) no-repeat center}
+.sf-menu .contact-active a {background:url(../images/menu-contact2.png) no-repeat center}
+.sf-menu .li-search a {border:0 none;margin-left:23px;padding:0}
+.sf-menu li li,.sf-menu li li li {background:url(../images/Sf-MPattern.png) repeat-y;width:151px;font-size:12px}

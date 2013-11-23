@@ -1,0 +1,311 @@
+.wrapper{background:url("../images/home-bg.png") no-repeat top center; min-height:835px; margin:0 auto; width:100%}
+
+.login-region{color:#999; float:left; height:20px; margin:0 0 -24px; padding:0; position:relative; text-align:left; width:904px; z-index:1000}
+.login-region a{color:#999 !important; text-decoration:none !important}
+.login-region a:Hover{text-decoration:underline !important; ; font-weight:normal}
+.login-region .account{float:right; /*margin-right:10px;*/ margin-top:2px}
+.login-region .logout{float:right; margin-right:20px; margin-top:2px}
+
+.phone-active{padding:20px}
+.phone-active .div1-1{}
+.phone-active .div1-1 .do-active{font-size:18px; text-align:center}
+
+.phone-smslog{padding:20px 10px}
+.phone-smslog .tbl{width:864px}
+.phone-smslog .tbl td{border:1px solid #DADADA; padding:2px 3px; text-align:center}
+.phone-smslog .tbl #number{}
+.phone-smslog .tbl #box{}
+.phone-smslog .tbl #empty{color:#1959AC; font-size:20px; padding:20px}
+.phone-smslog .tbl #head{background:none repeat scroll 0 0 #FAFAFA; font-size:11px; font-weight:bold}
+.phone-smslog .tbl #smsMessage{text-align:left}
+.phone-smslog #smsMessage a{color:#1959AC !important}
+.phone-smslog #smsMessage a:hover{color:blue !important; font-weight:normal !important; }
+
+.phone-settings{font-size:14px; padding:5px}
+.phone-settings .div1-1{font-size:13px}
+.phone-settings .div2{border:1px solid #999; display:block; float:left; margin:2px; width:500px}
+.phone-settings .tbl{width:500px}
+.phone-settings .tbl th{border:1px solid #E6E6E6; color:#666; font-size:11px; text-align:center}
+.phone-settings .tbl td{border:1px solid #E6E6E6; padding:0 3px; text-align:left}
+
+.phone-settings .setting-list{}
+.phone-settings .setting-list{}
+
+.phone-settings .setting-list .st-menu{}
+.phone-settings .setting-list .st-menu div{background:none repeat scroll 0 0 #F3F6F6; border-bottom:1px solid #999; border-right:1px solid #999; cursor:pointer; float:left; font-size:11px; font-weight:bold; padding:5px 20px; text-align:center}
+.phone-settings .setting-list .st-menu div:Hover{background:none repeat scroll 0 0 #e2e5e5}
+.phone-settings .setting-list .st-menu .mn-family{width:45px}
+.phone-settings .setting-list .st-menu .mn-friend{width:45px}
+.phone-settings .setting-list .st-menu .mn-neighbor{}
+.phone-settings .setting-list .st-menu .mn-groupa{}
+.phone-settings .setting-list .st-menu .mn-groupb{border-right:0 none}
+
+.phone-settings .setting-list .st-content{float:left; overflow:hidden}
+.phone-settings .setting-list .st-content .div3{}
+.phone-settings .setting-list .st-content .family{}
+.phone-settings .setting-list .st-content .friend{display:none}
+.phone-settings .setting-list .st-content .neighbor{display:none}
+.phone-settings .setting-list .st-content .groupa{display:none}
+.phone-settings .setting-list .st-content .groupb{display:none}
+
+.phone-list{padding:5px}
+.phone-list .div1{}
+
+.phone-list .tblList{width:872px}
+.phone-list .sl{width:254px}
+.phone-list .tblList th{border:1px solid #E6E6E6; text-align:center}
+.phone-list .tblList td{border:1px solid #E6E6E6; padding:3px 2px; text-align:center}
+
+.phone-list .tblEdit{}
+.phone-list .tblEdit td{}
+.phone-list .tblEdit .txt{width:250px}
+.phone-list .tblEdit .tdButton{}
+.phone-list .tblEdit .tdButton a{font-size:14px}
+.phone-list .tblEdit .tdMessage{color:#3B5998; font-size:13px; font-weight:bold}
+
+.testimonials-index{font-size:14px; padding:20px}
+.testimonials-index .div1-1{}
+
+.features-index{font-size:14px; padding:20px}
+.features-index .div1-1{}
+
+.about-index{font-size:14px; padding:20px}
+.about-index .div1-1{}
+.about-index .div1-2{text-align:center}
+.about-index .div1-3{}
+
+.contact-index{padding:20px}
+.contact-index .div1{}
+.contact-index .div1 a{}
+.contact-index .div1 .left{float:left; width:480px; margin-bottom:50px}
+.contact-index .div1 .left .name{}
+.contact-index .div1 .left .message{}
+.contact-index .div1 .left .submit{background:none repeat scroll 0 0 #606A80; border:medium none; color:#FFF; cursor:pointer; float:right; margin-right:32px; margin-top:5px; padding:8px; text-transform:uppercase; width:150px}
+.contact-index .div1 .left .text, .textarea{background:none repeat scroll 0 0 #F5F4F4; border:2px solid #8393B3; margin-bottom:10px; margin-top:3px; padding:4px; width:435px}
+.contact-index .div1 .left .loader{display:none; float:right; margin:14px 15px 0 0}
+.contact-index .div1 .left .flag{color:#3B5998; float:left; font-weight:bold; margin-top:5px; width:400px}
+
+.contact-index .div1 .right{float:left; width:300px}
+.contact-index .div1 .right ul{list-style:none outside none; margin:0; padding:0}
+.contact-index .div1 .right ul li{display:block; height:28px; line-height:24px; margin:0 0 7px; padding:0 0 0 33px}
+.contact-index .div1 .right .telephone{background:url("../images/telephone.gif") no-repeat scroll 0 2px transparent}
+.contact-index .div1 .right .email{background:url("../images/email.gif") no-repeat scroll 0 1px transparent}
+.contact-index .div1 .right .skype{background:url("../images/skype.gif") no-repeat scroll 0 3px transparent}
+.contact-index .div1 .right .twitter{background:url("../images/twitter.gif") no-repeat scroll 0 3px transparent}
+
+.contact-index .clearFloat{}
+
+.privacy-privacy{}
+.privacy-privacy .privacy-content{padding:20px}
+
+.terms-terms{}
+.terms-terms .terms-content{padding:20px}
+
+.home-index{}
+.home-index .home-content{margin:50px 15px 15px 15px}
+.home-index .home-content .div-take-tour{float:left; margin-left:253px; margin-top:154px}
+.home-index .home-content .btn-take-tour{background:url("../images/btn-take-tour.png") no-repeat scroll 0 0 transparent; display:block; height:130px; width:130px}
+.home-index .home-content .btn-take-tour:Hover{background:url("../images/btn-take-tour.png") no-repeat scroll 0 -130px transparent}
+.home-index .home-content .index-content{background:url("../images/home-index-content.png") no-repeat scroll 0 0 transparent; display:block; height:505px; width:540px}
+
+.login-panel{font-family:tahoma; font-size:11px; margin-bottom:5px; margin-top:5px}
+.login-panel .login-title{background:url("../images/home-login-title.png") no-repeat scroll 0 0 transparent; height:37px; margin-bottom:10px; margin-left:13px; width:287px}
+.login-panel .div1{padding:5px 0 0 12px; clear:both; line-height:20px}
+.login-panel .div1 a{color:#0768CC; font-family:tahoma; font-size:11px; font-weight:normal}
+
+.login-panel .div1 .left{float:left; line-height:22px; height:22px; width:125px; white-space:nowrap; overflow:hidden}
+.login-panel .div1 .right{   overflow:visible;    float:left}
+.login-panel .div1 .txt{ width:300px; font-size:13px !important}
+.login-panel .div1 .checkbox{padding:0 10px 0 0; text-align:right; width:65px}
+
+.login-panel .div1 .checkbox input{    margin:1px 0 0 0}
+.login-panel .div1 .button-login{background:url("../images/home-login.png") no-repeat scroll 0 0 transparent; border:medium none; cursor:pointer; height:21px; margin-right:10px; width:46px; float:right}
+
+.home-index .rightbar-element{float:left; font-family:tahoma; font-size:11px; margin-right:10px; margin-bottom:8px}
+.home-index .rightbar-element .top{float:left; height:23px; margin-right:10px; width:300px}
+.home-index .rightbar-element .top .top-left{background:url("../images/home-index-top-left.png") no-repeat scroll 0 0 transparent; float:left; height:23px; width:28px}
+.home-index .rightbar-element .top .top-center{background:none repeat scroll 0 0 #ECEFF5; float:left; height:23px; width:244px}
+.home-index .rightbar-element .top .top-right{background:none repeat scroll 0 0 #ECEFF5; float:left; height:23px; width:28px}
+.home-index .rightbar-element .mid{background:none repeat scroll 0 0 #ECEFF5; float:left; padding:0 28px; width:244px}
+.home-index .rightbar-element .mid .mid-center{}
+.home-index .rightbar-element .mid .mid-center .mid-center-top{border-bottom:1px solid #C0C9DC; color:#6C6C6C; margin-bottom:10px; padding-bottom:10px}
+.home-index .rightbar-element .mid .mid-center .mid-center-bot{color:#6478A3; text-align:center}
+.home-index .rightbar-element .bot{}
+.home-index .rightbar-element .bot .bot-left{background:none repeat scroll 0 0 #ECEFF5; float:left; height:23px; width:28px}
+.home-index .rightbar-element .bot .bot-center{background:none repeat scroll 0 0 #ECEFF5; float:left; height:23px; width:245px}
+.home-index .rightbar-element .bot .bot-right{background:url("../images/home-index-bot-right.png") no-repeat scroll 0 0 transparent; float:left; height:23px; width:27px}
+
+.alert-list{    padding:10px 15px}
+.alert-list .div1{height:250px; font-size:30px !important; padding:20px; text-align:center; color:#6478A3}
+.alert-list .date{margin:10px 0; text-align:center}
+.alert-list .title{float:left; background:url("../images/review-phone-history.png") no-repeat scroll 0 0 transparent; height:37px; margin:0; width:200px}
+.alert-list .number{color:#3D507B; float:left; font-size:16px; font-weight:bold; margin:6px 0 0 10px}
+.alert-list .add-note{
+  -khtml-border-radius: 0 12px 12px 0;
+  -moz-border-radius: 0 12px 12px 0;
+  -webkit-border-top-left-radius: 0;
+  -webkit-border-top-right-radius: 12px;
+  -webkit-border-bottom-left-radius: 12px;
+  -webkit-border-bottom-right-radius: 0;
+  border-radius: 0 12px 12px 0;
+  height:28px;line-height:28px; margin:7px 0; color: #3B5998; cursor: pointer; padding: 0 8px 0 20px;border: 1px solid #bbb; font-weight:bold; font-size:12px; background: url(../images/edit.png) no-repeat 2px 5px; }
+.alert-list .details{    background:none repeat scroll 0 0 #ECEFF5;     padding:5px 0}
+.alert-list .details tr:hover{background:#fafafa}
+.alert-list .scroll-details{background:none repeat scroll 0 0 #ECEFF5; height:195px; overflow-x:hidden; overflow-y:scroll; width:300px}
+.alert-list .details .details-title{    background:none repeat scroll 0 0 #FFF;     border:1px solid #C0C9DC;     color:#6478A3;     font-size:14px;     margin:2px 5px 10px 5px;     padding:3px;     text-align:center;     clear:both;     float:none}
+.alert-list .details div{    margin-left:30px}
+.alert-list .details div td{color:#6C6C6C; padding:1px 15px 1px 0}
+
+.alert-list .note-list{}
+.alert-list .note-list .note-count{    background:url("../images/comment_icn.png") no-repeat scroll 5px 4px #f3f3f3;     border-top:none;  color:#3B5998;     margin:0;     padding:5px 0 5px 25px}
+.note-count .node-count-content{    overflow:hidden;     white-space:nowrap}
+.alert-list .note-list .note-row{    background-color:#ECEFF5;     margin-top:1px;     padding:3px 7px}
+.alert-list .note-list .even{    background-color:#fff}
+.alert-list .note-list .note-row:hover .delete{display:block !important}
+.alert-list .note-list .note-scroll{    overflow-x:hidden;}
+.alert-list .note-list .from{color:#3B5998; float:left; font-size:11px; font-weight:bold}
+.alert-list .note-list .message{    padding:2px 0}
+.alert-list .note-list .datetime{    color:#808080;     font-size:11px;     float:right}
+.alert-list .note-list .delete{background:url("../images/pk-breadcrumb-delete.png") no-repeat scroll 0 0 transparent; cursor:pointer; display:block; float:right; height:16px; margin-right:-7px; margin-top:-7px; width:16px; opacity:0.6}
+.alert-list .note-list .delete:Hover{background:url("../images/pk-breadcrumb-delete.png") no-repeat scroll 0 -16px transparent; opacity:0.9}
+.alert-list .location{}
+.alert-list .location h1{padding:10px 0}
+.alert-list .location .map{margin:10px 0 15px 0}
+.alert-list .location .map .map_canvas{background-color:#E5E3DF; height:240px; overflow:hidden; position:relative; width:300px; z-index:0}
+.alert-list .alert{    padding:0;     clear:both}
+.alert-list .scroll-alert{clear: both; max-height:600px;     overflow-x:hidden;     overflow-y:auto;     padding:0}
+.alert-list .col-left .scroll-alert {max-height:480px;}
+
+.alert-list .alert-not-login{    max-height:773px}
+.alert-list .alert .alert-rows{    clear:both}
+.alert-list .alert .main-photo{margin:0 10px 0 0; width:100%}
+.alert-list .alert .main-photo .photo-txt{font-size:20px; font-weight:bold; margin:10px 0 0}
+.alert-list .alert .main-photo .photo-block{border:1px solid #E8E8E8; margin:3px 3px 3px 0; padding:5px}
+.alert-list .alert .main-photo .photo{text-align:center}
+.alert-list .alert .main-photo .photo img{max-height:none; max-width:395px; width: 98%}
+.alert-list .alert .main-audio{border-bottom:1px dashed #7A7A7A; margin:15px 5px 15px 0; padding-bottom:10px}
+.alert-list .alert .main-audio .emergency-null{margin-top:10px}
+.alert-list .alert .main-audio .media{}
+.alert-list .alert .main-audio .audio-text{font-size:20px; font-weight:bold; margin:10px 0}
+.alert-list .alert .main-audio .mp3-play{height:24px; overflow:hidden}
+.alert-list .alert .main-audio .mp3-play img{margin-top:-24px; }
+.alert-list .alert .main-audio .mp3-play img:Hover{margin-top:0px}
+
+.alert-list .alert .main-audio .play{background:url("/sosdata/sosbeacon/images/play_overlay_bg.png") no-repeat scroll 0 0 transparent; border:3px solid #999; display:block; height:240px; overflow:hidden; position:relative; vertical-align:bottom; width:317px; border-bottom:0}
+.alert-list .alert .main-audio .play div{bottom:0; display:block; float:left; margin-bottom:0px; margin-left:-1px; margin-right:-1px; position:absolute}
+.alert-list .alert .main-audio .audio{min-height:100px}
+.alert-list .alert .main-audio .date{float:left; margin:10px 0; width:100%}
+.alert-list .alert .main-audio .div_link{float:left; margin-top:0; width:100%}
+
+.alert-list .recording-list{    border-color:#E8E8E8;     border-style:solid none solid solid;     border-width:1px 0 1px 1px;     height:156px;     overflow-x:hidden;     overflow-y:scroll;     width:100%;     float:none;     margin:0 0 10px 0}
+
+.alert-list .alert-list-select-phone{    float:left;     width:49%}
+
+.alert-list .recording-list a:visited{color:#1959AC}
+.alert-list .recording-list .active{background:none repeat scroll 0 0 #ECEFF5; font-weight:bold}
+.alert-list .recording-list .list-alert{text-align:center; width:100%}
+
+.gmap{    padding:0 1px; border: 1px solid #eee}
+.google_map_canvas{ width:auto; height:300px}
+
+.main-content .alert-list .col-right, 
+.main-content .alert-list .col-left{    width:49%}
+
+.alert-list .recording-list .list-alert .aStt{color:#6C6C6C}
+.alert-list .recording-list .list-alert td{border-color:#E8E8E8; border-right:1px solid #E8E8E8; border-style:none solid solid none; border-width:0 1px 1px 0; padding:2px 0}
+.alert-list .recording-list .list-alert td .first{border:1px solid #E8E8E8}
+.alert-list .recording-list .list-alert td .last{border:1px solid #E8E8E8}
+.alert-list .recording-list .list-alert th{border-bottom:1px solid #E8E8E8; border-right:1px solid #E8E8E8; color:#666; padding:2px 0}
+.alert-list .recording-list .list-alert .id-img{float:left; height:16px; margin-left:3px; width:16px}
+.alert-list .recording-list .list-alert .id-num{}
+
+.alert-list .form-add-note{padding:2px 5px;     clear:both;     margin: 5px 1px;     border:1px solid #ddd}
+#formAddNote h3{    margin:3px 0;     font-size:15px;     color:#333;     padding:0 0 0 20px;     background:url(../sosbeacon/images/cancel.png) no-repeat left center;  height:18px;  line-height:18px}
+.alert-list .form-add-note input.noteFrom{ color:#666;  font-weight:bold;  width:95%;  height:25px;  border:1px solid #ccc;  padding:0 5px;  margin:5px 0}
+.alert-list .form-add-note .noteMsg{ color:#666;  height:30px;  line-height:20px;  width:95%;  border:1px solid #ccc;  padding:5px;  font-size:15px}
+.alert-list .form-add-note .noteAdd{ font-size:15px;  font-weight:bold;  height:30px;  line-height:30px;  padding:0 15px;  margin:5px}
+.alert-list .form-add-note .noteCancel{ font-size:15px;  font-weight:bold;  height:30px;  line-height:30px;  padding:0 15px;  margin:5px}
+
+.alert-list .last-clear{clear:left}
+
+.user-index .list-alert{margin:10px; width:864px}
+.user-index .list-alert th{text-align:center; padding:5px; border:1px solid #E8E8E8; font-size:13px}
+.user-index .list-alert td{border:1px solid #E8E8E8; padding:5px; text-align:center}
+.user-index .list-alert td a{display:block; width:100%}
+.user-index .alert-index-none{font-size:25px; margin:50px; text-align:center}
+
+#user-forgot{margin:20px 150px 50px 140px}
+
+#user-forgot #title{font-size:16px; font-weight:bold; margin:5px 0 20px}
+
+#user-forgot .txt{margin:3px 0; width:300px}
+
+#user-forgot .btn{}
+
+#user-forgot .message{color:#3B5998; font-weight:bold; margin:15px 0}
+
+.user-register{}
+.user-register .div1{margin-left:20px; margin-top:5px; padding:20px}
+.user-register .div1 h2{}
+.user-register .tblReg{}
+.user-register .tblReg td, th{line-height:20px; vertical-align:top}
+.user-register .tblReg .txt{width:248px}
+.user-register .tblReg .hint{color:#999; font-style:italic}
+.user-register .tblReg .country-code{width:50px}
+.user-register .tblReg .phone-num{width:182px}
+
+.login-home{ padding:20px}
+.addition-text{display:none; color:#FFF; float:left; font-family:arial; font-size:19px; margin:30px 0; text-align:center; width:100%}
+
+.clearFloat{clear:both}
+
+.paginationControl{margin:10px; text-align:right}
+.paginationControl ul{}
+.paginationControl li{border:1px solid #CACACA; cursor:pointer; float:left; list-style:none outside none; margin:0 2px; min-height:14px; min-width:16px; padding:1px; text-align:center}
+.paginationControl li:hover{background:#1959AC; color:#fff !important}
+.paginationControl a:hover{background:#1959AC; color:#fff !important}
+.paginationControl a{font-family:Verdana,Arial,"Helvetica Neue",Helvetica,sans-serif !important; text-decoration:none !important; display:block}
+.paginationControl li.active{font-size:11px; font-weight:bold; background:#1959AC; color:#fff !important}
+.paginationControl ul.countItems{}
+.paginationControl li.disabled{display:none}
+
+.div-add-note{float: left}
+
+a.android-market{    display:block;     overflow:hidden;     text-indent:-999px;     width:300px;     height:70px;     margin:0 0 5px 0;     background:url(../sosbeacon/images/androidmarket.png) no-repeat}
+
+a.itune-app{    display:block;     overflow:hidden;     text-indent:-999px;     width:300px;     height:70px;     margin:5px 0 10px 0;     background:url(../sosbeacon/images/itune.png) no-repeat}
+
+.message-info{    padding:5px;     color:blue;     text-align:center;     margin:3px 0}
+input.send_files_to_email{    float:right;     font-weight:bold;     font-size:14px;     margin:5px 5px 5px 0;     height:29px;     line-height:29px}
+
+h2.log-title span{    line-height:35px}
+
+.contact-list table td{    vertical-align:top}
+
+a.add-contact{    display:block;     float:left;     margin:5px;     background:url(../sosbeacon/images/add.png) no-repeat left;     height:18px;     line-height:18px;     padding-left:30px;     font-weight:bold;     text-decoration:none !important;     font-size:16px  !important;     color:#1959ac !important}
+a.import-google-contacts{    display:block;     float:left;     margin:5px;     background:url(../sosbeacon/images/google.png) no-repeat left;     height:18px;     line-height:18px;     padding-left:22px;     font-weight:bold;     text-decoration:none !important;     font-size:16px  !important;     color:#1959ac !important}
+a.import-yahoo-contacts{    display:block;     float:left;     margin:5px;     background:url(../sosbeacon/images/yahoo.png) no-repeat left;     height:18px;     line-height:18px;     padding-left:22px;     font-weight:bold;     text-decoration:none !important;     font-size:16px  !important;     color:#1959ac !important}
+
+a.edit-contact{    background:url(../sosbeacon/images/edit.png) no-repeat left;     line-height:16px;     padding:5px;     margin:5px;     text-decoration:none !important}
+
+a.update-contact{    background:url(../sosbeacon/images/save.png) no-repeat left;     line-height:16px;     padding:3px;     margin:5px;     text-decoration:none !important}
+
+a.cancel-contact{    background:url(../sosbeacon/images/cancel.png) no-repeat left;     line-height:16px;     padding:3px;     margin:5px;     text-decoration:none !important}
+
+a.delete-contact{    background:url(../sosbeacon/images/del.png) no-repeat left;     line-height:16px;     padding:3px;     margin:5px;     text-decoration:none !important}
+
+a.browse{    background:url(../sosbeacon/images/Icon_Search.jpg) no-repeat center center;     display:block;     line-height:16px;     padding:1px 3px;     margin:1px 5px;     text-decoration:none !important}
+a.browse:hover{}
+
+h1.yahoo{    padding:0 0 0 50px; height:60px; line-height:60px; background:url(/sosbeacon/images/yahoo48.png) no-repeat left center}
+
+h1.google{    padding:0 0 0 60px; height:60px; line-height:60px; background:url(/sosbeacon/images/google48.png) no-repeat left center}
+
+#noteList{ border:1px solid #eee;  padding:0 1px; max-height:250px;  overflow:auto; margin: 5px 0; clear: both}
+#noteList .note-scroll{ }
+#note-count-value{ font-weight:bold}
+#noteList #chat-content { width: 100% }
+#btnChatUp { display: block; float: left; margin: 0 6px 0 0; width: 32px; height: 32px; background: url(../sosbeacon/images/bt-up.png) no-repeat center center; }
+#btnChatDown { display: block; float: left; margin: 0; width: 32px; height: 32px; background: url(../sosbeacon/images/bt-down.png) no-repeat center center; }
+#scroll-button {float: right; padding: 3px 0 0 0}
+

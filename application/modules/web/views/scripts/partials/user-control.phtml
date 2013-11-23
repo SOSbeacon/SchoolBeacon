@@ -1,0 +1,26 @@
+<?php $auth = $this->auth ?>
+<div id="loginRegion" class="login-region">
+    <?php if (!$auth->getId()) : ?>
+        <form action="/web/users/login" method="POST" id="frmLogin" name="frmLogin">
+            <input class="text textbox-auto-clear" type="text" name="user" id="user" value="Phone number" /> <br />
+            <input class="text" type="password" name="password" value="password" onfocus="this.value=''" />
+            <div class="row">
+                <div class="left checkbox"><input type="checkbox" name="chkRemember"/> Remember me</div>
+                <div class="right"><input class="button-login" type="submit" name="btnLogin" value="" /></div>
+            </div>
+            <div class="row" style="padding-left: 10px">
+                <a href="/web/users/forgot">Forgot login?</a>
+            </div>                                            
+        </form>
+    <?php else: ?>
+        <div class="account">
+            Welcome
+            <strong>
+                <?php if ($auth->getName()) { echo htmlspecialchars($auth->getName()) . ' - '; } ?>  
+                <?php echo htmlspecialchars($auth->getNumber()); ?>!</strong> <br />
+            <a href="/web/alert/index/go/last">Phone history</a> | 
+            <a href="/webapp">WebAPP</a> | 
+            <a href="/web/users/logout">Logout</a>
+        </div>
+    <?php endif; ?>
+</div>

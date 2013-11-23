@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php
+$auth = Sos_Service_Functions::webappAuth(false);
+?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta name="viewport" content="initial-scale=0.66,minimum-scale=0.66,maximum-scale=2.0,user-scalable=yes,width=device-width,height=device-height" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="icon" href="/images/logo.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="/images/logo.ico" type="image/x-icon" />
+        <title>SOSbeacon WebAPP</title>
+        <link href="/styles/jquery-ui/jquery-ui-1.8.16.custom.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="/styles/webapp.css?k" media="screen" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="/scripts/jquery.js"></script>
+        <script type="text/javascript" src="/scripts/jquery.validate.js"></script>
+        <script type="text/javascript" src="/scripts/jquery-ui-1.8.16.custom.min.js"></script>
+        <script src="/scripts/jquery.cookie.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            function setLoading() {
+                $('#processing').show();
+                $('#main').addClass('page-loading');
+            }
+            $(window).load( function() {
+                $('#processing').hide();
+                $('.page-loading').removeClass('page-loading');
+                <?php if(!$_POST) : ?>$('#content').hide();$('#content').slideDown('slow');<?php endif ?>
+            });
+            
+        </script>
+    </head>
+    <body class="<?php if ($auth->getId()) : ?>login<?php else: ?>not-login<?php endif ?>" >
+        
+            <?php 
+            if ($auth->getId()) :
+                $accountTitle = 'Phone number ' . $auth->getNumber();
+            ?><div id="header">
+                <ul id="main-menu">
+                    <li class="back"><a href="javascript:history.back(1)"><span>Back</span></a></li>
+                    <li class="home"><a href="/"><span>Home</span></a></li>
+                    <li class="checkin"><a href="/webapp"><span>Broadcast</span></a></li>
+                    <li class="group"><a href="/webapp/groups"><span>Group</span></a></li>
+                    <li class="email"><a target="_blank" href="/web/about/contact"><span>Customer Service</span></a></li>
+                    <li class="settings"><a href="/webapp/settings"><span>Settings</span></a></li>
+					<li class="account"><a href="/webapp/account"><span>Account</span></a></li>
+                    <!-- li class="review"><a target="_blank" href="/web/alert/index/go/last"><span>Phone History</span></a></li -->
+                    <!-- li class="email"><a href="#/webapp/mail"><span>Email</span></a></li -->
+                    <!-- li class="logout"><a title="<?php echo $accountTitle ?>" href="/webapp/account/logout"><span>Logout</span></a></li-->
+                </ul>
+            </div>
+            <?php endif; ?>
+           
+        <div id="main" class="page-loading">
+            <div id="processing">
+                <img alt="loading..." src="/images/ajax_spinner.gif" /><br />
+                processing, please wait...
+            </div>
+            <div id="wrapper">
+                <div id="content">
+                    <h1 class="title"><?php echo $this->layout()->title ?></h1>
+                    <?php echo $this->layout()->content ?>
+                </div>
+                <div id="footer" class="center">
+                    <div class="account-menu">
+                        Account# <strong><?php echo $auth->getNumber() ?></strong><span class="normal"> | </span>
+                        <a target="_blank" href="/web/alert/index/go/last">Phone History</a><span class="normal"> | </span>
+                        <a title="<?php echo $accountTitle ?>" href="/webapp/account/logout" class="logout">Logout</a>
+                    </div>
+                    <div class="copyright">Copyright © 2012 SOSbeacon. All Rights Reserved</div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

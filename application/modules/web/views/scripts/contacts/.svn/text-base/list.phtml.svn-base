@@ -1,0 +1,173 @@
+<script type="text/javascript">
+    function contactGroupsSelect(selectedId) {
+        var output = '<select name="contactGroups" class="required ' + (selectedId > 0 ? 'form-element' : '') + '">';
+        output += '<option value=""> - Select - </option>';
+      <?php foreach ($this->groups as $group): ?>
+        output += '<option value="<?php echo $group['id'] ?>" ' + ( selectedId == <?php echo $group['id'] ?> ? 'selected="selected"' : '') + '><?php echo $group['name'] ?></option>';
+      <?php endforeach; ?>
+        output += '</select>';
+        return output;
+    }
+
+    function createContactForm(parentRow) {
+        parentRow.find('.display, .edit-contact').hide();
+        parentRow.find('.update-contact, .cancel-contact').show();
+        parentRow.find('.contact-name').append('<input type="hidden" name="contactId" class="required form-element" value="' + parentRow.find('.contact-id').html() + '" />');
+        parentRow.find('.contact-name').append('<input name="contactName" size="12" class="required form-element" value="' + parentRow.find('.contact-name .display').html() + '" />');
+        parentRow.find('.contact-email').append('<input id="contactEmail" name="contactEmail" size="18" class="email requireEmailOrPhone form-element" value="' + parentRow.find('.contact-email .display').html() + '" />');
+        parentRow.find('.contact-textphone').append('<input id="contactTextPhone" name="contactTextPhone" size="10" class="phoneUS requireEmailOrPhone form-element" value="' + parentRow.find('.contact-textphone .display').html() + '" />');
+        parentRow.find('.contact-voicephone').append('<input id="contactVoicePhone" name="contactVoicePhone" size="10" class="phoneUS form-element" value="' + parentRow.find('.contact-voicephone .display').html() + '" />');
+        parentRow.find('.contact-group').append(contactGroupsSelect(parseInt(parentRow.find('.contact-group .groupId').html())));
+    }
+
+    function addContactForm() {
+        var output = '<table style="border:1px solid #ccc; margin: 5px; padding: 5px;">';
+        output += '<tr><td style="width: 150px">Name: </td><td style="width: 250px"><input class="required" name="contactName" size="18" /></td></tr>';
+        output += '<tr><td>Email: </td><td><input class="email requireEmailOrPhone" id="contactEmail" name="contactEmail" size="18" /></td></tr>';
+        output += '<tr> <td>Text phone:</td><td><input class="phoneUS requireEmailOrPhone" id="contactTextPhone" name="contactTextPhone" size="18" /></td></tr>';
+        output += '<tr><td>Voice phone: </td><td> <input class="phoneUS" name="contactVoicePhone" size="18"  /></td></tr>';
+        output += '<tr><td>Group: </td><td>' + contactGroupsSelect(<?php echo $this->groupId ?>) + '</td></tr>';
+        output += '<tr><td colspan="2">';
+        output += '<input type="submit" value="Submit" />';
+        output += '<input class="add-contact-cancel" type="button" value="Cancel" />';
+        output += '</td></tr></table>';
+        $('#formMethod').val('POST');
+        return output;
+    }
+
+    function resetForm() {
+        $('.display').show();
+        $('.display, .edit-contact').show();
+        $('.update-contact, .cancel-contact').hide();
+        $('.form-element').remove();
+        $('label.error').remove();
+        $('#add-contact-form').html('');
+        $('#formMethod').val('');
+        $('#contactId').val('');
+    }
+    $(document).ready(function() {
+        jQuery.validator.addMethod("phoneUS", function(phone_number, element) {
+            phone_number = phone_number.replace(/\s+/g, "");
+            return this.optional(element) || phone_number.length > 9 && phone_number.match(/^(1-?)?(\([2-9]\d{2}\)|[2-9]\d{2})-?[2-9]\d{2}-?\d{4}$/);
+        }, "Please specify a valid US phone number");
+
+        jQuery.validator.addMethod("requireEmailOrPhone", function(value, element) {
+            return ($.trim($('#contactEmail').val()) != '') || ($.trim($('#contactTextPhone').val()) != '');
+        }, "Please enter email or phone number");
+
+        $('#contactForm').validate();
+        
+        $('a.add-contact').click(function() {
+            resetForm();
+            $('#add-contact-form').html(addContactForm());
+            return false;
+        });
+
+        $('.add-contact-cancel').live('click', function() {
+            resetForm();
+        });
+
+        $('a.edit-contact').click(function() {
+            var parentRow = $(this).parents('.contact-row');
+            resetForm();
+            createContactForm(parentRow);
+            return false;
+        });
+
+        $('a.update-contact').click(function() {
+            $('#formMethod').val('PUT');
+            $('#contactForm').submit();
+            return false;
+        });
+
+        $('a.delete-contact').click(function() {
+            if (confirm('Are you sure you want to delete this contact?')) {
+                resetForm();
+                var parentRow = $(this).parents('.contact-row');
+                $('#formMethod').val('DELETE');
+                $('#contactId').val(parentRow.find('.contact-id').html());
+                $('#contactForm').submit();
+            }
+            return false;
+        });
+
+        $('a.cancel-contact').click(function() {
+            resetForm();
+            return false;
+        });
+    });
+</script>
+
+<div class="phone-list contact-list">
+    <form id="contactForm" method="post" action="">
+        <input id="formMethod" type="hidden" name="_method" />
+        <input id="contactId" type="hidden" name="contactId" />
+        <h1>Contact List</h1>
+        <div style="text-align: right">
+            Phone nunmber: <strong><a href="/web/groups?phoneId=<?php echo $this->phoneId ?>"><?php echo $this->phoneNumber ?></a></strong>
+            | Group: <strong><?php echo $this->groupName ?></strong>
+        </div>
+        <div style="height:40px">
+            <a href="#" class="add-contact">Add Contact</a>
+            <a href="/web/contacts/import-google-contacts/phoneId/<?php echo $this->phoneId ?>/groupId/<?php echo $this->groupId ?>" class="import-google-contacts">Import Google Contacts</a>
+            <a href="/web/contacts/import-yahoo-contacts/phoneId/<?php echo $this->phoneId ?>/groupId/<?php echo $this->groupId ?>" class="import-yahoo-contacts">Import Yahoo Contacts</a>
+        </div>
+        <?php if($this->message): ?>
+        <div style="border:1px solid #ccc; padding: 5px; margin: 5px 0; font-weight: bold"><?php echo $this->message ?></div>
+        <?php endif ?>
+        <div id="add-contact-form"></div>
+        <div style="height: 444px;overflow: auto; border: 1px solid #eee">
+        <table class="tblList" style="width: 99%">
+            <thead>
+                <tr>
+                    <th>Contact name</th>
+                    <th>Group</th>
+                    <th>Email</th>
+                    <th>Text phone</th>
+                    <th>Voice phone</th>
+                    <th>Type</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+        <?php foreach ($this->contacts as $contact) : ?>
+            <tr class="contact-row" id="contact-<?php echo $contact['id'] ?>">
+                <td style="text-align: left" class="contact-name">
+                    <span class="contact-id" style="display:none"><?php echo $contact['id'] ?></span>
+                    <span class="display"><?php echo htmlspecialchars($contact['name']) ?></span>
+                </td>
+                <td class="contact-group">
+                    <span class="groupId" style="display:none"><?php echo $contact['groupId'] ?></span>
+                    <span class="display"><?php echo htmlspecialchars($contact['groupName']) ?></span>
+                </td>
+                <td class="contact-email">
+                    <span class="display"><?php echo htmlspecialchars($contact['email']) ?></span>
+                </td>
+                <td class="contact-textphone">
+                    <span class="display"><?php echo $contact['textPhone'] ?></span>
+                </td>
+                <td class="contact-voicephone">
+                    <span class="display"><?php echo $contact['voicePhone'] ?></span>
+                </td>
+                <td>
+                    <?php echo $contact['typeName'] ?>
+                </td>
+                <td style="white-space: nowrap">&nbsp;
+                    <?php if ($contact['typeId'] != '1') : ?>
+                        <a title="Edit" class="edit-contact" href="#contact-<?php echo $contact['id'] ?>">&nbsp;&nbsp;&nbsp;</a>
+                        <a title="Update" class="update-contact" href="#contact-<?php echo $contact['id'] ?>" style="display: none">&nbsp;&nbsp;&nbsp;</a>
+                        <a title="Cancel" class="cancel-contact" href="#contact-<?php echo $contact['id'] ?>" style="display: none">&nbsp;&nbsp;&nbsp;</a>
+                    <?php endif ?>
+                </td>
+                <td>&nbsp;
+                    <?php if ($contact['typeId'] != '1') : ?>
+                        <a title="Delete" class="delete-contact" href="#contact-<?php echo $contact['id'] ?>">&nbsp;&nbsp;&nbsp;</a>
+                    <?php endif ?>
+                </td>
+            </tr>
+        
+        <?php endforeach; ?>
+        </table>
+        </div>
+    </form>
+</div>
