@@ -126,12 +126,21 @@
 		ABE481E5126501F0009B88BB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE481E4126501F0009B88BB /* QuartzCore.framework */; };
 		ABEEAE4C121F078600ADCBFC /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = ABEEAE4B121F078600ADCBFC /* Icon.png */; };
 		B38E339017E7077300B926FB /* libFlurry_4.2.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B38E338F17E7077300B926FB /* libFlurry_4.2.3.a */; };
+		B3AC87EC1859B54F0094A68D /* dsym_upload.sh in Resources */ = {isa = PBXBuildFile; fileRef = B3AC87EA1859B54F0094A68D /* dsym_upload.sh */; };
+		B3AC87ED1859B54F0094A68D /* libCrittercism_v4_3_0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3AC87EB1859B54F0094A68D /* libCrittercism_v4_3_0.a */; };
 		B3AFE86C17E2B79F008052F5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B3AFE86B17E2B79F008052F5 /* Default-568h@2x.png */; };
+		B3B5BD53186C2FE9004A3EF7 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3B5BD4D186C2FE9004A3EF7 /* libTestFlight.a */; };
+		B3B5BD54186C2FE9004A3EF7 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = B3B5BD4E186C2FE9004A3EF7 /* README.md */; };
+		B3B5BD55186C2FE9004A3EF7 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = B3B5BD4F186C2FE9004A3EF7 /* release_notes.md */; };
+		B3D11D20184774F5007F50AA /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = B3D11D1F184774F5007F50AA /* UIImage+fixOrientation.m */; };
+		B3F9D8EC185AE5F400E3F577 /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B3F9D8E5185AE5F400E3F577 /* TPKeyboardAvoidingCollectionView.m */; };
+		B3F9D8ED185AE5F400E3F577 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = B3F9D8E7185AE5F400E3F577 /* TPKeyboardAvoidingScrollView.m */; };
+		B3F9D8EE185AE5F400E3F577 /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B3F9D8E9185AE5F400E3F577 /* TPKeyboardAvoidingTableView.m */; };
+		B3F9D8EF185AE5F400E3F577 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B3F9D8EB185AE5F400E3F577 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
 		CD08BA7412D6F4B4002E4584 /* CaptorView.m in Sources */ = {isa = PBXBuildFile; fileRef = AB577D6B12022D8A001C2A41 /* CaptorView.m */; };
 		CD31662412D45EB000BD9A63 /* clearTrack.png in Resources */ = {isa = PBXBuildFile; fileRef = CD31662312D45EB000BD9A63 /* clearTrack.png */; };
 		F40C065014A40F6D007B5200 /* OfflineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F40C064E14A40F6D007B5200 /* OfflineViewController.m */; };
 		F40C065114A40F6D007B5200 /* OfflineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F40C064F14A40F6D007B5200 /* OfflineViewController.xib */; };
-		F418E1611467D08E000BDFF4 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F418E15F1467D08E000BDFF4 /* libTestFlight.a */; };
 		F421851414B82781005CECCC /* OfflineModeBgr.png in Resources */ = {isa = PBXBuildFile; fileRef = F421851214B82781005CECCC /* OfflineModeBgr.png */; };
 		F421851514B82781005CECCC /* OfflineModeBgr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F421851314B82781005CECCC /* OfflineModeBgr@2x.png */; };
 		F421851B14B829DD005CECCC /* CallButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F421851714B829DD005CECCC /* CallButton.png */; };
@@ -375,13 +384,32 @@
 		ABEEAE4B121F078600ADCBFC /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		B38E338E17E7077300B926FB /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		B38E338F17E7077300B926FB /* libFlurry_4.2.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_4.2.3.a; sourceTree = "<group>"; };
+		B3AC87E71859B54F0094A68D /* CRFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRFilter.h; sourceTree = "<group>"; };
+		B3AC87E81859B54F0094A68D /* Crittercism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Crittercism.h; sourceTree = "<group>"; };
+		B3AC87E91859B54F0094A68D /* CrittercismDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrittercismDelegate.h; sourceTree = "<group>"; };
+		B3AC87EA1859B54F0094A68D /* dsym_upload.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = dsym_upload.sh; sourceTree = "<group>"; };
+		B3AC87EB1859B54F0094A68D /* libCrittercism_v4_3_0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCrittercism_v4_3_0.a; sourceTree = "<group>"; };
 		B3AFE86B17E2B79F008052F5 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		B3B5BD4D186C2FE9004A3EF7 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		B3B5BD4E186C2FE9004A3EF7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		B3B5BD4F186C2FE9004A3EF7 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
+		B3B5BD50186C2FE9004A3EF7 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
+		B3B5BD51186C2FE9004A3EF7 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
+		B3B5BD52186C2FE9004A3EF7 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		B3D11D1E184774F5007F50AA /* UIImage+fixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+fixOrientation.h"; sourceTree = "<group>"; };
+		B3D11D1F184774F5007F50AA /* UIImage+fixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+fixOrientation.m"; sourceTree = "<group>"; };
+		B3F9D8E4185AE5F400E3F577 /* TPKeyboardAvoidingCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingCollectionView.h; sourceTree = "<group>"; };
+		B3F9D8E5185AE5F400E3F577 /* TPKeyboardAvoidingCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingCollectionView.m; sourceTree = "<group>"; };
+		B3F9D8E6185AE5F400E3F577 /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
+		B3F9D8E7185AE5F400E3F577 /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
+		B3F9D8E8185AE5F400E3F577 /* TPKeyboardAvoidingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingTableView.h; sourceTree = "<group>"; };
+		B3F9D8E9185AE5F400E3F577 /* TPKeyboardAvoidingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingTableView.m; sourceTree = "<group>"; };
+		B3F9D8EA185AE5F400E3F577 /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
+		B3F9D8EB185AE5F400E3F577 /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
 		CD31662312D45EB000BD9A63 /* clearTrack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clearTrack.png; sourceTree = "<group>"; };
 		F40C064D14A40F6D007B5200 /* OfflineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfflineViewController.h; sourceTree = "<group>"; };
 		F40C064E14A40F6D007B5200 /* OfflineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfflineViewController.m; sourceTree = "<group>"; };
 		F40C064F14A40F6D007B5200 /* OfflineViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OfflineViewController.xib; sourceTree = "<group>"; };
-		F418E15F1467D08E000BDFF4 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
-		F418E1601467D08E000BDFF4 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		F421851214B82781005CECCC /* OfflineModeBgr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OfflineModeBgr.png; sourceTree = "<group>"; };
 		F421851314B82781005CECCC /* OfflineModeBgr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OfflineModeBgr@2x.png"; sourceTree = "<group>"; };
 		F421851714B829DD005CECCC /* CallButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CallButton.png; sourceTree = "<group>"; };
@@ -490,6 +518,7 @@
 				FA99451715B8164C0027C1D8 /* MobileCoreServices.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				B3AC87ED1859B54F0094A68D /* libCrittercism_v4_3_0.a in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				22C992A011C8A71800482E6D /* AddressBook.framework in Frameworks */,
 				22C992A211C8A71800482E6D /* AddressBookUI.framework in Frameworks */,
@@ -500,11 +529,11 @@
 				ABA18E271235392800D1F9E4 /* AudioToolbox.framework in Frameworks */,
 				ABE481E5126501F0009B88BB /* QuartzCore.framework in Frameworks */,
 				A5BA10D9128D1A6A0016DD72 /* CFNetwork.framework in Frameworks */,
+				B3B5BD53186C2FE9004A3EF7 /* libTestFlight.a in Frameworks */,
 				B38E339017E7077300B926FB /* libFlurry_4.2.3.a in Frameworks */,
 				623D33CD13AE6CE800E20B72 /* MessageUI.framework in Frameworks */,
 				0A52021113CBEA8C0066655A /* Security.framework in Frameworks */,
 				0A52021313CBEA8C0066655A /* SystemConfiguration.framework in Frameworks */,
-				F418E1611467D08E000BDFF4 /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -699,6 +728,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				B3F9D8E3185AE5F400E3F577 /* TPKeyboardAvoiding */,
+				B3AC87E61859B54F0094A68D /* CrittercismSDK */,
 				B3AFE86B17E2B79F008052F5 /* Default-568h@2x.png */,
 				FABCDDC915B810F5006A1114 /* TNHRequestHelper */,
 				FABCDDAB15B81082006A1114 /* ASIHTTPRequest */,
@@ -721,6 +752,7 @@
 		29B97315FDCFA39411CA2CEA /* AppSetting */ = {
 			isa = PBXGroup;
 			children = (
+				B3B5BD4C186C2FE9004A3EF7 /* TestFlightSDK2.1.3 */,
 				62B08B1713030DF400A3BE9A /* FlurryLibWithLocation */,
 				32CA4F630368D1EE00C91783 /* SOSBEACON_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
@@ -749,8 +781,6 @@
 			children = (
 				FA99451915B816590027C1D8 /* libz.dylib */,
 				FA99451615B8164C0027C1D8 /* MobileCoreServices.framework */,
-				F418E15F1467D08E000BDFF4 /* libTestFlight.a */,
-				F418E1601467D08E000BDFF4 /* TestFlight.h */,
 				ABE481E4126501F0009B88BB /* QuartzCore.framework */,
 				22C9937F11C8C9E300482E6D /* CoreAudio.framework */,
 				22C9934211C8C44100482E6D /* AVFoundation.framework */,
@@ -891,6 +921,46 @@
 			name = MainView;
 			sourceTree = "<group>";
 		};
+		B3AC87E61859B54F0094A68D /* CrittercismSDK */ = {
+			isa = PBXGroup;
+			children = (
+				B3AC87E71859B54F0094A68D /* CRFilter.h */,
+				B3AC87E81859B54F0094A68D /* Crittercism.h */,
+				B3AC87E91859B54F0094A68D /* CrittercismDelegate.h */,
+				B3AC87EA1859B54F0094A68D /* dsym_upload.sh */,
+				B3AC87EB1859B54F0094A68D /* libCrittercism_v4_3_0.a */,
+			);
+			path = CrittercismSDK;
+			sourceTree = "<group>";
+		};
+		B3B5BD4C186C2FE9004A3EF7 /* TestFlightSDK2.1.3 */ = {
+			isa = PBXGroup;
+			children = (
+				B3B5BD4D186C2FE9004A3EF7 /* libTestFlight.a */,
+				B3B5BD4E186C2FE9004A3EF7 /* README.md */,
+				B3B5BD4F186C2FE9004A3EF7 /* release_notes.md */,
+				B3B5BD50186C2FE9004A3EF7 /* TestFlight+AsyncLogging.h */,
+				B3B5BD51186C2FE9004A3EF7 /* TestFlight+ManualSessions.h */,
+				B3B5BD52186C2FE9004A3EF7 /* TestFlight.h */,
+			);
+			path = TestFlightSDK2.1.3;
+			sourceTree = "<group>";
+		};
+		B3F9D8E3185AE5F400E3F577 /* TPKeyboardAvoiding */ = {
+			isa = PBXGroup;
+			children = (
+				B3F9D8E4185AE5F400E3F577 /* TPKeyboardAvoidingCollectionView.h */,
+				B3F9D8E5185AE5F400E3F577 /* TPKeyboardAvoidingCollectionView.m */,
+				B3F9D8E6185AE5F400E3F577 /* TPKeyboardAvoidingScrollView.h */,
+				B3F9D8E7185AE5F400E3F577 /* TPKeyboardAvoidingScrollView.m */,
+				B3F9D8E8185AE5F400E3F577 /* TPKeyboardAvoidingTableView.h */,
+				B3F9D8E9185AE5F400E3F577 /* TPKeyboardAvoidingTableView.m */,
+				B3F9D8EA185AE5F400E3F577 /* UIScrollView+TPKeyboardAvoidingAdditions.h */,
+				B3F9D8EB185AE5F400E3F577 /* UIScrollView+TPKeyboardAvoidingAdditions.m */,
+			);
+			path = TPKeyboardAvoiding;
+			sourceTree = "<group>";
+		};
 		F42186A614B846DC005CECCC /* OfflineMode */ = {
 			isa = PBXGroup;
 			children = (
@@ -934,6 +1004,8 @@
 				F4A0A1C113E6868200878041 /* NewLogin.xib */,
 				3E3065BA123B248E00DE4280 /* CameraView.h */,
 				3E3065BB123B248E00DE4280 /* CameraView.m */,
+				B3D11D1E184774F5007F50AA /* UIImage+fixOrientation.h */,
+				B3D11D1F184774F5007F50AA /* UIImage+fixOrientation.m */,
 				AB577D6A12022D8A001C2A41 /* CaptorView.h */,
 				AB577D6B12022D8A001C2A41 /* CaptorView.m */,
 				AB75B3C11203487200499AA6 /* CaptorView.xib */,
@@ -1156,6 +1228,7 @@
 				ABD0CFB7125BD49C00BAD08D /* btnAttach.png in Resources */,
 				ABD0CFB8125BD49C00BAD08D /* btnStop.png in Resources */,
 				ABD0CFB9125BD49C00BAD08D /* buttonChecking.png in Resources */,
+				B3B5BD54186C2FE9004A3EF7 /* README.md in Resources */,
 				A5F684BB1288F2E200A57567 /* Entitlements.plist in Resources */,
 				A58C8107128CD9400043344E /* TellUs.xib in Resources */,
 				A5A7C4DB128D429200064FEF /* group.png in Resources */,
@@ -1181,9 +1254,11 @@
 				62AF07E913B535FB009E948C /* CallEmergencyPhoneButton@2x.png in Resources */,
 				62AF07EC13B535FB009E948C /* CheckInImOkButton.png in Resources */,
 				62AF07ED13B535FB009E948C /* CheckInImOkButton@2x.png in Resources */,
+				B3B5BD55186C2FE9004A3EF7 /* release_notes.md in Resources */,
 				62AF07EE13B535FB009E948C /* SendAlertButton.png in Resources */,
 				62AF07EF13B535FB009E948C /* SendAlertButton@2x.png in Resources */,
 				62E1218913B54A3D006271CB /* CancelButton@2x.png in Resources */,
+				B3AC87EC1859B54F0094A68D /* dsym_upload.sh in Resources */,
 				62E1218A13B54A3D006271CB /* CancelButton.png in Resources */,
 				F498A16113E15B9700B58F84 /* CheckInGroupButton.png in Resources */,
 				F498A16213E15B9700B58F84 /* CheckInGroupButton@2x.png in Resources */,
@@ -1263,7 +1338,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				B3F9D8ED185AE5F400E3F577 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				2291F53711BE4C910085F1EC /* Personal.m in Sources */,
+				B3F9D8EC185AE5F400E3F577 /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				22921F2B11C62EFB006857B1 /* RestConnection.m in Sources */,
 				22919B5F11C72774001848ED /* NSDictionaryParam.m in Sources */,
 				22919B6C11C727DB001848ED /* NSStringEscaping.m in Sources */,
@@ -1290,8 +1367,10 @@
 				3EA93DA1124065C200D272F9 /* TermViewControl.m in Sources */,
 				A58C8106128CD9400043344E /* TellUs.m in Sources */,
 				CD08BA7412D6F4B4002E4584 /* CaptorView.m in Sources */,
+				B3F9D8EE185AE5F400E3F577 /* TPKeyboardAvoidingTableView.m in Sources */,
 				62B08B1F13030E6000A3BE9A /* Tracking.m in Sources */,
 				62BF902A13A5C306009E0FF6 /* SaveImageOperation.m in Sources */,
+				B3D11D20184774F5007F50AA /* UIImage+fixOrientation.m in Sources */,
 				623D313C13AD5D3500E20B72 /* SettingsMain.m in Sources */,
 				623D317B13AD656300E20B72 /* SettingsStorageView.m in Sources */,
 				623D318013AD65B600E20B72 /* SettingsAccountView.m in Sources */,
@@ -1319,6 +1398,7 @@
 				FA99452815B817A80027C1D8 /* NSString+SBJSON.m in Sources */,
 				FA99452915B817A80027C1D8 /* SBJsonBase.m in Sources */,
 				FA99452A15B817A80027C1D8 /* SBJsonParser.m in Sources */,
+				B3F9D8EF185AE5F400E3F577 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				FA99452B15B817A80027C1D8 /* SBJsonWriter.m in Sources */,
 				FA2761EE15B8E5A000B8DC26 /* TNHRequestHelper.m in Sources */,
 			);
@@ -1359,7 +1439,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Clifford Orloff";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Clifford Orloff (D8W2Z3GQ2G)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1371,12 +1451,14 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)/FlurryLibWithLocation\\\"",
-					"\\\"$(SRCROOT)/GData\\\"",
-					"\\\"$(SRCROOT)/GData/Gdata/simulator/simulator\\\"",
-					"\\\"$(SRCROOT)/GData/Gdata/divice/Gdata_device_distribution\\\"",
+					"\\\\\\\\\\\\\\\"$(SRCROOT)/FlurryLibWithLocation\\\\\\\\\\\\\\\"",
+					"\\\\\\\\\\\\\\\"$(SRCROOT)/GData\\\\\\\\\\\\\\\"",
+					"\\\\\\\\\\\\\\\"$(SRCROOT)/GData/Gdata/simulator/simulator\\\\\\\\\\\\\\\"",
+					"\\\\\\\\\\\\\\\"$(SRCROOT)/GData/Gdata/divice/Gdata_device_distribution\\\\\\\\\\\\\\\"",
 					"$(SRCROOT)",
 					"/Users/luannguyen/Documents/Du\\ an/SchoolBeacon/FlurryLibWithLocation",
+					"/Users/luannguyen/Documents/Du\\ an/SchoolBeacon/CrittercismSDK",
+					"/Users/luannguyen/Documents/Du\\ an/SchoolBeacon/TestFlightSDK2.1.3",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -1384,7 +1466,7 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = SOSBEACON;
-				PROVISIONING_PROFILE = "1CC8471C-A3EC-456C-A106-8C096D146BBB";
+				PROVISIONING_PROFILE = "EE39ED12-F430-43CB-9EDE-3DA8BF715EF7";
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = armv7;
 			};
@@ -1396,7 +1478,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Clifford Orloff";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Clifford Orloff (9AXUNLYN42)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1406,12 +1488,14 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)/FlurryLibWithLocation\\\"",
-					"\\\"$(SRCROOT)/GData\\\"",
-					"\\\"$(SRCROOT)/GData/Gdata/simulator/simulator\\\"",
-					"\\\"$(SRCROOT)/GData/Gdata/divice/Gdata_device_distribution\\\"",
+					"\\\\\\\\\\\\\\\"$(SRCROOT)/FlurryLibWithLocation\\\\\\\\\\\\\\\"",
+					"\\\\\\\\\\\\\\\"$(SRCROOT)/GData\\\\\\\\\\\\\\\"",
+					"\\\\\\\\\\\\\\\"$(SRCROOT)/GData/Gdata/simulator/simulator\\\\\\\\\\\\\\\"",
+					"\\\\\\\\\\\\\\\"$(SRCROOT)/GData/Gdata/divice/Gdata_device_distribution\\\\\\\\\\\\\\\"",
 					"$(SRCROOT)",
 					"/Users/luannguyen/Documents/Du\\ an/SchoolBeacon/FlurryLibWithLocation",
+					"/Users/luannguyen/Documents/Du\\ an/SchoolBeacon/CrittercismSDK",
+					"/Users/luannguyen/Documents/Du\\ an/SchoolBeacon/TestFlightSDK2.1.3",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -1419,7 +1503,7 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = SOSBEACON;
-				PROVISIONING_PROFILE = "1CC8471C-A3EC-456C-A106-8C096D146BBB";
+				PROVISIONING_PROFILE = "18BF649E-804B-4216-8948-E116EF94DE3C";
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv6 armv7";
 			};
@@ -1452,7 +1536,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				"CODE_SIGN_ENTITLEMENTS[sdk=*]" = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Clifford Orloff";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Clifford Orloff (9AXUNLYN42)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1462,12 +1546,14 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)/FlurryLibWithLocation\\\"",
-					"\\\"$(SRCROOT)/GData\\\"",
-					"\\\"$(SRCROOT)/GData/Gdata/simulator/simulator\\\"",
-					"\\\"$(SRCROOT)/GData/Gdata/divice/Gdata_device_distribution\\\"",
+					"\\\\\\\\\\\\\\\"$(SRCROOT)/FlurryLibWithLocation\\\\\\\\\\\\\\\"",
+					"\\\\\\\\\\\\\\\"$(SRCROOT)/GData\\\\\\\\\\\\\\\"",
+					"\\\\\\\\\\\\\\\"$(SRCROOT)/GData/Gdata/simulator/simulator\\\\\\\\\\\\\\\"",
+					"\\\\\\\\\\\\\\\"$(SRCROOT)/GData/Gdata/divice/Gdata_device_distribution\\\\\\\\\\\\\\\"",
 					"$(SRCROOT)",
 					"/Users/luannguyen/Documents/Du\\ an/SchoolBeacon/FlurryLibWithLocation",
+					"/Users/luannguyen/Documents/Du\\ an/SchoolBeacon/CrittercismSDK",
+					"/Users/luannguyen/Documents/Du\\ an/SchoolBeacon/TestFlightSDK2.1.3",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -1475,7 +1561,7 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = SOSBEACON;
-				PROVISIONING_PROFILE = "1CC8471C-A3EC-456C-A106-8C096D146BBB";
+				PROVISIONING_PROFILE = "F4D3FB8F-0FFA-4E52-98D3-BD10E6B8C2B3";
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = armv7;
 			};
@@ -1538,7 +1624,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Clifford Orloff";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Clifford Orloff (9AXUNLYN42)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1548,12 +1634,14 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)/FlurryLibWithLocation\\\"",
-					"\\\"$(SRCROOT)/GData\\\"",
-					"\\\"$(SRCROOT)/GData/Gdata/simulator/simulator\\\"",
-					"\\\"$(SRCROOT)/GData/Gdata/divice/Gdata_device_distribution\\\"",
+					"\\\\\\\\\\\\\\\"$(SRCROOT)/FlurryLibWithLocation\\\\\\\\\\\\\\\"",
+					"\\\\\\\\\\\\\\\"$(SRCROOT)/GData\\\\\\\\\\\\\\\"",
+					"\\\\\\\\\\\\\\\"$(SRCROOT)/GData/Gdata/simulator/simulator\\\\\\\\\\\\\\\"",
+					"\\\\\\\\\\\\\\\"$(SRCROOT)/GData/Gdata/divice/Gdata_device_distribution\\\\\\\\\\\\\\\"",
 					"$(SRCROOT)",
 					"/Users/luannguyen/Documents/Du\\ an/SchoolBeacon/FlurryLibWithLocation",
+					"/Users/luannguyen/Documents/Du\\ an/SchoolBeacon/CrittercismSDK",
+					"/Users/luannguyen/Documents/Du\\ an/SchoolBeacon/TestFlightSDK2.1.3",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -1561,7 +1649,7 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = SOSBEACON;
-				PROVISIONING_PROFILE = "1CC8471C-A3EC-456C-A106-8C096D146BBB";
+				PROVISIONING_PROFILE = "F4D3FB8F-0FFA-4E52-98D3-BD10E6B8C2B3";
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = armv7;
 			};

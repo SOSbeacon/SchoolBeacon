@@ -14,7 +14,7 @@
 #import "TNHRequestHelper.h"
 
 typedef enum {ActionType_None=0,ActionType_OK=1,ActionType_Help=2}ActionType;
-@interface HomeView : UIViewController<SlideToCancelDelegate,UINavigationControllerDelegate,RestConnectionDelegate,UploaderDelegate,UIActionSheetDelegate, UIScrollViewDelegate, UIAlertViewDelegate, ASIHTTPRequestDelegate> {
+@interface HomeView : UIViewController<SlideToCancelDelegate,UINavigationControllerDelegate,RestConnectionDelegate,UploaderDelegate,UIActionSheetDelegate, UIScrollViewDelegate, UIAlertViewDelegate, ASIHTTPRequestDelegate,UITextViewDelegate> {
 	RestConnection *rest;
 	SOSBEACONAppDelegate *appDelegate;	
 	

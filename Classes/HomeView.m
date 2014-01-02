@@ -20,6 +20,9 @@
 #import "VideoViewController.h"
 
 @implementation HomeView
+{
+    BOOL isShowKeyBoard;
+}
 @synthesize _scrollView;
 @synthesize shortMessageTextView;
 @synthesize longMessageTextView;
@@ -180,10 +183,29 @@
     if (broadcastGroupLabel.text.length == 0) {
         broadcastGroupLabel.text = @"All Groups";
     }
+    // Listen for keyboard appearances and disappearances
+  }
+
+- (void)keyboardDidShow: (NSNotification *) notif{
+    isShowKeyBoard=YES;
+
 }
 
+- (void)keyboardDidHide: (NSNotification *) notif{
+    isShowKeyBoard=NO;
+}
 - (void)viewDidLoad {
 //	countDownTimer=[NSTimer scheduledTimerWithTimeInterval:2.5 target:self selector:@selector(timerTick) userInfo:nil repeats:YES];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidShow:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidHide:)
+                                                 name:UIKeyboardDidHideNotification
+                                               object:nil];
+
    [ _closeBtn setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor,nil] forState:UIControlStateNormal];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshGroups) name:@"GetGroupsDidFinish" object:nil];
     _scrollView.contentSize = CGSizeMake(320, 800);
@@ -514,15 +536,25 @@
 #pragma mark -
 #pragma mark - Action methods
 - (IBAction)backgroundTapped:(id)sender {
-    [longMessageTextView resignFirstResponder];
-    [shortMessageTextView resignFirstResponder];
+    
+//    if (isShowKeyBoard) {
+//        [longMessageTextView resignFirstResponder];
+//        [shortMessageTextView resignFirstResponder];
+//    }
+
 }
 
 - (IBAction)chooseBroadcastType:(id)sender {
     [self backgroundTapped:nil];
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"School Notice", @"Emergency Alert", nil];
     actionSheet.tag = 1000;
-    [actionSheet showFromTabBar:self.tabBarController.tabBar];
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+        
+         [actionSheet showInView:appDelegate.window];
+    }else{
+      [actionSheet showInView:self.tabBarController.tabBar];
+    }
+    
     [actionSheet release];
 }
 
@@ -537,7 +569,12 @@
     actionSheet.cancelButtonIndex = [actionSheet addButtonWithTitle:@"Cancel"];
     actionSheet.tag = 2000;
     actionSheet.delegate = self;
-    [actionSheet showFromTabBar:self.tabBarController.tabBar];
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+        
+        [actionSheet showInView:appDelegate.window];
+    }else{
+        [actionSheet showInView:self.tabBarController.tabBar];
+    }
     [actionSheet release];
 }
 
@@ -659,6 +696,13 @@
     }    
     NSString *request = [NSString stringWithFormat:@"%@/alert?_method=post&format=json", SERVER_URL];
     NSArray *keys = [NSArray arrayWithObjects:@"userId", @"schoolId", @"token", @"type", @"shortMessage", @"longMessage", @"latitude", @"longitude", nil];
+    NSLog(@"lat:%@ lon:%@",appDelegate.latitudeString,appDelegate.longitudeString);
+    if (appDelegate.latitudeString==nil) {
+        appDelegate.latitudeString=@"";
+    }
+    if (appDelegate.longitudeString==nil) {
+        appDelegate.longitudeString=@"";
+    }
     NSArray *objs = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%d", appDelegate.userID], appDelegate.schoolId, appDelegate.apiKey, appDelegate.broadcastType, shortMessageTextView.text, longMessageTextView.text, appDelegate.latitudeString, appDelegate.longitudeString, nil];
     NSDictionary *params = [NSDictionary dictionaryWithObjects:objs forKeys:keys];
     NSLog(@"params: %@", params);
@@ -709,10 +753,21 @@
             }           
         }
         else {
-            NSString *message = [dict objectForKey:@"message"];
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Send Broadcast" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alertView show];
-            [alertView release];
+            if ([success isEqual:@"true"]) {
+                NSString *message = [dict objectForKey:@"message"];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Send Broadcast" message:@"Broadcast is sent successfully" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [alertView show];
+                [alertView release];
+
+            } else {
+                NSString *message = [dict objectForKey:@"message"];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [alertView show];
+                [alertView release];
+
+            }
+
+            
         }
     }
     else {

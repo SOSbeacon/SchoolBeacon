@@ -15,6 +15,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import <math.h>
 #import "SaveImageOperation.h"
+#import "UIImage+fixOrientation.h"
+
 static inline double radians (double degrees) {return degrees * M_PI/180;}
 
 
@@ -32,6 +34,11 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 - (id)init {
 	if(self=[super init])
 	{
+        if (IS_IPHONE_4) {
+            self.view.frame=CGRectMake(0, 0, 320, 480);
+        }else{
+            self.view.frame=CGRectMake(0, 0, 320, 568);
+        }
 	}
 	return self;
 }
@@ -59,8 +66,8 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 	label1.textAlignment = UITextAlignmentCenter;
 	label2.textAlignment = UITextAlignmentCenter;
     label4.hidden = YES;
-	}	
-
+    
+	}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     //NSLog(@"@@@@@@@@@@@@@@ memory error capture!!!");
@@ -102,8 +109,16 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
     picker = [[CameraView alloc] init] ;
 	picker.delegate = self;
 	picker.captorView=self;
+    if (IS_IPHONE_4) {
+        picker.view.frame=CGRectMake(0, 0, 320, 480);
+        vwToolbarHolder.frame=CGRectMake(0, 0, 320, 480);
+    }else{
+        picker.view.frame=CGRectMake(0, 0, 320, 568);
+        vwToolbarHolder.frame=CGRectMake(0, 0, 320, 568);
+    }
 	picker.cameraOverlayView =vwToolbarHolder;
 	[self presentModalViewController:picker animated:NO];
+    
 
 }
 
@@ -151,8 +166,15 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 	dateString = [formatter stringFromDate:[NSDate date]];
 	[formatter release];
     
-    
-	SaveImageOperation *op=[[SaveImageOperation alloc] initWithImage:inImage];
+    UIImage *newimage=[inImage fixOrientation];
+    SaveImageOperation *op=nil;
+//    if (SYSTEM_VERSION_GREATER_THAN(@"7.0")) {
+//        op=[[SaveImageOperation alloc] initWithImage:inImage];
+//    }else{
+//       op=[[SaveImageOperation alloc] initWithImage:newimage];
+//    }
+    op=[[SaveImageOperation alloc] initWithImage:newimage];
+//	SaveImageOperation *op=[[SaveImageOperation alloc] initWithImage:newimage];
     op.imageOritation = imageOritation;
 	op.mainDelegate=self;
 	op.fileToWriteTo=[PHOTO_FOLDER stringByAppendingFormat:@"/A%d_%d_%@.jpg",currentBlock,capCount,dateString];
@@ -199,6 +221,7 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 }
 
 - (IBAction)stopCaptorOnCamera:(id)sender {
+ 	[picker dismissModalViewControllerAnimated:YES];   
 	label1.text = @"Audio record process....";
 	label2.text = @"Photo capture process...";
     label4.hidden = NO;
@@ -211,9 +234,8 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 	[picker stopCapture];
 	audioRecorder.block = -1; //stop next block
 	[audioRecorder closeAndStop]; 
-	[picker dismissModalViewControllerAnimated:NO];
-	
-	[appDelegate.uploader endUploadPhoto];
+
+    [appDelegate.uploader endUploadPhoto];
 	[appDelegate.uploader endUploadAudio];
     [self finishedSavingImage];
     /*

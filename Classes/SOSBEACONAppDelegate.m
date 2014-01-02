@@ -24,6 +24,8 @@
 #import "NewLogin.h"
 #import "JSONKit.h"
 #import "OfflineViewController.h"
+#import "Crittercism.h"
+#import "TestFlight.h"
 #define ST_ImageRecordFrequency @"imageRecordFrequency"
 #define ST_VoiceRecordDuration @"voiceRecordDuration"
 #define ST_LocationReporting @"locationReporting"
@@ -128,7 +130,9 @@ void uncaughtExceptionHandler(NSException *exception) {
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {  
 	//	flagSetting = 1;
-	
+	[Crittercism enableWithAppID:@"52a97d0d46b7c22593000006"];
+    //testflight
+     [TestFlight takeOff:@"5690b79c-ea23-4266-83ce-dd2e578c1d73"];
 	UIImageView *imageview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"splash.png"]];
 	imageview.frame = CGRectMake(0, 0, 320, 480);
     if (IS_IPHONE_5) {
@@ -283,7 +287,6 @@ void uncaughtExceptionHandler(NSException *exception) {
 	logout = NO;
 	saveContact = NO;
 	savePerson=NO;
-    
     [window makeKeyAndVisible];
     
 	return YES;
