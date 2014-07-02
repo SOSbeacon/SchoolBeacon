@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView  
+  xmlns:android="http://schemas.android.com/apk/res/android" 
+  android:id="@+id/wrapscroll"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:background="@drawable/settings">
+<RelativeLayout  
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent" 
+  android:gravity="top"
+  android:paddingLeft="20dip"
+ >
+	<LinearLayout  
+	   android:id ="@+id/samaritantsetting"
+	   android:layout_width="fill_parent"
+	   android:layout_height="wrap_content"
+	   android:orientation="vertical" 
+	   android:layout_marginTop="10dip"   
+	   >
+	      <LinearLayout
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:gravity="center_vertical"
+               > 
+                 <TextView
+             android:layout_width="227dip"
+             android:layout_height="wrap_content"
+             android:text="@string/lblSamaritanReceive"/>
+                 <ToggleButton
+                  android:id="@+id/btntogg_receive"
+                  android:layout_width="wrap_content"
+                      android:layout_height="wrap_content" 
+                      android:gravity="center">
+                 </ToggleButton>
+         </LinearLayout>
+         <LinearLayout
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:gravity="center_vertical"
+               > 
+             <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="@string/lblSamaritanMaximum"/>
+            <Spinner 
+            android:id="@+id/spinner_samaritant_maximum"
+            android:layout_width="160dip"
+            android:layout_height="wrap_content"
+            android:drawSelectorOnTop="true"
+            android:prompt="@string/samari_distance_prompt"/>
+        </LinearLayout>
+        
+	   	   <LinearLayout
+              android:layout_width="wrap_content"
+              android:layout_height="fill_parent"
+              android:gravity="center_vertical"
+              > 
+                  <TextView
+                  android:text="@string/lblPanicNear" 
+                  android:layout_width="224dip" android:layout_height="wrap_content"/>
+                  <ToggleButton
+                   android:id="@+id/btntogg_near"
+                   android:layout_width="60dip"
+                   android:layout_height="wrap_content" 
+                   android:gravity="center">
+                  </ToggleButton>
+          </LinearLayout>
+          <LinearLayout
+              android:layout_width="wrap_content"
+              android:layout_height="fill_parent"
+              android:gravity="center_vertical"
+              >
+              <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/lblPanicMaximum"/>
+               
+                 <Spinner 
+                 android:id="@+id/spinner_panic_maximum"
+                 android:layout_width="160dip"
+                 android:layout_height="wrap_content"
+                 android:drawSelectorOnTop="true"
+                 android:prompt="@string/panic_distance_prompt"/>    
+           </LinearLayout>
+    
+	</LinearLayout>
+</RelativeLayout>
+</ScrollView>

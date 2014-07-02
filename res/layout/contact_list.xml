@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  android:background="@drawable/background_list_round"
+  android:listSelector="@drawable/background_list_round"
+  android:layout_marginTop="1dip"
+  android:layout_marginLeft="3dip"
+  android:layout_marginRight="3dip"
+  >
+<TextView
+    android:id="@+id/contactName"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="2dip"
+    android:layout_marginBottom="2dip"
+    android:layout_marginLeft ="10dip"
+    android:textColor="#333333"
+    android:textStyle="bold"
+    />
+    <RelativeLayout 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginLeft ="10dip"
+        android:layout_marginRight ="10dip"
+        android:layout_marginBottom="2dip"
+        >
+	    <TextView
+		    android:id="@+id/contactPhone"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_gravity="left"
+		    android:textColor="#333333"
+		    android:layout_alignParentLeft="true"
+	     />
+	     <TextView
+            android:id="@+id/contactEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:textColor="#333333"
+            android:layout_alignParentRight="true"
+         />
+     </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,8 @@
+*~
+*.DS_Store
+*.class
+*java#
+*.settings
+bin
+gen
+.svn

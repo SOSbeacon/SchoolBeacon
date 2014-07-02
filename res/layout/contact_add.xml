@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dip" >
+
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_list_round"
+            android:padding="10dip" >
+
+            <TableRow>
+
+                <TextView
+                    android:text="@string/lblUserName"
+                    android:width="80dip" />
+
+                <EditText
+                    android:id="@+id/txtUserName"
+                    android:inputType="textPersonName"
+                    android:maxWidth="200dip"
+                    android:width="200dip" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView android:text="@string/lblEmail" />
+
+                <EditText
+                    android:id="@+id/txtEmail"
+                    android:inputType="textEmailAddress" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView android:text="@string/lblVoicePhone" />
+
+                <EditText
+                    android:id="@+id/txtVoicePhone"
+                    android:inputType="phone"
+                    android:phoneNumber="true" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView android:text="@string/lblTextPhone" />
+
+                <EditText
+                    android:id="@+id/txtTextPhone"
+                    android:inputType="phone"
+                    android:phoneNumber="true" />
+            </TableRow>
+        </TableLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:gravity="bottom"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/btn_add_exist_contacts"
+                android:layout_width="fill_parent"
+                android:layout_height="50dip"
+                android:text="@string/contact_add_from_contact"
+                android:textSize="20dip" />
+
+            <TextView
+                android:id="@+id/tvNotice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/contact_not_allow_change"
+                android:visibility="gone" />
+        </LinearLayout>
+        <!--
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_marginTop="10dip"
+        android:gravity="center_horizontal"
+         android:orientation="vertical"
+    >
+    <RadioGroup android:id="@+id/radioGroup1" android:layout_width="wrap_content" android:layout_height="wrap_content">
+    </RadioGroup>
+    <RadioGroup android:id="@+id/selectServices" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal">
+        <RadioButton android:id="@+id/yahoo" android:text="Yahoo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="true"></RadioButton>
+        <RadioButton android:id="@+id/facebook" android:text="Facebook" android:layout_width="wrap_content" android:layout_height="wrap_content"></RadioButton>
+    </RadioGroup>            
+    <Button 
+                android:id="@+id/btn_import_contact"
+                android:layout_width="fill_parent"
+                android:layout_height="50dip"
+                android:text="Import contacts"
+                android:textSize="20dip"                
+                />
+    </LinearLayout>  
+        -->
+    </LinearLayout>
+
+</ScrollView>
